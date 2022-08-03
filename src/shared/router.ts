@@ -8,17 +8,26 @@ let routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
 		name: 'Landing',
-		component: () => import('@/shared/views/Landing.vue')
+		component: () => import('@/shared/views/Landing.vue'),
+		meta: {
+			type: 'public'
+		}
 	},
 	{
 		path: '/:error',
 		name: 'Error',
-		component: () => import('@/shared/views/Error.vue')
+		component: () => import('@/shared/views/Error.vue'),
+		meta: {
+			type: 'public'
+		}
 	},
 	{
 		path: '/dashboard',
 		name: 'Dashboard',
-		component: () => import('@/shared/views/Dashboard.vue')
+		component: () => import('@/shared/views/Dashboard.vue'),
+		meta: {
+			type: 'protected'
+		}
 	},
 ]
 

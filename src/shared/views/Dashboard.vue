@@ -1,13 +1,13 @@
 <template>
-    <div class="dashboard">Dashboard</div>
+    <Nav>
+        <div class="dashboard">Dashboard</div>
+    </Nav>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import Nav from "../components/general/Nav.vue";
 
-export default defineComponent({
-    name: "Dashboard",
-});
+
 </script>
 
 <style lang="scss" scoped>
