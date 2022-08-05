@@ -1,5 +1,5 @@
 <template>
-  <Loading v-show="isLoading"/>
+  <Loading v-show="isLoading" />
   <h1 class="contest__title">List contest</h1>
   <div class="contest__container">
     <table class="contest__container--table">
@@ -66,7 +66,7 @@ export default defineComponent({
       response.forEach((item) => {
         this.contestData.push(item);
       });
-      setTimeout(() => this.isLoading = false, 2000)
+      setTimeout(() => (this.isLoading = false), 2000);
     } catch (error) {
       console.error(error);
     }
@@ -164,6 +164,7 @@ export default defineComponent({
   font-size: 30px;
   padding-bottom: 10px;
   padding-top: 50px;
+  text-align: center;
 }
 
 .pagination {
@@ -194,6 +195,7 @@ export default defineComponent({
   padding-top: 30px;
   width: 80%;
   margin: 0 auto;
+  text-align: center;
 
   table {
     width: 100%;

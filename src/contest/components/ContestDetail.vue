@@ -103,13 +103,9 @@ export default defineComponent({
       return problems;
     },
 
-    getRank() {
+    getRank() {},
 
-    },
-
-    getProbScore() {
-      
-    }
+    getProbScore() {},
   },
 
   methods: {
@@ -134,11 +130,13 @@ export default defineComponent({
 }
 
 .page__title {
+  text-align: center;
   font-size: 30px;
   padding-bottom: 30px;
   padding-top: 30px;
 }
 .container {
+  text-align: center;
   width: 80%;
   margin: 0 auto;
 
