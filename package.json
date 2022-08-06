@@ -8,11 +8,14 @@
   },
   "dependencies": {
     "autoprefixer": "^10",
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "postcss": "^8",
     "tailwindcss": "^3",
     "vue": "^3.2.13",
+    "vue-monaco-editor": "^0.0.19",
     "vue-router": "^4.0.3",
+    "vue3-markdown-it": "^1.0.10",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

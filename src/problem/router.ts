@@ -1,8 +1,12 @@
 export default [
-    // example:
     {
-        path: '/',
+        path: '/problem',
         name: 'Problem',
-        component: () => '' //paste the component needed
+        component: () => import('./components/Problem.vue')
+    },
+    {
+        path: '/problem/:id',
+        name: 'ProblemDetail',
+        component: () => import('./components/detail/Problem.vue')
     }
 ]
