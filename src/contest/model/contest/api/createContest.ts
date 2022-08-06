@@ -1,4 +1,5 @@
-import assert from "assert";
+import { assert } from "@vue/compiler-core";
+
 import apiService from "../../../helper/apiService";
 
 type Request = {
@@ -16,9 +17,8 @@ type Response = {
 
 async function createContestAPI(request: Request): Promise<Response> {
   try {
-    const response = (
-      await apiService("POST", "/contest/contest", {}, request)
-    ).data as Response;
+    const response = (await apiService("POST", "/contest/contest", {}, request))
+      .data as Response;
     return response;
   } catch (error) {
     throw error;

@@ -168,6 +168,7 @@ export default defineComponent({
     text-align: left;
     font-size: 20px;
     font-weight: 600;
+    padding: 4px 0;
     margin-left: -1px;
     background-color: #ccc;
     border-top-left-radius: 8px;

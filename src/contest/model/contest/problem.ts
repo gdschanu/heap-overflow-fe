@@ -1,4 +1,5 @@
-import assert from 'assert';
+import { assert } from "@vue/compiler-core";
+
 
 class Problem {
   _ordinal;

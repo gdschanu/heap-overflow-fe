@@ -44,7 +44,9 @@
 import { defineComponent } from "vue";
 import { Contest } from "../model/contest/contest";
 import { searchContest } from "../model/contest/domainLogic/contest";
+import errorHandler from "../../shared/helpers/errorHandler";
 import Loading from "./Loading.vue";
+import { AxiosError } from "axios";
 
 export default defineComponent({
   components: {
@@ -69,7 +71,7 @@ export default defineComponent({
       });
       setTimeout(() => (this.isLoading = false), 2000);
     } catch (error) {
-      console.error(error);
+      errorHandler(error as AxiosError);
     }
   },
 
@@ -172,7 +174,7 @@ export default defineComponent({
   display: flex;
   text-align: left;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 15px;
   margin-bottom: 50px;
   color: green;
 
@@ -180,11 +182,13 @@ export default defineComponent({
     margin: 0 20px;
   }
 
-  .next:hover,
-  .previous:hover {
-    color: rgba(0, 128, 0, 0.6);
-
-    cursor: pointer;
+  .next,
+  .previous {
+    font-size: 18px;
+    &:hover {
+      color: rgba(0, 128, 0, 0.6);
+      cursor: pointer;
+    }
   }
 }
 
@@ -205,6 +209,7 @@ export default defineComponent({
     font-size: 20px;
     font-weight: 600;
     margin-left: -0.5px;
+    padding: 4px 0;
     background-color: #ccc;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;

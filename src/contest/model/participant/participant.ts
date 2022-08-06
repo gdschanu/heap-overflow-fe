@@ -1,4 +1,4 @@
-import assert from "assert";
+import { assert } from "@vue/compiler-core";
 import { ProblemScore } from "./problemScore";
 
 class Participant {
