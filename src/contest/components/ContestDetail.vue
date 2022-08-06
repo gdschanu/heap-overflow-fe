@@ -2,24 +2,20 @@
   <h1 class="page__title">Contest detail</h1>
   <div class="container">
     <div class="container__left">
-      <table class="container__left-problem--table">
+      <table>
         <thead>
-          <span class="problem__table--title"><p>Problems</p></span>
+          <span><p>Problem</p></span>
           <tr>
             <th>#</th>
-            <th>Problem name</th>
+            <th>Name</th>
             <th>Score</th>
           </tr>
         </thead>
-        <!-- v-for problems -->
-        <!-- <tbody v-for="problem in listProblem"> -->
         <tbody>
-          <tr>
-            <td class="prob--order">1</td>
-            <td class="prob--name">
-              <p>abc</p>
-            </td>
-            <td class="prob--score">100</td>
+          <tr v-for="(problem, index) in listProblem" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>probName {{ index + 1 }}</td>
+            <td>10</td>
           </tr>
         </tbody>
       </table>
@@ -29,7 +25,7 @@
       <div class="container__right-joinContest--table">
         <table>
           <thead>
-            <span><p>Join contest</p></span>
+            <span><p>Join</p></span>
           </thead>
           <tbody>
             <tr>
@@ -54,9 +50,9 @@
               <th>Coder Name</th>
             </tr>
           </thead>
-          <!-- v-for something ??? -->
+          <!-- v-for in list rank -->
           <tbody>
-            <tr>
+            <tr v-for="rank in listProblem">
               <td class="rank--order">1</td>
               <td class="rank--name">coderName</td>
             </tr>
@@ -78,6 +74,7 @@ import { Participant } from "../model/participant/participant";
 export default defineComponent({
   data() {
     return {
+      participant: {} as Participant,
       isJoin: false,
     };
   },
@@ -100,49 +97,62 @@ export default defineComponent({
 
     listProblem() {
       const problems = this.getContest.getProblems() as Problem[];
-      return problems;
+      // return problems;
+      return 10;
     },
 
-    getRank() {},
+    rank() {},
 
-    getProbScore() {},
+    problemScore() {},
   },
 
   methods: {
     // create participant when click to join button
     joinContest() {
       const contestID = this.getContest.getId() as string;
-      try {
-        const participant = createParticipant(contestID) as Participant;
-        this.isJoin = true;
-        return participant;
-      } catch (error) {
-        console.error(error);
-      }
+      const participant = createParticipant(contestID);
+      this.participant = participant;
+      // this.isJoin = true;
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.clear {
-  clear: both;
+@mixin text-center {
+  text-align: center;
+}
+
+@mixin none-TopLeftRight-border {
+  border-top: unset;
+  border-right: unset;
+  border-left: unset;
 }
 
 .page__title {
-  text-align: center;
+  @include text-center;
   font-size: 30px;
   padding-bottom: 30px;
-  padding-top: 30px;
+  padding-top: 50px;
 }
 .container {
-  text-align: center;
+  @include text-center;
+  display: flex;
+  align-items: flex-start;
   width: 80%;
-  margin: 0 auto;
+  margin: 10px auto;
 
   .container__left {
-    float: left;
     width: 70%;
+
+    span {
+      margin-left: -0.5px;
+    }
+
+    tr,
+    td {
+      padding: 10px 30px;
+    }
 
     .prob--name {
       color: green;
@@ -158,6 +168,7 @@ export default defineComponent({
     text-align: left;
     font-size: 20px;
     font-weight: 600;
+    margin-left: -1px;
     background-color: #ccc;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -172,7 +183,6 @@ export default defineComponent({
     border-bottom: none;
   }
 
-  table,
   th,
   td {
     border: 1px solid #aaa9a9;
@@ -181,7 +191,6 @@ export default defineComponent({
   }
 
   .container__right {
-    float: right;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -189,17 +198,18 @@ export default defineComponent({
     width: 30%;
     padding-left: 20px;
 
+    .container__right-rank--table {
+      table {
+        @include none-TopLeftRight-border;
+      }
+    }
+
     .container__right-joinContest--table {
       table {
-        border-top: unset;
-        border-left: unset;
-        border-right: unset;
-
-        td {
-          border: 0.5px solid #aaa9a9;
-        }
+        @include none-TopLeftRight-border;
 
         span {
+          width: 30%;
           p {
             font-weight: 600;
             font-size: 20px;
@@ -207,10 +217,12 @@ export default defineComponent({
         }
       }
 
-      p {
-        text-align: left;
-        padding: 6px;
-        font-size: 14px;
+      tbody {
+        p {
+          text-align: left;
+          font-size: 14px;
+          padding: 10px;
+        }
       }
 
       .join--btn {

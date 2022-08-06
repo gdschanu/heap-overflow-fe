@@ -29,6 +29,18 @@ class Participant {
     assert(contestId !== undefined && typeof contestId === "string");
     this._contestId = contestId;
   }
+
+  getCoderId(): string {
+    return this._coderId;
+  }
+
+  getRank(): number {
+    return this._rank!;
+  }
+
+  getProblemScores() {
+    return this._problemScores;
+  }
 }
 
 export { Participant };

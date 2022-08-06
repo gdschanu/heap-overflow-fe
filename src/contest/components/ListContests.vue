@@ -4,6 +4,7 @@
   <div class="contest__container">
     <table class="contest__container--table">
       <thead>
+        <span><p>Contest</p></span>
         <tr>
           <th class="title--name">Name</th>
           <th>Author</th>
@@ -13,8 +14,8 @@
           <th>Status</th>
         </tr>
       </thead>
-      <tbody v-for="(contest, index) in contestData" :key="index">
-        <tr>
+      <tbody>
+        <tr v-for="(contest, index) in contestData" :key="index">
           <td @click="toContest(contest)" class="detail--name">
             <p href="">{{ contest.getName() }}</p>
           </td>
@@ -197,11 +198,26 @@ export default defineComponent({
   margin: 0 auto;
   text-align: center;
 
+  span {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: -0.5px;
+    background-color: #ccc;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    p {
+      margin-left: 5px;
+    }
+  }
+
   table {
     width: 100%;
   }
 
-  table,
   th,
   td {
     border: 1px solid #aaa9a9;
