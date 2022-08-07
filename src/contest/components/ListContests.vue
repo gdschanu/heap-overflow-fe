@@ -104,11 +104,12 @@ export default defineComponent({
       // const remainContest = this.contestCount - this.page * this.perPage;
       try {
         const response = await searchContest(this.page, this.perPage);
+        // console.log(response);
         response.forEach((item) => {
           this.contestData.push(item);
         });
       } catch (error) {
-        console.error(error);
+        errorHandler(error as AxiosError);
       }
     },
 
@@ -121,7 +122,7 @@ export default defineComponent({
           this.contestData.push(item);
         });
       } catch (error) {
-        console.error(error);
+        errorHandler(error as AxiosError);
       }
     },
 
@@ -204,7 +205,7 @@ export default defineComponent({
 
   span {
     display: block;
-    width: 100%;
+    width: 100.1%;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
