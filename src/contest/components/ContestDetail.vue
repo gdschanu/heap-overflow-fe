@@ -110,7 +110,7 @@ export default defineComponent({
       const contestID = this.getContest.getId() as string;
       const participant = createParticipant(contestID);
       this.participant = participant;
-      // this.isJoin = true;
+      this.isJoin = true;
     },
   },
 });
