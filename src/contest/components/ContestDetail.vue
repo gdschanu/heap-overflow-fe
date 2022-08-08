@@ -99,17 +99,19 @@ export default defineComponent({
 
     listProblem() {
       const problems = this.getContest.getProblems() as Problem[];
-      console.log(problems);
+      // console.log(problems);
       return problems;
     },
   },
 
   methods: {
     // create participant when click to join button
+    // need to remember when the participant joined
     joinContest() {
       const contestID = this.getContest.getId() as string;
       const participant = createParticipant(contestID);
       this.participant = participant;
+      // console.log(this.participant._contestId);
       this.isJoin = true;
     },
   },
@@ -263,4 +265,30 @@ export default defineComponent({
     }
   }
 }
+
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               RUN FLUENTLY         NO BUG
+//
 </style>
