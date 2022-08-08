@@ -69,8 +69,7 @@ export default {
     margin: 5px;
     display: flex;
     align-items: center;
-    border: 1px solid var(--stroke-color);
-    background: var(--container-color);
+    border: 1px solid black;
     border-radius: 10px;
     justify-content: space-between;
     cursor: pointer;
@@ -96,8 +95,8 @@ export default {
         left: 0;
         padding: 8px;
         min-width: 5rem;
-        border: 1px solid var(--stroke-color);
-        background: var(--container-color);
+        border: 1px solid black;
+        background-color: white;
         border-radius: 10px;
         &__item--selected {
             font-weight: bold;

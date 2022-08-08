@@ -4,7 +4,7 @@
             <TabBar :tabBarList="['Test case', 'Run code', 'Submission']" class="tab-bar" :selected="consoleSelected"
                 @selectUpdated="(value) => { consoleSelected = value; }">
                 <template v-slot:Testcase>
-                    <!-- <TestCase :testCases="testCases" /> -->
+                    <TestCase :testCases="testCases" />
                 </template>
                 <template v-slot:Runcode>
                     <!-- <RunCode :runCodeResult="runCodeResult" /> -->
@@ -37,12 +37,13 @@
 <script lang="ts" setup>
 
 import TabBar from "./ProblemTabBar.vue";
-// import TestCase from "./RightConsoleTestCase";
+import TestCase from "./RightConsoleTestCase.vue";
 // import RunCode from "./RightConsoleRunCode";
 // import Submission from "./RightConsoleSubmission";
 import Button from "../../components/common/Button.vue";
 import Problem from "@/problem/model/problem";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { getTestCasesById } from "../../model/domainLogic/testCase"
 
 const isSubmitting = ref(false)
 const isRunning = ref(false)
@@ -64,6 +65,10 @@ function runCode() {
 function submit() {
     console.log('submitting...');
 }
+
+onMounted(async () => {
+    testCases.value = await getTestCasesById('625bc0c4f4a7b0e40f3d23a4')
+})
 
 </script>
 

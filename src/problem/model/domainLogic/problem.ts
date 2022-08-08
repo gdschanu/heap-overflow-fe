@@ -7,6 +7,7 @@ import TimeLimits from '../timeLimit'
 import Kilobyte from '../kilobyte'
 import Millisecond from '../millisecond'
 import listProblemApi from '../api/listProblemApi'
+import countProblemsApi from '../api/countProblemsApi'
 
 async function getProblemById(id: string): Promise<Problem> {
     const responseData = await getProblemApi({ id })
@@ -74,8 +75,13 @@ async function createProblem(problem: Problem, testCases: TestCase[]): Promise<s
     return problemId
 }
 
+async function countProblems() {
+    return await countProblemsApi()
+}
+
 export {
     getProblemById,
     listProblem,
-    createProblem
+    createProblem,
+    countProblems
 }
