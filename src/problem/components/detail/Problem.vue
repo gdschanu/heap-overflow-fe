@@ -11,7 +11,10 @@
             </div>
             <div :class="fullScreen ? 'right right-full-screen' : 'right'">
                 <Right
+                    :fullScreen="fullScreen"
                     :problem="problem"
+                    @enterFullScreen="fullScreen = true"
+                    @exitFullScreen="fullScreen = false"
                 />
             </div>
         </div>
@@ -24,7 +27,7 @@ import Left from './Left.vue'
 import Right from "./Right.vue"
 import ProblemNotFound from "./ProblemNotFound.vue"
 import Loading from "../common/Loading.vue"
-import { reactive, ref } from "@vue/reactivity"
+import { reactive, Ref, ref } from "@vue/reactivity"
 import { getProblemById } from "../../model/domainLogic/problem"
 import errorHandler from "@/shared/helpers/errorHandler"
 import { AxiosError } from "axios";
@@ -41,7 +44,7 @@ const current = typeof route.params.id === 'string' ? route.params.id : ''
 const firstLoading = ref(true)
 const problemNotFound = ref(false)
 const fullScreen = ref(false)
-const problem = ref(new Problem(current, '', '', '', Difficulty.EASY))
+const problem: Ref<Problem> = ref(new Problem(current, '', '', '', Difficulty.EASY))
 
 onMounted(async () => {
     try {

@@ -23,7 +23,7 @@ $lh: 20px;
 .wrapper {
     overflow: hidden;
     border-radius: 10px;
-    border: 1px solid var(--stroke-color);
+    border: 1px solid black;
 
     .console {
         font-family: "Courier New", monospace;

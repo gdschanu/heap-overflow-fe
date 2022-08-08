@@ -11,9 +11,9 @@ function showAlert(message: string) {
     })
 }
 
-export default function(error: AxiosError) {
+export default function(error: AxiosError | Error) {
     
-    if (error.response) {
+    if (error instanceof AxiosError && error.response) {
         const response = error.response;
         const data = response.data as ResponseForm;
         console.log(data);
