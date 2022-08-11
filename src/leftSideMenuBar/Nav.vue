@@ -56,7 +56,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 export default {
   name: "Nav",
   data() {
@@ -105,13 +105,14 @@ export default {
     routeCheck() {
       // because vue router component load is async, this.$route is changed when loading component, which cause a nav view bug
       // check if mete.type is undefined to prevent nav rendered in the first load
-      if (this.$route.meta.type === undefined) return false;
+      // if (this.$route.meta.type === undefined) return false;
 
-      return !(
-        this.$route.meta.type === "auth" ||
-        this.$route.meta.type === "public" ||
-        this.$route.meta.type === "detail"
-      );
+      // return !(
+      //   this.$route.meta.type === "auth" ||
+      //   this.$route.meta.type === "public" ||
+      //   this.$route.meta.type === "detail"
+      // );
+      return true;
     },
     routerLinkActive() {},
   },
