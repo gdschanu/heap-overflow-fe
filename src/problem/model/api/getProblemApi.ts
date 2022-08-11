@@ -33,7 +33,7 @@ async function getProblemApi(req: GetProblemRequest): Promise<GetProblemResponse
     try {
         const response = (await apiService('GET', `/practiceProblem/problem/${req.id}`)).data as GetProblemResponse
         if (response.data === null)
-            throw new Error('Problem not found')        
+            throw new Error('Problem not found')      
         return response.data
     } catch (error) {
         throw error

@@ -1,13 +1,13 @@
 export default [
     // example:
     {
-        path: '/',
+        path: '/login',
         name: 'Login',
-        component: () => '' //paste the component needed
+        component: () => import("./AuthLogin.vue") //paste the component needed
     },
     {
-        path: '/',
+        path: '/register',
         name: 'Register',
-        component:  () => '' //paste the component needed
+        component:  () => import("./AuthRegister.vue") //paste the component needed
     }
 ]

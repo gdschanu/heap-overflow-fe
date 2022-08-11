@@ -13,9 +13,11 @@
         </thead>
         <tbody>
           <tr v-for="(problem, index) in listProblem" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>probName {{ index + 1 }}</td>
-            <td>10</td>
+            <td>{{ problem.ordinal }}</td>
+            <td class="problem--name">
+              <p>{{ problem.name }}</p>
+            </td>
+            <td>{{ problem.score }}</td>
           </tr>
         </tbody>
       </table>
@@ -52,8 +54,8 @@
           </thead>
           <!-- v-for in list rank -->
           <tbody>
-            <tr v-for="rank in listProblem">
-              <td class="rank--order">1</td>
+            <tr v-for="(rank, index) in 10">
+              <td class="rank--order">{{ index + 1 }}</td>
               <td class="rank--name">coderName</td>
             </tr>
           </tbody>
@@ -97,22 +99,20 @@ export default defineComponent({
 
     listProblem() {
       const problems = this.getContest.getProblems() as Problem[];
-      // return problems;
-      return 10;
+      // console.log(problems);
+      return problems;
     },
-
-    rank() {},
-
-    problemScore() {},
   },
 
   methods: {
     // create participant when click to join button
+    // need to remember when the participant joined
     joinContest() {
       const contestID = this.getContest.getId() as string;
       const participant = createParticipant(contestID);
       this.participant = participant;
-      // this.isJoin = true;
+      // console.log(this.participant._contestId);
+      this.isJoin = true;
     },
   },
 });
@@ -145,6 +145,17 @@ export default defineComponent({
   .container__left {
     width: 70%;
 
+    .problem--name {
+      color: green;
+      &:hover {
+        color: rgba(0, 128, 0, 0.6);
+      }
+
+      p:hover {
+        cursor: pointer;
+      }
+    }
+
     span {
       margin-left: -0.5px;
     }
@@ -164,7 +175,7 @@ export default defineComponent({
 
   span {
     display: block;
-    width: 100%;
+    width: 100.2%;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
@@ -254,4 +265,30 @@ export default defineComponent({
     }
   }
 }
+
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               RUN FLUENTLY         NO BUG
+//
 </style>

@@ -65,7 +65,7 @@ export default defineComponent({
   async created() {
     try {
       const response = await searchContest(0, this.perPage);
-      // console.log(response);
+      console.log(response);
       response.forEach((item) => {
         this.contestData.push(item);
       });
@@ -104,11 +104,12 @@ export default defineComponent({
       // const remainContest = this.contestCount - this.page * this.perPage;
       try {
         const response = await searchContest(this.page, this.perPage);
+        // console.log(response);
         response.forEach((item) => {
           this.contestData.push(item);
         });
       } catch (error) {
-        console.error(error);
+        errorHandler(error as AxiosError);
       }
     },
 
@@ -121,7 +122,7 @@ export default defineComponent({
           this.contestData.push(item);
         });
       } catch (error) {
-        console.error(error);
+        errorHandler(error as AxiosError);
       }
     },
 
@@ -204,7 +205,7 @@ export default defineComponent({
 
   span {
     display: block;
-    width: 100%;
+    width: 100.1%;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
@@ -258,4 +259,31 @@ export default defineComponent({
     }
   }
 }
+
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               RUN FLUENTLY         NO BUG
+//
+
 </style>
