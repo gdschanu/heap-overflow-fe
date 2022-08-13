@@ -25,7 +25,7 @@ type contestData = Array<{
 
 async function searchContestAPI(request: Request): Promise<Response> {
   try {
-    const response = (await apiService("GET", "/contest/", request, {}))
+    const response = (await apiService("GET", "/contest", request, {}))
       .data as Response;
     return response;
   } catch (error) {
