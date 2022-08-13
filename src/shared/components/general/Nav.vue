@@ -67,11 +67,11 @@ const routeList = ref([
 
 <style lang="scss" scoped>
 .nav-layout {
-    @apply flex;
+    @apply flex items-stretch;
 }
 
 .nav-container {
-    @apply relative h-screen;
+    @apply relative;
 
     .nav {
         @apply sticky top-0 w-52;
