@@ -15,7 +15,10 @@ import Nav from '@/shared/components/general/Nav.vue';
 </script>
 
 <style lang="scss" scoped>
+.problem {
+    @apply mt-8;
+}
 .problem-list-container {
-    @apply mt-8 mx-auto w-4/5 dark:text-teal-50;
+    @apply mx-auto w-4/5 dark:text-teal-50;
 }
 </style>

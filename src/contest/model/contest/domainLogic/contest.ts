@@ -1,5 +1,6 @@
 import { createContestAPI } from "../api/createContest";
 import { searchContestAPI } from "../api/searchContest";
+import { countContestAPI } from "../api/countContest";
 import { Contest } from "../contest";
 
 async function createContest(contest: Contest): Promise<string | null> {
@@ -40,4 +41,9 @@ async function searchContest(
   return contests;
 }
 
-export { createContest, searchContest };
+async function countContest(): Promise<string | null> {
+  const response = await countContestAPI();
+  return response.data!;
+}
+
+export { createContest, searchContest, countContest };

@@ -46,21 +46,23 @@
 import { defineComponent } from "vue";
 import { Contest } from "../model/contest/contest";
 import { searchContest } from "../model/contest/domainLogic/contest";
+import { countContest } from "../model/contest/domainLogic/contest";
 import errorHandler from "../../shared/helpers/errorHandler";
-import Loading from "./Loading.vue";
+import Loading from "./detail/Loading.vue";
 import { AxiosError } from "axios";
 import Nav from "@/shared/components/general/Nav.vue";
 
 export default defineComponent({
   components: {
     Loading,
-    Nav
+    Nav,
   },
 
   data() {
     return {
       page: 0,
       perPage: 21,
+      contestCount: 0,
       contestData: [] as Contest[],
       isLoading: true,
     };
@@ -73,18 +75,20 @@ export default defineComponent({
       response.forEach((item) => {
         this.contestData.push(item);
       });
-      setTimeout(() => (this.isLoading = false), 100);
+      setTimeout(() => (this.isLoading = false), 200);
+    } catch (error) {
+      errorHandler(error as AxiosError);
+    }
+    // contest count
+    try {
+      const response = await countContest() as unknown as number;
+      this.contestCount = response;
     } catch (error) {
       errorHandler(error as AxiosError);
     }
   },
 
   computed: {
-    // return the number of contests
-    contestCount() {
-      return 77;
-    },
-
     canNext() {
       if (this.contestCount - this.page * this.perPage <= this.perPage) {
         return false;
@@ -151,9 +155,9 @@ export default defineComponent({
       const endTime = new Date(contest.getEndAt());
       const now = new Date();
       if (now.getTime() < startTime.getTime()) {
-        return "Not time yet";
+        return "Incoming";
       } else if (now.getTime() > endTime.getTime()) {
-        return "Done";
+        return "Too late";
       } else {
         return "Happening";
       }
@@ -179,7 +183,7 @@ export default defineComponent({
   width: 100%;
   margin-top: 15px;
   margin-bottom: 50px;
-  color: green;
+  color: #7b61ff;
 
   .space {
     margin: 0 20px;
@@ -189,7 +193,7 @@ export default defineComponent({
   .previous {
     font-size: 18px;
     &:hover {
-      color: rgba(0, 128, 0, 0.6);
+      color: #7b61ff77;
       cursor: pointer;
     }
   }
@@ -244,9 +248,9 @@ export default defineComponent({
     }
 
     .detail--name {
-      color: green;
+      color: #7b61ff;
       &:hover {
-        color: rgba(0, 128, 0, 0.6);
+        color: #7b61ff77;
       }
 
       p:hover {
@@ -256,7 +260,7 @@ export default defineComponent({
 
     .detail--status {
       p {
-        color: green;
+        color: #7b61ff;
       }
     }
   }
@@ -287,5 +291,4 @@ export default defineComponent({
 //
 //               RUN FLUENTLY         NO BUG
 //
-
 </style>
