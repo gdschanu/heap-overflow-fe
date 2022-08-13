@@ -1,43 +1,45 @@
 <template>
-  <Loading v-show="isLoading" />
-  <h1 class="contest__title">List contest</h1>
-  <div class="contest__container">
-    <table class="contest__container--table">
-      <thead>
-        <span><p>Contest</p></span>
-        <tr>
-          <th class="title--name">Name</th>
-          <th>Author</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Problems</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(contest, index) in contestData" :key="index">
-          <td @click="toContest(contest)" class="detail--name">
-            <p href="">{{ contest.getName() }}</p>
-          </td>
-          <!-- author here -->
-          <td class="detail--author">Author</td>
-          <td class="detail--startTime">{{ startTime(contest) }}</td>
-          <td class="detail--endTime">{{ endTime(contest) }}</td>
-          <td class="detail--numProbs">{{ contest._problems.length }}</td>
-          <td class="detail--status">
-            <p>{{ contestStatus(contest) }}</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="pagination">
-      <h2 @click="previousPage" v-show="canPrev" class="previous">
-        ...Previous page
-      </h2>
-      <div class="space" v-show="canPrev"></div>
-      <h2 @click="nextPage" v-show="canNext" class="next">Next page...</h2>
+  <Nav>
+    <Loading v-show="isLoading" />
+    <h1 class="contest__title">List contest</h1>
+    <div class="contest__container">
+      <table class="contest__container--table">
+        <thead>
+          <span><p>Contest</p></span>
+          <tr>
+            <th class="title--name">Name</th>
+            <th>Author</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Problems</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(contest, index) in contestData" :key="index">
+            <td @click="toContest(contest)" class="detail--name">
+              <p href="">{{ contest.getName() }}</p>
+            </td>
+            <!-- author here -->
+            <td class="detail--author">Author</td>
+            <td class="detail--startTime">{{ startTime(contest) }}</td>
+            <td class="detail--endTime">{{ endTime(contest) }}</td>
+            <td class="detail--numProbs">{{ contest._problems.length }}</td>
+            <td class="detail--status">
+              <p>{{ contestStatus(contest) }}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <h2 @click="previousPage" v-show="canPrev" class="previous">
+          ...Previous page
+        </h2>
+        <div class="space" v-show="canPrev"></div>
+        <h2 @click="nextPage" v-show="canNext" class="next">Next page...</h2>
+      </div>
     </div>
-  </div>
+  </Nav>
 </template>
 
 <script lang="ts">
@@ -47,10 +49,12 @@ import { searchContest } from "../model/contest/domainLogic/contest";
 import errorHandler from "../../shared/helpers/errorHandler";
 import Loading from "./Loading.vue";
 import { AxiosError } from "axios";
+import Nav from "@/shared/components/general/Nav.vue";
 
 export default defineComponent({
   components: {
     Loading,
+    Nav
   },
 
   data() {

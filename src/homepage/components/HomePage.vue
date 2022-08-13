@@ -1,14 +1,13 @@
 <template>
      <Nav>
-     <ProblemSolving></ProblemSolving>
+          <ProblemSolving></ProblemSolving>
      </Nav>
 </template>
 
 <script lang="ts" setup>
-     import Nav from '@/leftSideMenuBar/Nav.vue';
-     import ProblemSolving from './ProblemSolving.vue';
+import Nav from '@/shared/components/general/Nav.vue';
+import ProblemSolving from './ProblemSolving.vue';
 </script>
 
 <style>
-
 </style>
