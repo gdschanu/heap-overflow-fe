@@ -32,7 +32,7 @@ import Problem from '@/problem/model/problem';
 
 const problems: Ref<Array<Array<Problem>>> = ref([])
 const currentPage = ref(0)
-const perPage = ref(8)
+const perPage = ref(20)
 const numberOfProblem = ref(50)
 
 function gotoPage(page: number) {
