@@ -32,7 +32,7 @@ import Problem from '@/problem/model/problem';
 
 const problems: Ref<Array<Array<Problem>>> = ref([])
 const currentPage = ref(0)
-const perPage = ref(8)
+const perPage = ref(calculateNumberOfProblemPerPage())
 const numberOfProblem = ref(50)
 
 function gotoPage(page: number) {
@@ -46,7 +46,7 @@ async function getProblemBaseOnPage() {
 onMounted(async () => {
     try {
         numberOfProblem.value = await countProblems()
-        await getProblemBaseOnPage()
+        await getProblemBaseOnPage() 
     } catch (error) {
         errorHandler(error as AxiosError)
     }
@@ -59,6 +59,18 @@ watch(currentPage, async () => {
         errorHandler(error as AxiosError)
     }
 })
+
+watch(perPage, async () => {
+    try {
+        await getProblemBaseOnPage()
+    } catch (error) {
+        errorHandler(error as AxiosError)
+    }
+})
+
+function calculateNumberOfProblemPerPage() {
+    return Math.floor((window.innerHeight - 200) / 50);
+}
 
 </script>
 

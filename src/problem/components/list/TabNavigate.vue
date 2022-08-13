@@ -27,14 +27,15 @@
                 class="fa-solid fa-angle-right"></i>
         </TabNavigateItem>
         <TabNavigateItem :disabled="currentTabNavigateEnd === numberOfPage ? true : false"
-            @clicked="handleTabNavigateMoving(numberOfPage - NUMBER_OF_TAB_NAVIGATE_ITEM + 1, numberOfPage)"><i class="fa-solid fa-angles-right"></i>
+            @clicked="handleTabNavigateMoving(numberOfPage - NUMBER_OF_TAB_NAVIGATE_ITEM + 1, numberOfPage)"><i
+                class="fa-solid fa-angles-right"></i>
         </TabNavigateItem>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from "@vue/reactivity";
-import { ref } from "vue";
+import { onBeforeUpdate, ref, watch } from "vue";
 import TabNavigateItem from "./TabNavigateItem.vue"
 
 const NUMBER_OF_TAB_NAVIGATE_ITEM = ref(5)
@@ -58,22 +59,24 @@ const numberOfPage = computed(() => {
     return Math.floor(props.numberOfProblem / props.perPage) + 1
 })
 
-function calculateNumberOfPage() {
+const calculateNumberOfPage = computed(() => {
     return Math.floor(props.numberOfProblem / props.perPage) + 1
-}
+})
 
 const currentTabNavigateStart = ref(props.currentPage + 1 - Math.floor(NUMBER_OF_TAB_NAVIGATE_ITEM.value / 2))
 const currentTabNavigateEnd = ref(props.currentPage + 1 + Math.floor(NUMBER_OF_TAB_NAVIGATE_ITEM.value / 2))
 
-if (currentTabNavigateStart.value < 1) {
-    currentTabNavigateStart.value = 1
-    currentTabNavigateEnd.value = NUMBER_OF_TAB_NAVIGATE_ITEM.value
-}
+onBeforeUpdate(() => {
+    if (currentTabNavigateStart.value < 1) {
+        currentTabNavigateStart.value = 1
+        currentTabNavigateEnd.value = NUMBER_OF_TAB_NAVIGATE_ITEM.value
+    }
 
-if (currentTabNavigateEnd.value > calculateNumberOfPage()) {
-    currentTabNavigateEnd.value = calculateNumberOfPage()
-    currentTabNavigateStart.value = calculateNumberOfPage() - NUMBER_OF_TAB_NAVIGATE_ITEM.value + 1
-}
+    if (currentTabNavigateEnd.value > calculateNumberOfPage.value) {
+        currentTabNavigateEnd.value = calculateNumberOfPage.value
+        currentTabNavigateStart.value = calculateNumberOfPage.value - NUMBER_OF_TAB_NAVIGATE_ITEM.value + 1
+    }
+})
 
 function handleTabNavigateMoving(start: number, end: number) {
     currentTabNavigateStart.value = start
