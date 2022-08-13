@@ -1,29 +1,33 @@
 <template>
   <h1 class="page__title">Contest detail</h1>
   <div class="backBtn">
-    <button>&lt;&ndash;</button>
+    <i class="fa-solid fa-circle-arrow-left" @click="backToListContest"></i>
   </div>
   <div class="container">
     <div class="container__left">
-      <table>
-        <thead>
-          <span><p>Problem</p></span>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(problem, index) in listProblem" :key="index">
-            <td>{{ problem.ordinal }}</td>
-            <td class="problem--name">
-              <p>{{ problem.name }}</p>
-            </td>
-            <td>{{ problem.score }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="container__left--problems">
+        <table>
+          <thead>
+            <span><p>Problem</p></span>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(problem, index) in listProblem" :key="index">
+              <td>{{ problem.ordinal }}</td>
+              <td class="problem--name">
+                <p>{{ problem.name }}</p>
+              </td>
+              <td>{{ problem.score }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ContestDescription :description="getDescription" />
     </div>
 
     <div class="container__right">
@@ -61,11 +65,13 @@ import { createParticipant } from "../model/participant/domainLogic/participant"
 import { Participant } from "../model/participant/participant";
 import RankList from "./detail/RankList.vue";
 import ParticipantList from "./detail/ParticipantList.vue";
+import ContestDescription from "./detail/ContestDescription.vue";
 
 export default defineComponent({
   components: {
     RankList,
     ParticipantList,
+    ContestDescription,
   },
 
   data() {
@@ -96,6 +102,11 @@ export default defineComponent({
       // console.log(problems);
       return problems;
     },
+
+    getDescription(): String {
+      const description = this.getContest.getDescription();
+      return description;
+    },
   },
 
   methods: {
@@ -108,11 +119,27 @@ export default defineComponent({
       // console.log(this.participant._contestId);
       this.isJoin = true;
     },
+
+    backToListContest() {
+      this.$router.push("/contest");
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
+.backBtn {
+  top: -60px;
+  left: 10%;
+  position: relative;
+  font-size: 28px;
+  i {
+    &:hover {
+      color: rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+    }
+  }
+}
 @mixin text-center {
   text-align: center;
 }

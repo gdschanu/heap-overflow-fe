@@ -8,7 +8,7 @@
           <th>Coder Name</th>
         </tr>
       </thead>
-      <!-- v-for in list rank -->
+      <!-- v-for in list participant -->
       <tbody>
         <tr v-for="(rank, index) in 10">
           <td class="participant--order">{{ index + 1 }}</td>

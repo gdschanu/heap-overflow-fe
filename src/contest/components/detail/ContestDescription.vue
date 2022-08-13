@@ -1,18 +1,12 @@
 <template>
-  <div class="rank__container">
+  <div class="description__container">
     <table>
       <thead>
-        <span class="rank__container--title"><p>Rank</p></span>
-        <tr>
-          <th>#</th>
-          <th>Coder Name</th>
-        </tr>
+        <span class="description__container--title"><p>Description</p></span>
       </thead>
-      <!-- v-for in list rank -->
       <tbody>
-        <tr v-for="(rank, index) in 10">
-          <td class="rank--order">{{ index + 1 }}</td>
-          <td class="rank--name">coderName</td>
+        <tr>
+          <td class="description__container--content"><MarkdownRender :description="description"/></td>
         </tr>
       </tbody>
     </table>
@@ -21,28 +15,34 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import MarkdownRender from "./MarkdownRender.vue";
 
 export default defineComponent({
-  name: "RankList",
+  name: "ContestDescription",
+
+  components: {
+    MarkdownRender,
+  },
+
   props: {
-    rankList: {
-      type: Array,
-      default: []
-    }
-  }
+    description: {
+      type: String,
+      default: "",
+    },
+  },
 });
 </script>
 
 <style lang="scss">
-.rank__container {
+.description__container {
   span {
     display: block;
-    width: 101%;
+    width: 20%;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
     padding: 4px 0;
-    margin-left: -1px;
+    margin-left: -0.5px;
     background-color: #ccc;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -53,12 +53,13 @@ export default defineComponent({
   }
 
   table {
+    width: 100%;
     border-top: unset;
     border-right: unset;
     border-left: unset;
   }
 
-  .rank__container--title {
+  .description__container--title {
     margin-top: 20px;
   }
 
