@@ -1,5 +1,5 @@
 <template>
-    <div class="tab-navigate">
+    <div class="tab-navigate" style="margin-bottom:30px; margin-top:20px">
         <TabNavigateItem :disabled="currentTabNavigateStart === 1 ? true : false"
             @clicked="handleTabNavigateMoving(1, NUMBER_OF_TAB_NAVIGATE_ITEM)"><i class="fa-solid fa-angles-left"></i>
         </TabNavigateItem>
