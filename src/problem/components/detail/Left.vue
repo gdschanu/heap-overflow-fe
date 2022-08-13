@@ -9,7 +9,7 @@
                 <p>solution</p>
             </template>
             <template v-slot:Discussion>
-                <p>discussion</p>
+               <Discussion />
             </template>
             <template v-slot:Submission>
                 <Submissions />
@@ -36,6 +36,7 @@ import MarkdownRender from "../../components/common/MarkdownRender.vue";
 import Submissions from "./LeftSubmissions.vue";
 import Problem from "@/problem/model/problem";
 import { ref } from "vue";
+import Discussion from "./Discussions.vue"
 
 const tabBarSelected = ref(0)
 

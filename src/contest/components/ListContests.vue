@@ -1,7 +1,7 @@
 <template>
   <Nav>
     <Loading v-show="isLoading" />
-    <h1 class="contest__title">List contest</h1>
+    <h1 class="contest__title">Contests</h1>
     <div class="contest__container">
       <table class="contest__container--table">
         <thead>
@@ -73,7 +73,7 @@ export default defineComponent({
       response.forEach((item) => {
         this.contestData.push(item);
       });
-      setTimeout(() => (this.isLoading = false), 2000);
+      setTimeout(() => (this.isLoading = false), 100);
     } catch (error) {
       errorHandler(error as AxiosError);
     }
@@ -169,10 +169,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .contest__title {
-  font-size: 30px;
-  padding-bottom: 10px;
-  padding-top: 50px;
-  text-align: center;
+    margin: 2%;
+    text-align: center;
 }
 
 .pagination {

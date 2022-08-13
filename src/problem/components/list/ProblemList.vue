@@ -1,4 +1,5 @@
 <template>
+    <h1 class="title"> Practice Problems </h1>
     <div class="list">
         <div class="list-container">
             <table>
@@ -63,6 +64,11 @@ watch(currentPage, async () => {
 </script>
 
 <style lang="scss" scoped>
+.title {
+    margin: 2%;
+    text-align: center;
+}
+
 .list {}
 
 .list-container {

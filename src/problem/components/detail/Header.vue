@@ -46,7 +46,7 @@ function pushToProblem() {
 
 function likeClicked() {
     if (like.value) like.value = false;
-    else {
+    else {/*  */
         like.value = true;
         dislike.value = false;
     }
