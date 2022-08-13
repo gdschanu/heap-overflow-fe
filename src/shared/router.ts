@@ -3,6 +3,7 @@ import problemRouter from '@/problem/router'
 import coderRouter from '@/coder/router'
 import contestRouter from '@/contest/router'
 import blogRouter from '@/blog/router'
+import homePageRouter from '@/homepage/router'
 
 let routes: Array<RouteRecordRaw> = [
 	{
@@ -21,17 +22,9 @@ let routes: Array<RouteRecordRaw> = [
 			type: 'public'
 		}
 	},
-	{
-		path: '/dashboard',
-		name: 'Dashboard',
-		component: () => import('@/shared/views/Dashboard.vue'),
-		meta: {
-			type: 'protected'
-		}
-	},
 ]
 
-routes = [...routes, ...blogRouter, ...coderRouter, ...problemRouter, ...contestRouter]
+routes = [...routes, ...blogRouter, ...coderRouter, ...problemRouter, ...contestRouter, ...homePageRouter]
 
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
