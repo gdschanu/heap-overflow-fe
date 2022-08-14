@@ -38,6 +38,7 @@
 
 import TabBar from "./ProblemTabBar.vue";
 import TestCase from "./RightConsoleTestCase.vue";
+import TestCaseModel from "@/problem/model/testCase";
 // import RunCode from "./RightConsoleRunCode";
 // import Submission from "./RightConsoleSubmission";
 import Button from "../../components/common/Button.vue";
@@ -50,7 +51,7 @@ const isRunning = ref(false)
 const showConsole = ref(false)
 const submission = ref({})
 const consoleSelected = ref(0)
-const testCases = ref([])
+const testCases = ref()
 
 const props = defineProps({
     problem: {
@@ -77,6 +78,7 @@ onMounted(async () => {
     position: relative;
     display: flex;
     align-items: center;
+    background-color: white;
 
     .console-window {
         position: absolute;
