@@ -3,7 +3,6 @@ import router from "../router";
 
 export default function routerWatcher(to: RouteLocationNormalizedLoaded, from: RouteLocationNormalizedLoaded) {
     const accessToken = localStorage.getItem("accessToken");
-    console.log(accessToken);
     
     if (to.meta.type === 'protected' && !accessToken)
         return router.push({ name: "Login" });

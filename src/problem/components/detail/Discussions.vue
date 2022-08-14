@@ -5,11 +5,11 @@
         </div> -->
         <table>
             <tr>
-                <th>Time submitted</th>
-                <th>Status</th>
-                <th>Runtime</th>
-                <th>Memory</th>
-                <th>Language</th>
+                <th>Title</th>
+                <th>Created At</th>
+                <th>Comments</th>
+                <th>Like</th>
+                <th>Dislike</th>
             </tr>
             <tr>
                 <td>03/20/2022 11:03</td>
@@ -46,7 +46,7 @@
 
 <script>
 export default {
-    name: "Submissions",
+    name: "Discussions",
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="img__container">
     <img
-      src="../assets/CatLoading.gif"
+      src="../../assets/CatLoading.gif"
       alt="loading-icon"
     />
   </div>

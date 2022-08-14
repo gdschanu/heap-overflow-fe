@@ -44,7 +44,7 @@ const current = typeof route.params.id === 'string' ? route.params.id : ''
 const firstLoading = ref(true)
 const problemNotFound = ref(false)
 const fullScreen = ref(false)
-const problem: Ref<Problem> = ref(new Problem(current, '', '', '', Difficulty.EASY))
+const problem = ref()
 
 onMounted(async () => {
     try {
@@ -105,12 +105,6 @@ function editorSettings() {
     } else {
         store.dispatch("problemStore/setEditorSettings", defaultSettings);
     }
-
-    setTimeout(() => {
-        store.dispatch("problemStore/setEditorSettings", {
-            folding: false
-        });
-    }, 1000);
 }
 
 </script>

@@ -1,26 +1,33 @@
 <template>
   <h1 class="page__title">Contest detail</h1>
+  <div class="backBtn">
+    <i class="fa-solid fa-circle-arrow-left" @click="backToListContest"></i>
+  </div>
   <div class="container">
     <div class="container__left">
-      <table>
-        <thead>
-          <span><p>Problem</p></span>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(problem, index) in listProblem" :key="index">
-            <td>{{ problem.ordinal }}</td>
-            <td class="problem--name">
-              <p>{{ problem.name }}</p>
-            </td>
-            <td>{{ problem.score }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="container__left--problems">
+        <table>
+          <thead>
+            <span><p>Problem</p></span>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(problem, index) in listProblem" :key="index">
+              <td>{{ problem.ordinal }}</td>
+              <td class="problem--name">
+                <p>{{ problem.name }}</p>
+              </td>
+              <td>{{ problem.score }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ContestDescription :description="getDescription" />
     </div>
 
     <div class="container__right">
@@ -42,25 +49,9 @@
           </tbody>
         </table>
       </div>
-
-      <div class="container__right-rank--table">
-        <table>
-          <thead>
-            <span class="rank__problem--title"><p>Rank</p></span>
-            <tr>
-              <th>#</th>
-              <th>Coder Name</th>
-            </tr>
-          </thead>
-          <!-- v-for in list rank -->
-          <tbody>
-            <tr v-for="(rank, index) in 10">
-              <td class="rank--order">{{ index + 1 }}</td>
-              <td class="rank--name">coderName</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- rank/list participant -->
+      <RankList />
+      <ParticipantList />,
       <div class="clear"></div>
     </div>
   </div>
@@ -72,8 +63,17 @@ import { Contest } from "../model/contest/contest";
 import { Problem } from "../model/contest/problem";
 import { createParticipant } from "../model/participant/domainLogic/participant";
 import { Participant } from "../model/participant/participant";
+import RankList from "./detail/RankList.vue";
+import ParticipantList from "./detail/ParticipantList.vue";
+import ContestDescription from "./detail/ContestDescription.vue";
 
 export default defineComponent({
+  components: {
+    RankList,
+    ParticipantList,
+    ContestDescription,
+  },
+
   data() {
     return {
       participant: {} as Participant,
@@ -102,6 +102,11 @@ export default defineComponent({
       // console.log(problems);
       return problems;
     },
+
+    getDescription(): String {
+      const description = this.getContest.getDescription();
+      return description;
+    },
   },
 
   methods: {
@@ -114,11 +119,27 @@ export default defineComponent({
       // console.log(this.participant._contestId);
       this.isJoin = true;
     },
+
+    backToListContest() {
+      this.$router.push("/contest");
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
+.backBtn {
+  top: -60px;
+  left: 10%;
+  position: relative;
+  font-size: 28px;
+  i {
+    &:hover {
+      color: rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+    }
+  }
+}
 @mixin text-center {
   text-align: center;
 }
@@ -146,9 +167,9 @@ export default defineComponent({
     width: 70%;
 
     .problem--name {
-      color: green;
+      color: #7b61ff;
       &:hover {
-        color: rgba(0, 128, 0, 0.6);
+        color: #7b61ff77;
       }
 
       p:hover {
@@ -166,9 +187,9 @@ export default defineComponent({
     }
 
     .prob--name {
-      color: green;
+      color: #7b61ff;
       &:hover {
-        color: rgba(0, 128, 0, 0.6);
+        color: #7b61ff77;
       }
     }
   }
@@ -210,12 +231,6 @@ export default defineComponent({
     width: 30%;
     padding-left: 20px;
 
-    .container__right-rank--table {
-      table {
-        @include none-TopLeftRight-border;
-      }
-    }
-
     .container__right-joinContest--table {
       table {
         @include none-TopLeftRight-border;
@@ -241,11 +256,11 @@ export default defineComponent({
         padding: 4px 14px;
         margin: 0 auto;
         color: whitesmoke;
-        background-color: green;
+        background-color: #7b61ff;
         border-radius: 4px;
         margin: 6px;
         &:hover {
-          background-color: rgba(0, 128, 0, 0.6);
+          background-color: #7b61ff77;
           color: unset;
           cursor: pointer;
         }
@@ -258,10 +273,6 @@ export default defineComponent({
           background-color: #ccc;
         }
       }
-    }
-
-    .rank__problem--title {
-      margin-top: 20px;
     }
   }
 }

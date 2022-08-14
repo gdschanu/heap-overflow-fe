@@ -2,8 +2,19 @@
     <div class="nav-layout">
         <div class="nav-container">
             <div class="nav">
-                <img src="https://images.unsplash.com/photo-1530210124550-912dc1381cb8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="logo">
-                <h2>Hanu Code</h2>
+                <div class="nav__header">
+                    <div class="nav__header__img-container">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" alt="logo">
+                    </div>
+                    <h5 class="nav__header__title">Hanu Code</h5>
+                </div>
+                <div class="nav__route">
+                    <router-link v-for="(route, index) in routeList" :to="route.path" :key="index"
+                        class="nav__route__item">
+                        <i :class="route.icon" class="nav__route__item__icon"></i>
+                        <span class="nav__route__item__name">{{ route.name }}</span>
+                    </router-link>
+                </div>
             </div>
         </div>
         <div class="content-container">
@@ -13,27 +24,96 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 
+const routeList = ref([
+    {
+        path: "/dashboard",
+        name: "Dashboard",
+        icon: "fa-solid fa-house",
+    },
+    {
+        path: "/problem",
+        name: "Problem",
+        icon: "fa-solid fa-computer",
+    },
+    {
+        path: "/contest",
+        name: "Contest",
+        icon: "fa-brands fa-free-code-camp",
+    },
+    {
+        path: "/discussion",
+        name: "Discussion",
+        icon: "fa-solid fa-comment",
+    },
+    {
+        path: "/ranking",
+        name: "Ranking",
+        icon: "fa-solid fa-ranking-star",
+    },
+    {
+        path: "/help",
+        name: "Help",
+        icon: "fa-solid fa-circle-question",
+    },
+    {
+        path: "/setting",
+        name: "Setting",
+        icon: "fa-solid fa-gear",
+    },
+])
 </script>
 
 <style lang="scss" scoped>
 .nav-layout {
-    border: 1px solid red;
-    display: flex;
+    @apply flex items-stretch;
 }
 
 .nav-container {
-    position: relative;
-    border: 1px solid blue;
+    @apply relative;
+
     .nav {
-        position: sticky;
-        top: 0;
-        width: 200px;
+        @apply sticky top-0 w-52;
+
+        &__header {
+            @apply flex justify-center items-center py-2;
+
+            img {
+                @apply block w-20;
+            }
+
+            &__title {
+                @apply font-medium;
+            }
+        }
+
+        &__route {
+
+            &__item {
+                @apply relative flex items-center py-3 pl-3 text-slate-500 hover:text-slate-600 active:text-slate-700;
+
+                &__icon {
+                    @apply mx-3;
+                }
+
+                &__name {
+                    @apply mx-3;
+                }
+            }
+            &__item.router-link-active {
+                @apply text-slate-900 font-bold;
+            }
+
+            &__item.router-link-active::after {
+                @apply absolute bg-slate-900 left-0 top-1 bottom-1 w-1 rounded-r;
+                content: "";
+            }
+        }
     }
 }
 
 .content-container {
-    border: 1px solid green;
-    flex: 1 1 auto;
+    @apply flex-auto;
 }
 </style>
