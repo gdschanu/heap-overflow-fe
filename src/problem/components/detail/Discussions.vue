@@ -19,12 +19,13 @@
         <div class="pagination-container">
             <div class="pagination">
                 <a href="#">&laquo;</a>
-                <a href="#">1</a>
-                <a class="active" href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
+                <span v-for="index in countPages()">
+                    <a v-if="index-1 == currentPage" class="active">{{index}}</a>
+                    <a 
+                        v-if="index-1 != currentPage"
+                        @click="goToPage(index-1)"
+                    >{{index}}</a>
+                </span>
                 <a href="#">&raquo;</a>
             </div>
         </div>
@@ -32,19 +33,32 @@
 </template>
 
 <script>
-import { getPosts } from '../../model/domainLogic/getPost'
+import { countPosts, getPosts } from '../../model/domainLogic/getPost'
 export default {
     name: "Discussions",
     data() {
         return {
-            posts: []
+            posts: [],
+            perPage: 2,
+            total: 0,
+            countPages () {
+                return Math.ceil(this.total / this.perPage)
+            },
+            currentPage: 0,
+            async goToPage(page) {
+                this.currentPage = page
+                this.posts = await getPosts(this.currentPage, this.perPage, this.problemId)
+                this.total = await countPosts()
+            }
         }
     },
     created() {
         (async () => {
-            this.posts = await getPosts(0, 0)
+            this.posts = await getPosts(this.currentPage, this.perPage, this.problemId)
+            this.total = await countPosts()
         })()
-    }
+    },
+    props: ['problemId']
 };
 </script>
 

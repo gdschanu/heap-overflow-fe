@@ -9,7 +9,7 @@
                 <p>solution</p>
             </template>
             <template v-slot:Discussion>
-               <Discussion />
+               <Discussion :problemId="problem.getId()"/>
             </template>
             <template v-slot:Submission>
                 <Submissions />
