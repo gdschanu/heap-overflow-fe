@@ -1,8 +1,5 @@
 <template>
-    <div class="submissions">
-        <!-- <div class="no-submit">
-            <h3>You don't have any submissions yet.</h3>
-        </div> -->
+    <div class="discussion">
         <table>
             <tr>
                 <th>Title</th>
@@ -11,55 +8,84 @@
                 <th>Like</th>
                 <th>Dislike</th>
             </tr>
-            <tr>
-                <td>03/20/2022 11:03</td>
-                <td class="red">Runtime Error</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>python3</td>
-            </tr>
-            <tr>
-                <td>03/20/2022 09:45</td>
-                <td class="green">Accepted</td>
-
-                <td>80 ms</td>
-                <td>13.8 MB</td>
-                <td>python3</td>
-            </tr>
-            <tr>
-                <td>03/17/2022 22:05</td>
-                <td class="red">Wrong Answer</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>javascript</td>
-            </tr>
-            <tr>
-                <td>03/17/2022 22:05</td>
-                <td class="red">Compile Error</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>java</td>
+            <tr v-for="post in posts" class="row">
+                <td class="title">{{post.getTitle()}}</td>
+                <td>{{post.getCreatedAt().toString()}}</td>
+                <td>{{post.getNumberOfComments()}}</td>
+                <td>10</td>
+                <td>20</td>
             </tr>
         </table>
+        <div class="pagination-container">
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#">1</a>
+                <a class="active" href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import { getPosts } from '../../model/domainLogic/getPost'
 export default {
     name: "Discussions",
+    data() {
+        return {
+            posts: []
+        }
+    },
+    created() {
+        (async () => {
+            this.posts = await getPosts(0, 0)
+        })()
+    }
 };
 </script>
 
 <style lang="scss" scoped>
-.submissions {
+
+.pagination-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #535653;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.row {
+    border-bottom: 1px solid rgb(209, 205, 205);
+    
+}
+.title:hover {
+    background-color: gainsboro;
+}
+.title {
+    max-width: auto;
+}
+.discussion {
     padding: 10px;
-    .no-submit {
-        margin-top: 15%;
-        h3 {
-            color: var(--text-color-light);
-            text-align: center;
-        }
-    }
     table {
         width: 100%;
         border-collapse: collapse;

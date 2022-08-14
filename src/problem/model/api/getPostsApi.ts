@@ -11,7 +11,7 @@ export interface GetPostsResp {
 export async function getPostsApi(page : number, perPage: number) : Promise<GetPostsResp[]> {
   return [
     {
-      title: 'Solution 1',
+      title: 'Solution 1, Solution 1, Solution 1, Solution 1, Solution 1, Solution 1, Solution 1',
       author: 'quanvda',
       createdAt: '2023-03-03T08:42:40.760756Z',
       updatedAt: '2023-03-03T08:42:40.760756Z',
@@ -32,77 +32,14 @@ export async function getPostsApi(page : number, perPage: number) : Promise<GetP
       content: 'Some content'
     },
     {
-      title: 'Solution 3',
+      title: 'Solution 1, Solution 1, Solution 1, Solution 1, Solution 1, Solution 1, Solution 1',
       author: 'quanvda',
       createdAt: '2023-03-03T08:42:40.760756Z',
       updatedAt: '2023-03-03T08:42:40.760756Z',
       content: 'Some content'
     },
     {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    },
-    {
-      title: 'Solution 3',
+      title: 'Solution 2',
       author: 'quanvda',
       createdAt: '2023-03-03T08:42:40.760756Z',
       updatedAt: '2023-03-03T08:42:40.760756Z',
