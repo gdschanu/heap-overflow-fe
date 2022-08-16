@@ -55,7 +55,7 @@ const props = defineProps({
 })
 
 const numberOfPage = computed(() => {
-    return Math.floor(props.numberOfProblem / props.perPage) + 1
+    return Math.ceil(props.numberOfProblem / props.perPage)
 })
 
 const calculateNumberOfPage = computed(() => {
