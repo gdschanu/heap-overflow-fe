@@ -1,9 +1,9 @@
 import Post from "../post";
-import { GetPostsResp, getPostsApi } from '../api/getPostsApi'
+import { GetPostsResp, getPostsApi, countPostsApi } from '../api/getPostsApi'
 import DateTime from "@/shared/models/dateTime";
 
-export async function getPosts(page : number, perPage : number) : Promise<Post[]> {
-  const resps : GetPostsResp[] = await getPostsApi(page, perPage);
+export async function getPosts(page : number, perPage : number, problemId : string) : Promise<Post[]> {
+  const resps : GetPostsResp[] = await getPostsApi(page, perPage, problemId);
   const posts : Post[] = [];
   for (const resp of resps) {
     posts.push(new Post({
@@ -18,5 +18,5 @@ export async function getPosts(page : number, perPage : number) : Promise<Post[]
 }
 
 export async function countPosts() : Promise<number> {
-  return 10
+  return await countPostsApi();
 }
