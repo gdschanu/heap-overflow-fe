@@ -1,13 +1,12 @@
 <template>
-    <div class="tab-navigate" style="margin-bottom:30px; margin-top:20px">
-        <TabNavigateItem :disabled="currentTabNavigateStart === 1 ? true : false"
+    <div class="tab-navigate">
+        <TabNavigateItem :disabled="currentTabNavigateStart <= 1 ? true : false"
             @clicked="handleTabNavigateMoving(1, NUMBER_OF_TAB_NAVIGATE_ITEM)"><i class="fa-solid fa-angles-left"></i>
         </TabNavigateItem>
-        <TabNavigateItem :disabled="currentTabNavigateStart === 1 ? true : false"
+        <TabNavigateItem :disabled="currentTabNavigateStart <= 1 ? true : false"
             @clicked="handleTabNavigateMoving(currentTabNavigateStart - 1, currentTabNavigateEnd - 1)"><i
                 class="fa-solid fa-angle-left"></i>
         </TabNavigateItem>
-        <!-- <TabNavigateItem :active="true">1</TabNavigateItem> -->
         <template v-if="numberOfPage <= NUMBER_OF_TAB_NAVIGATE_ITEM">
             <TabNavigateItem v-for="page in numberOfPage" :key="page" :active="page - 1 === currentPage"
                 @clicked="gotoPage(page)">{{ page }}
@@ -22,11 +21,11 @@
             </template>
         </template>
 
-        <TabNavigateItem :disabled="currentTabNavigateEnd === numberOfPage ? true : false"
+        <TabNavigateItem :disabled="currentTabNavigateEnd >= numberOfPage ? true : false"
             @clicked="handleTabNavigateMoving(currentTabNavigateStart + 1, currentTabNavigateEnd + 1)"><i
                 class="fa-solid fa-angle-right"></i>
         </TabNavigateItem>
-        <TabNavigateItem :disabled="currentTabNavigateEnd === numberOfPage ? true : false"
+        <TabNavigateItem :disabled="currentTabNavigateEnd >= numberOfPage ? true : false"
             @clicked="handleTabNavigateMoving(numberOfPage - NUMBER_OF_TAB_NAVIGATE_ITEM + 1, numberOfPage)"><i
                 class="fa-solid fa-angles-right"></i>
         </TabNavigateItem>
