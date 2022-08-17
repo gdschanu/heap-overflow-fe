@@ -1,5 +1,6 @@
 <template>
     <div class="discussion">
+        <button class="createpost">Create Post</button>
         <table>
             <tr>
                 <th>Title</th>
@@ -8,7 +9,7 @@
                 <th>Like</th>
                 <th>Dislike</th>
             </tr>
-            <tr v-for="post in posts" class="row">
+            <tr v-for="post in posts" class="row" :key="post">
                 <td class="title">{{post.getTitle()}}</td>
                 <td>{{post.getCreatedAt().toString()}}</td>
                 <td>{{post.getNumberOfComments()}}</td>
@@ -16,77 +17,51 @@
                 <td>20</td>
             </tr>
         </table>
-        <div class="pagination-container">
-            <div class="pagination">
-                <a href="#">&laquo;</a>
-                <span v-for="index in countPages()">
-                    <a v-if="index-1 == currentPage" class="active">{{index}}</a>
-                    <a 
-                        v-if="index-1 != currentPage"
-                        @click="goToPage(index-1)"
-                    >{{index}}</a>
-                </span>
-                <a href="#">&raquo;</a>
-            </div>
-        </div>
     </div>
+    <Paging v-if="renderPaging" :perPage="perPage" :total="total" :moveToPageHandler="moveToPageHandler"/>
 </template>
 
 <script>
 import { countPosts, getPosts } from '../../model/domainLogic/getPost'
+import Paging from '../../../shared/paging/Paging.vue'
 export default {
     name: "Discussions",
     data() {
         return {
             posts: [],
-            perPage: 2,
             total: 0,
-            countPages () {
-                return Math.ceil(this.total / this.perPage)
+            perPage: 20,
+            moveToPageHandler: async (page) => {
+                this.posts = await getPosts(page-1, this.perPage, this.problemId)
             },
-            currentPage: 0,
-            async goToPage(page) {
-                this.currentPage = page
-                this.posts = await getPosts(this.currentPage, this.perPage, this.problemId)
-                this.total = await countPosts()
-            }
+            renderPaging: false,
         }
     },
     created() {
         (async () => {
-            this.posts = await getPosts(this.currentPage, this.perPage, this.problemId)
+            this.posts = await getPosts(0, this.perPage, this.problemId)
             this.total = await countPosts()
+            this.renderPaging = true;
         })()
     },
-    props: ['problemId']
+    props: ['problemId'],
+    components: {
+        Paging,
+    }
 };
 </script>
 
 <style lang="scss" scoped>
-
-.pagination-container {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
+.createpost {
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(74, 74, 74);
+    color: white;
 }
 
-.pagination {
-  display: inline-block;
+.createpost:hover {
+    background-color: rgb(145, 145, 145);
 }
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #535653;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
 
 .row {
     border-bottom: 1px solid rgb(209, 205, 205);

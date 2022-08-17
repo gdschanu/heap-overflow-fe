@@ -8,5 +8,5 @@ export default [
         path: '/problem/:id',
         name: 'ProblemDetail',
         component: () => import('./components/detail/Problem.vue')
-    }
+    },
 ]
