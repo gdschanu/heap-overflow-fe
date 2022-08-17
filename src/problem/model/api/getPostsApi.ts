@@ -23,5 +23,5 @@ export async function getPostsApi(page : number, perPage: number, problemId : st
 }
 
 export async function countPostsApi() {
-  return 10;
+  return 500;
 }

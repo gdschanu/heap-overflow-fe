@@ -1,5 +1,5 @@
 <script>
-import PageManager from './PageManager'
+import PageManager from './PagingManager'
 export default {
   data() {
     return {
@@ -7,7 +7,6 @@ export default {
     }
   },
   created() {
-    console.log('???? ' + this.perPage + ' ' + this.total)
     this.pageManager = new PageManager(this.perPage, this.total, this.moveToPageHandler)
   },
   props: ['perPage', 'total', 'moveToPageHandler'],

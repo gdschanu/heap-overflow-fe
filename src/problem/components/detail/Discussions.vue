@@ -18,14 +18,12 @@
             </tr>
         </table>
     </div>
-    <PageManager :perPage="perPage" :total="total" :moveToPageHandler="moveToPageHandler"/>
-    <ButtonCounter />
+    <Paging v-if="renderPaging" :perPage="perPage" :total="total" :moveToPageHandler="moveToPageHandler"/>
 </template>
 
 <script>
 import { countPosts, getPosts } from '../../model/domainLogic/getPost'
-import PageMangager from './pageManager/PageManager.vue'
-import ButtonCounter from './ButtonCounter.vue'
+import Paging from '../../../shared/paging/Paging.vue'
 export default {
     name: "Discussions",
     data() {
@@ -35,19 +33,20 @@ export default {
             perPage: 20,
             moveToPageHandler: async (page) => {
                 this.posts = await getPosts(page-1, this.perPage, this.problemId)
-            }
+            },
+            renderPaging: false,
         }
     },
     created() {
         (async () => {
             this.posts = await getPosts(0, this.perPage, this.problemId)
             this.total = await countPosts()
+            this.renderPaging = true;
         })()
     },
     props: ['problemId'],
     components: {
-        PageMangager,
-        ButtonCounter
+        Paging,
     }
 };
 </script>
