@@ -70,7 +70,7 @@ watch(perPage, async () => {
 })
 
 function calculateNumberOfProblemPerPage() {
-    return Math.floor((window.innerHeight - 200) / 50);
+    return Math.floor((window.innerHeight - 250) / 50);
 }
 
 </script>
