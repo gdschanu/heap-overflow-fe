@@ -25,18 +25,18 @@ import Setting from "./RightSetting.vue";
 import Console from "./RightConsole.vue";
 import MonacoEditor from "./MonacoEditor.vue";
 import Problem from "@/problem/model/problem";
-import { computed } from "vue";
+import { computed, PropType, Ref } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore()
+const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
 
 const props = defineProps({
     fullScreen: Boolean,
-    problem: {
-        type: Problem,
-        required: true
-    }
 })
 
 const languages = computed(() => {
-    return props.problem.getAllowedProgrammingLanguages()
+    return problem.value.getAllowedProgrammingLanguages()
 })
 </script>
 
@@ -53,7 +53,7 @@ const languages = computed(() => {
     }
 
     .editor {
-        height: calc(100% + var(--nav-height) - 120px) !important;
+        height: calc(100% - 2*var(--nav-height)) !important;
     }
 
     .console {

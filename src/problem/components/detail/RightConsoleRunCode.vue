@@ -1,7 +1,7 @@
 <template>
     <div class="run-code-result">
         <div class="before-run" v-if="detailIsEmpty">
-            <h3>Run your code to see result</h3>
+            <h3>feature will be released soon</h3>
         </div>
         <div class="ran" v-else>
             <h3 class="status">Accepted</h3>
@@ -10,33 +10,31 @@
     </div>
 </template>
 
-<script>
-import Console from "../../general/Console";
+<script lang="ts" setup>
+import { computed } from "vue";
+import Console from "../common/Console.vue";
 
-export default {
-    name: "RunCode",
-    props: {
-        runCodeResult: Object,
-    },
-    components: {
-        Console
-    },
-    computed: {
-        detailIsEmpty() {
-            return (
-                Object.keys(this.runCodeResult).length === 0 &&
-                this.runCodeResult.constructor === Object
-            );
-        },
-    },
-};
+const props = defineProps({
+    runCodeResult: {
+        type: Object,
+        default: {}
+    }
+})
+
+const detailIsEmpty = computed(() => {
+    return (
+        Object.keys(props.runCodeResult).length === 0 &&
+        props.runCodeResult.constructor === Object
+    )
+})
 </script>
 
 <style lang="scss" scoped>
 .run-code-result {
     .before-run {
+        @apply text-center;
     }
-    .ran {
-    }
+
+    .ran {}
 }
 </style>

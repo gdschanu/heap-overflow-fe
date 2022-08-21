@@ -1,7 +1,7 @@
 <template>
     <button
         :title="des"
-        class="relative rounded-lg px-5 py-2.5 font-bold"
+        class="block whitespace-nowrap relative rounded-lg px-5 py-2.5 font-bold"
         :class="type + (disabled ? '-disabled' : '')"
         :disabled="disabled"
         @click="clicked"
@@ -48,7 +48,8 @@ const props = defineProps({
 
 const emit = defineEmits(['clicked'])
 function clicked() {
-    emit('clicked')
+    if (!props.loading && !props.disabled)
+        emit('clicked')
 }
 
 </script>
