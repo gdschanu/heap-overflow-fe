@@ -46,7 +46,7 @@ export default {
     },
     computed: {
         getTheme() {
-            return this.$store.state.problemStore.theme === "dark-theme"
+            return this.$store.state.theme === "dark"
                 ? "vs-dark"
                 : "vs";
         },

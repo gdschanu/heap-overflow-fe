@@ -7,10 +7,10 @@
                     <TestCase :testCases="testCases" />
                 </template>
                 <template v-slot:Runcode>
-                    <!-- <RunCode :runCodeResult="runCodeResult" /> -->
+                    <RunCode :runCodeResult="{}" />
                 </template>
                 <template v-slot:Submission>
-                    <!-- <Submission :submission="{ ...submission }" /> -->
+                    <Submission :submission="currentSubmission" />
                 </template>
                 <template v-slot:Testcase-icon>
                     <i class="fa-solid fa-gear"></i>
@@ -29,8 +29,8 @@
                 <i class="fa-solid fa-chevron-up"></i>
             </span>
         </div>
-        <Button @click="runCode" class="button" :disable="isSubmitting" text="Run code" />
-        <Button @click="submit" class="button" :disable="isSubmitting" text="Submit Code" />
+        <Button @clicked="runCode" class="button" text="Run Code" />
+        <Button @clicked="submit" class="button" text="Submit Code" />
     </div>
 </template>
 
@@ -39,36 +39,50 @@
 import TabBar from "./ProblemTabBar.vue";
 import TestCase from "./RightConsoleTestCase.vue";
 import TestCaseModel from "@/problem/model/testCase";
-// import RunCode from "./RightConsoleRunCode";
-// import Submission from "./RightConsoleSubmission";
+import SubmissionModel from "../../model/submission"
+import RunCode from "./RightConsoleRunCode.vue";
+import Submission from "./RightConsoleSubmission.vue";
 import Button from "../../components/common/Button.vue";
 import Problem from "@/problem/model/problem";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, Ref } from "vue";
 import { getTestCasesById } from "../../model/domainLogic/testCase"
+import errorHandler from "@/shared/helpers/errorHandler";
+import { getSubmissionById } from "@/problem/model/domainLogic/submission";
+import { AxiosError } from "axios";
+import { useStore } from "vuex";
+
+const store = useStore()
+const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
 
 const isSubmitting = ref(false)
 const isRunning = ref(false)
 const showConsole = ref(false)
-const submission = ref({})
 const consoleSelected = ref(0)
 const testCases = ref()
 
-const props = defineProps({
-    problem: {
-        type: Problem,
-        required: true
-    }
-})
+const currentSubmission = ref()
 
 function runCode() {
     console.log('running code ...');
 }
-function submit() {
-    console.log('submitting...');
+async function submit() {
+    try {
+        console.log('submitting');
+        
+        isSubmitting.value = true
+    } catch (error) {
+        isSubmitting.value = false
+        errorHandler(error as AxiosError)
+    }
 }
 
 onMounted(async () => {
-    testCases.value = await getTestCasesById('625bc0c4f4a7b0e40f3d23a4')
+    try {
+        testCases.value = await getTestCasesById(problem.value.getId())
+        // currentSubmission.value = await getSubmissionById('62ff25b8f86d54687bafb3e8')
+    } catch (error) {
+        errorHandler(error as AxiosError)
+    }
 })
 
 </script>
@@ -85,9 +99,10 @@ onMounted(async () => {
         bottom: var(--nav-height);
         left: -1px;
         right: -1px;
-        height: 50vh;
+        height: calc(100vh - 15px - 32px - 15px - var(--nav-height) - 15px);
         overflow: hidden;
         border: 1px solid black;
+        background-color: white;
         border-bottom: none;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;

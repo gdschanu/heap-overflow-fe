@@ -1,12 +1,7 @@
 <template>
     <div class="test-case">
         <div class="test" v-for="(sample, index) in sampleTestCases" :key="index">
-            <p>
-                {{
-                        sampleTestCases.length != 1
-                            ? "Test case" : ""
-                }}
-            </p>
+            <p>{{ sampleTestCases.length != 1 ? "Test case" : "" }}</p>
             <div class="container">
                 <Console :text="sample.getInput()" />
                 <Console :text="sample.getExpectedOutput()" />

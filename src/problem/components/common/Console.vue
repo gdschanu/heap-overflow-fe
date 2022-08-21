@@ -11,7 +11,7 @@ const props = defineProps({
     text: String,
     maxLine: {
         type: Number,
-        default: 3,
+        default: 7,
     },
 })
 
@@ -21,16 +21,16 @@ const props = defineProps({
 $lh: 20px;
 
 .wrapper {
-    overflow: hidden;
+    overflow: auto;
     border-radius: 10px;
     border: 1px solid black;
 
     .console {
         font-family: "Courier New", monospace;
         white-space: pre-line;
+        width: max-content;
         padding: 10px;
         line-height: $lh;
-        overflow-y: auto;
         font-weight: bold;
     }
 

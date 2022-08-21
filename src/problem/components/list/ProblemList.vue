@@ -47,7 +47,7 @@ async function getProblemBaseOnPage() {
 onMounted(async () => {
     try {
         numberOfProblem.value = await countProblems()
-        await getProblemBaseOnPage() 
+        await getProblemBaseOnPage()
     } catch (error) {
         errorHandler(error as AxiosError)
     }

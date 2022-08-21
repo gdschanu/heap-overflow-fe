@@ -1,4 +1,5 @@
 import { Module } from 'vuex'
+import Problem from './model/problem';
 const date = new Date();
 
 type ProblemCode = {
@@ -30,6 +31,11 @@ export default {
 	state: {
 		currentProblemCode: {},
 		editorSettings: {},
+		problem: {}
+	} as {
+		currentProblemCode: ProblemCode,
+		editorSettings: EditorSetting,
+		problem: Problem
 	},
 	mutations: {
 		setCurrentProblemCode(state, currentProblem: ProblemCode) {
@@ -37,6 +43,9 @@ export default {
 		},
 		setEditorSettings(state, editorSettings: EditorSetting) {
 			state.editorSettings = editorSettings;
+		},
+		setProblem(state, problem: Problem) {
+			state.problem = problem
 		}
 	},
 	actions: {
@@ -64,5 +73,8 @@ export default {
 				localStorage.setItem("editorSettings", JSON.stringify(settingsToSave));
 			}
 		},
+		setProblem(state, problem: Problem) {
+			state.commit("setProblem", problem)
+		}
 	},
 } as Module<any, any>

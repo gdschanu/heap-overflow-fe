@@ -6,7 +6,7 @@
         <h4 class="problem-name">{{ problem.getName() }}</h4>
         <div class="problem-info">
             <div :class="'difficulty ' + problem.getDifficulty()">
-                {{ problem.getDifficulty() }}
+                {{ $store.state.problemStore.problem.getDifficulty() }}
             </div>
             <div class="like" @click="likeClicked">
                 {{ like ? likeCount + 1 : likeCount }}
@@ -23,22 +23,19 @@
 <script lang="ts" setup>
 import Problem from '../../model/problem';
 import errorHandler from '@/shared/helpers/errorHandler';
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { computed } from '@vue/reactivity';
+import { useStore } from 'vuex';
 
 const router = useRouter()
+const store = useStore()
+const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
 
 const like = ref(false)
 const likeCount = ref(0)
 const dislike = ref(false)
 const dislikeCount = ref(0)
-
-const props = defineProps({
-    problem: {
-        type: Problem,
-        required: true
-    },
-})
 
 function pushToProblem() {
     router.push("/problem");

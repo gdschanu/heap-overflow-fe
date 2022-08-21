@@ -4,15 +4,14 @@
         <ProblemNotFound v-if="problemNotFound" />
         <div class="content" v-if="!firstLoading && !problemNotFound">
             <div class="header" v-show="!fullScreen">
-                <Header :problem="problem" />
+                <Header />
             </div>
             <div class="left" v-show="!fullScreen">
-                <Left :problem="problem" />
+                <Left />
             </div>
             <div :class="fullScreen ? 'right right-full-screen' : 'right'">
                 <Right
                     :fullScreen="fullScreen"
-                    :problem="problem"
                     @enterFullScreen="fullScreen = true"
                     @exitFullScreen="fullScreen = false"
                 />
@@ -33,9 +32,9 @@ import errorHandler from "@/shared/helpers/errorHandler"
 import { AxiosError } from "axios";
 import { useRoute, useRouter } from "vue-router"
 import { onMounted } from "vue";
-import Problem from "../../model/problem"
-import Difficulty from "../../model/difficulty"
 import { useStore } from "vuex"
+import Problem from "@/problem/model/problem"
+import ProgrammingLanguage from "@/problem/model/programmingLanguage"
 
 const route = useRoute()
 const store = useStore()
@@ -44,7 +43,7 @@ const current = typeof route.params.id === 'string' ? route.params.id : ''
 const firstLoading = ref(true)
 const problemNotFound = ref(false)
 const fullScreen = ref(false)
-const problem = ref()
+const problem = ref() as Ref<Problem>
 
 onMounted(async () => {
     try {
@@ -62,18 +61,19 @@ onMounted(async () => {
 
 async function initProblem() {
     problem.value = await getProblemById(current)
+    store.dispatch("problemStore/setProblem", await getProblemById(current))
 }
 
 function restoreCode() {
-    const currentCode = localStorage.getItem("problemID: " + problem.value.getId())
+    const currentCode = localStorage.getItem("problemID: " + store.state.problemStore.problem.getId())
     if (currentCode !== null)
         store.dispatch("problemStore/setCurrentProblemCode", {
-            id: problem.value.getId(),
+            id: store.state.problemStore.problem.getId(),
             code: JSON.parse(currentCode)["code"],
         });
     else
         store.dispatch("problemStore/setCurrentProblemCode", {
-            id: problem.value.getId(),
+            id: store.state.problemStore.problem.getId(),
             code: "",
         });
 }
@@ -81,20 +81,17 @@ function restoreCode() {
 function editorSettings() {
     const defaultSettings = {
         fontSize: "15px",
-        fontFamily: "monospace", //[Times New Roman | monospace | Courier New | Papyrus | Georgia | Trebuchet MS | Tahoma]
-        fontWeight: "normal", //[normal | bold]
+        fontFamily: "monospace",
+        fontWeight: "normal",
         lineHeight: 20,
-        // other
         wordWrap: false,
         lineNumbers: true,
-        // no change
         scrollBeyondLastLine: true,
         folding: true,
         foldingHighlight: true,
         tabCompletion: "on",
         automaticLayout: true,
-        cursorBlinking: "phase", // [blink | smooth | phase | solid | expand]
-        // not an option
+        cursorBlinking: "phase",
         language: problem.value.getAllowedProgrammingLanguages()[0],
     };
     const currentSetting = localStorage.getItem("editorSettings")

@@ -1,9 +1,16 @@
 <template>
     <div class="submissions">
-        <!-- <div class="no-submit">
-            <h3>You don't have any submissions yet.</h3>
-        </div> -->
-        <table>
+        <div class="no-submit" v-if="submissions.length === 0">
+            <h4>You don't have any submissions yet.</h4>
+        </div>
+        <table v-else>
+            <colgroup>
+                <col class="time" />
+                <col class="status" />
+                <col class="runtime" />
+                <col class="memory" />
+                <col class="language" />
+            </colgroup>
             <tr>
                 <th>Time submitted</th>
                 <th>Status</th>
@@ -11,74 +18,91 @@
                 <th>Memory</th>
                 <th>Language</th>
             </tr>
-            <tr>
-                <td>03/20/2022 11:03</td>
-                <td class="red">Runtime Error</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>python3</td>
-            </tr>
-            <tr>
-                <td>03/20/2022 09:45</td>
-                <td class="green">Accepted</td>
-
-                <td>80 ms</td>
-                <td>13.8 MB</td>
-                <td>python3</td>
-            </tr>
-            <tr>
-                <td>03/17/2022 22:05</td>
-                <td class="red">Wrong Answer</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>javascript</td>
-            </tr>
-            <tr>
-                <td>03/17/2022 22:05</td>
-                <td class="red">Compile Error</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>java</td>
+            <tr v-for="(submission, index) in submissions" :key="index">
+                <td>{{ dateFormat(submission.getSubmittedAt()) }}</td>
+                <td class="status" :class="submission.getStatus()">{{ submission.getStatus() }}</td>
+                <td>{{ submission.getRuntime().toNumber() }} ms</td>
+                <td>{{ submission.getMemory().toNumber() }} kb</td>
+                <td>{{ submission.getProgrammingLanguage() }}</td>
             </tr>
         </table>
     </div>
 </template>
 
-<script>
-export default {
-    name: "Submissions",
-};
+<script lang="ts" setup>
+import { listSubmission } from '@/problem/model/domainLogic/submission';
+import Submission from '@/problem/model/submission';
+import errorHandler from '@/shared/helpers/errorHandler';
+import { computed } from '@vue/reactivity';
+import { AxiosError } from 'axios';
+import { onMounted, ref, Ref } from 'vue';
+import { dateFormat } from '../../utils/stringFormatter'
+
+const submissions = ref([]) as Ref<Submission[]>
+
+onMounted(async () => {
+    try {
+        submissions.value = await listSubmission(0, 1000, '6268ed01fad0b0e48fbd0ed6', '62fde27ff9b65468f1327fbd')
+    } catch (error) {
+        errorHandler(error as AxiosError)
+    }
+})
 </script>
 
 <style lang="scss" scoped>
 .submissions {
-    padding: 10px;
     .no-submit {
-        margin-top: 15%;
-        h3 {
-            color: var(--text-color-light);
-            text-align: center;
-        }
+        @apply mt-3 text-center;
     }
+
     table {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
+        @apply table-fixed w-full rounded-lg;
+
+        .time {
+            width: 25%;
+        }
+
+        .status {
+            width: 15%;
+        }
+
+        .runtime {
+            width: 20%;
+        }
+
+        .memory {
+            width: 20%;
+        }
+
+        .language {
+            width: 20%;
+        }
+
         th,
-        td {
-            border-collapse: collapse;
-            border-spacing: 0;
-            padding: 5px;
-            text-align: left;
+        tr {
+            th {
+                @apply p-2 bg-slate-200;
+            }
+
+            td {
+                @apply text-center p-2 cursor-pointer truncate;
+            }
+
+            td.status {
+                @apply text-red-600;
+            }
+
+            td.status.AC {
+                @apply text-green-600;
+            }
         }
-        tr:nth-child(even) {
-            background-color: var(--container-color-darker);
+
+        tr:nth-child(2n) {
+            @apply bg-slate-100 hover:bg-slate-200;
         }
-        .red {
-            color: rgb(255, 70, 70);
-        }
-        .green {
-            color: rgb(43, 223, 43);
+
+        tr:nth-child(2n + 1) {
+            @apply bg-slate-50 hover:bg-slate-200;
         }
     }
 }
