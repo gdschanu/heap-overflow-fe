@@ -16,7 +16,8 @@ export default createStore({
 			isAlert: false,
 			message: '',
 			type: ''
-		}
+		},
+		theme: localStorage.getItem('theme')
 	},
 	mutations: {
 		setAlert(state, alert: Alert) {
