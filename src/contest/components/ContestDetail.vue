@@ -68,6 +68,8 @@ import ParticipantList from "./detail/ParticipantList.vue";
 import ContestDescription from "./detail/ContestDescription.vue";
 
 export default defineComponent({
+  name: "ContestDetail",
+  
   components: {
     RankList,
     ParticipantList,
