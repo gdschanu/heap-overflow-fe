@@ -50,8 +50,8 @@
         </table>
       </div>
       <!-- rank/list participant -->
-      <RankList />
-      <ParticipantList />,
+      <RankList v-if="isLated"/>
+      <ParticipantList v-else/>,
       <div class="clear"></div>
     </div>
   </div>
@@ -68,6 +68,8 @@ import ParticipantList from "./detail/ParticipantList.vue";
 import ContestDescription from "./detail/ContestDescription.vue";
 
 export default defineComponent({
+  name: "ContestDetail",
+
   components: {
     RankList,
     ParticipantList,
@@ -106,6 +108,15 @@ export default defineComponent({
     getDescription(): String {
       const description = this.getContest.getDescription();
       return description;
+    },
+
+    isLated() {
+      const endAt = new Date(this.getContest.getEndAt());
+      const now = new Date();
+      if (now.getTime() > endAt.getTime()) {
+        return true;
+      }
+      return false;
     },
   },
 

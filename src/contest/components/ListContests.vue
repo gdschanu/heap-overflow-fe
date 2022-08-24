@@ -32,11 +32,7 @@
         </tbody>
       </table>
       <div class="pagination">
-        <h2 @click="previousPage" v-show="canPrev" class="previous">
-          ...Previous page
-        </h2>
-        <div class="space" v-show="canPrev"></div>
-        <h2 @click="nextPage" v-show="canNext" class="next">Next page...</h2>
+        <Pagination :totalPages="totalPages" @pageClicked="toPage" />
       </div>
     </div>
   </Nav>
@@ -51,10 +47,14 @@ import errorHandler from "../../shared/helpers/errorHandler";
 import Loading from "./detail/Loading.vue";
 import { AxiosError } from "axios";
 import Nav from "@/shared/components/general/Nav.vue";
+import Pagination from "./detail/Pagination.vue";
 
 export default defineComponent({
+  name: "ListContests",
+
   components: {
     Loading,
+    Pagination,
     Nav,
   },
 
@@ -62,73 +62,50 @@ export default defineComponent({
     return {
       page: 0,
       perPage: 21,
-      contestCount: 0,
       contestData: [] as Contest[],
-      isLoading: true,
+      isLoading: true, // true
+      numberOfContests: 0,
     };
   },
 
   async created() {
     try {
       const response = await searchContest(0, this.perPage);
-      console.log(response);
+      // console.log(response);
       response.forEach((item) => {
         this.contestData.push(item);
       });
-      setTimeout(() => (this.isLoading = false), 200);
+      this.isLoading = false;
     } catch (error) {
       errorHandler(error as AxiosError);
     }
-    // contest count
+    // contestCount
     try {
-      const response = await countContest() as unknown as number;
-      this.contestCount = response;
+      const response = (await countContest()) as unknown as number;
+      // console.log(response);
+      this.numberOfContests = response as number;
     } catch (error) {
       errorHandler(error as AxiosError);
     }
   },
 
   computed: {
-    canNext() {
-      if (this.contestCount - this.page * this.perPage <= this.perPage) {
-        return false;
-      }
-      return true;
-    },
-
-    canPrev() {
-      if (this.page === 0) {
-        return false;
-      } else {
-        return true;
-      }
+    totalPages(): number {
+      return Math.ceil(this.numberOfContests / this.perPage);
     },
   },
 
   methods: {
-    async nextPage() {
-      this.page++;
+    async toPage(page: number) {
+      this.isLoading = true;
       this.contestData = [];
-      // const remainContest = this.contestCount - this.page * this.perPage;
+      // console.log(page)
       try {
-        const response = await searchContest(this.page, this.perPage);
-        // console.log(response);
+        const response = await searchContest(page - 1, this.perPage);
         response.forEach((item) => {
           this.contestData.push(item);
         });
-      } catch (error) {
-        errorHandler(error as AxiosError);
-      }
-    },
-
-    async previousPage() {
-      this.page--;
-      this.contestData = [];
-      try {
-        const response = await searchContest(this.page, this.perPage);
-        response.forEach((item) => {
-          this.contestData.push(item);
-        });
+        this.isLoading = false;
       } catch (error) {
         errorHandler(error as AxiosError);
       }
@@ -173,30 +150,16 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .contest__title {
-    margin: 2%;
-    text-align: center;
+  margin: 2%;
+  text-align: center;
 }
 
 .pagination {
-  display: flex;
-  text-align: left;
   width: 100%;
-  margin-top: 15px;
-  margin-bottom: 50px;
-  color: #7b61ff;
-
-  .space {
-    margin: 0 20px;
-  }
-
-  .next,
-  .previous {
-    font-size: 18px;
-    &:hover {
-      color: #7b61ff77;
-      cursor: pointer;
-    }
-  }
+  background-color: #fff;
+  position: fixed;
+  padding: 20px 0;
+  bottom: 0;
 }
 
 .contest__container {
@@ -205,6 +168,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   padding-top: 30px;
+  padding-bottom: 6%;
   width: 80%;
   margin: 0 auto;
   text-align: center;

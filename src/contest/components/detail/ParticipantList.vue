@@ -4,8 +4,8 @@
       <thead>
         <span class="participant__container--title"><p>Participant</p></span>
         <tr>
-          <th>#</th>
-          <th>Coder Name</th>
+          <th class="participant__container--title-order">#</th>
+          <th class="participant__container--title-name">Coder Name</th>
         </tr>
       </thead>
       <!-- v-for in list participant -->
@@ -27,9 +27,9 @@ export default defineComponent({
   props: {
     ParticipantList: {
       type: Array,
-      default: []
-    }
-  }
+      default: [],
+    },
+  },
 });
 </script>
 
@@ -37,11 +37,12 @@ export default defineComponent({
 .participant__container {
   span {
     display: block;
-    width: 100%;
+    width: 101%;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
     padding: 4px 0;
+    margin: -1px;
     background-color: #ccc;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -71,8 +72,7 @@ export default defineComponent({
 
   tr,
   td {
-    width: 100%;
-    padding: 5px 30px;
+    padding: 5px 50px;
   }
 
   th,
@@ -80,6 +80,14 @@ export default defineComponent({
     border: 1px solid #aaa9a9;
     border-collapse: collapse;
     font-size: 16px;
+  }
+
+  .participant__container--title-name {
+    width: 90%;
+  }
+
+  .participant__container--title-order {
+    width: 10%;
   }
 }
 </style>
