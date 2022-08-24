@@ -50,7 +50,7 @@
         </table>
       </div>
       <!-- rank/list participant -->
-      <RankList v-if="!isLated"/>
+      <RankList v-if="isLated"/>
       <ParticipantList v-else/>,
       <div class="clear"></div>
     </div>
@@ -114,9 +114,9 @@ export default defineComponent({
       const endAt = new Date(this.getContest.getEndAt());
       const now = new Date();
       if (now.getTime() > endAt.getTime()) {
-        return false;
+        return true;
       }
-      return true;
+      return false;
     },
   },
 

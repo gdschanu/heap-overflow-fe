@@ -121,7 +121,7 @@ export default defineComponent({
     color: #7b61ff;
     font-size: 16px;
     margin: 0 4px;
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   .previous,

@@ -4,8 +4,8 @@
       <thead>
         <span class="rank__container--title"><p>Rank</p></span>
         <tr>
-          <th>#</th>
-          <th>Coder Name</th>
+          <th class="rank__container--title-order">#</th>
+          <th class="rank__container--title-name">Coder Name</th>
         </tr>
       </thead>
       <!-- v-for in list rank -->
@@ -72,7 +72,6 @@ export default defineComponent({
 
   tr,
   td {
-    width: 100%;
     padding: 5px 30px;
   }
 
@@ -81,6 +80,10 @@ export default defineComponent({
     border: 1px solid #aaa9a9;
     border-collapse: collapse;
     font-size: 16px;
+  }
+
+  .rank__container--title-name {
+    width: 100%;
   }
 }
 </style>
