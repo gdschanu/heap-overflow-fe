@@ -10,7 +10,7 @@
         <MonacoEditor
             class="editor"
             :language="$store.state.problemStore.editorSettings.language"
-            :code="$store.state.problemStore.currentProblemCode[problem.getId()]"
+            :code="$store.state.problemStore.currentProblemCode.code"
             @dataUpdated="$store.dispatch('problemStore/setCurrentProblemCode', {
                 id: problem.getId(),
                 code: $event,

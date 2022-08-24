@@ -1,5 +1,7 @@
 import { Module } from 'vuex'
 import Problem from './model/problem';
+import ProgrammingLanguage from './model/programmingLanguage';
+import Submission from './model/submission';
 const date = new Date();
 
 type ProblemCode = {
@@ -21,7 +23,7 @@ type EditorSetting = {
 	tabCompletion: string,
 	automaticLayout: boolean,
 	cursorBlinking: string,
-	language: string
+	language: ProgrammingLanguage
 }
 
 type EditorSettingKey = keyof EditorSetting
@@ -31,21 +33,26 @@ export default {
 	state: {
 		currentProblemCode: {},
 		editorSettings: {},
-		problem: {}
+		problem: {},
+		submission: null
 	} as {
 		currentProblemCode: ProblemCode,
 		editorSettings: EditorSetting,
-		problem: Problem
+		problem: Problem,
+		submission: Submission | null
 	},
 	mutations: {
 		setCurrentProblemCode(state, currentProblem: ProblemCode) {
-			state.currentProblemCode[currentProblem.id] = currentProblem.code;
+			state.currentProblemCode = currentProblem;
 		},
 		setEditorSettings(state, editorSettings: EditorSetting) {
 			state.editorSettings = editorSettings;
 		},
 		setProblem(state, problem: Problem) {
 			state.problem = problem
+		},
+		setSubmission(state, submission: Submission) {
+			state.submission = submission
 		}
 	},
 	actions: {
@@ -75,6 +82,13 @@ export default {
 		},
 		setProblem(state, problem: Problem) {
 			state.commit("setProblem", problem)
+		},
+		setSubmission(state, submission: Submission) {
+			state.commit("setSubmission", submission)
 		}
 	},
 } as Module<any, any>
+
+export { ProblemCode }
+export { EditorSetting }
+export { EditorSettingKey }

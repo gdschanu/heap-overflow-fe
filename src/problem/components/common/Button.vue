@@ -2,13 +2,14 @@
     <button
         :title="des"
         class="block whitespace-nowrap relative rounded-lg px-5 py-2.5 font-bold"
-        :class="type + (disabled ? '-disabled' : '')"
+        :class="`${type}${disabled ? '-disabled' : ''}`"
         :disabled="disabled"
         @click="clicked"
     >
         <span :class="loading ? 'opacity-0' : ''">
             {{ text }}
         </span>
+        <slot></slot>
         <LoadingIcon
             v-if="loading"
             class="

@@ -10,7 +10,11 @@
                     <RunCode :runCodeResult="{}" />
                 </template>
                 <template v-slot:Submission>
-                    <Submission :submission="currentSubmission" />
+                    <Submission :submission="currentSubmission" :is-judging="isJudging">
+                        <template #judging>
+                            <RightConsoleJudging />
+                        </template>
+                    </Submission>
                 </template>
                 <template v-slot:Testcase-icon>
                     <i class="fa-solid fa-gear"></i>
@@ -29,8 +33,8 @@
                 <i class="fa-solid fa-chevron-up"></i>
             </span>
         </div>
-        <Button @clicked="runCode" class="button" text="Run Code" />
-        <Button @clicked="submit" class="button" text="Submit Code" />
+        <Button @clicked="handleRunCode" class="button" text="Run Code" />
+        <Button @clicked="handleSubmit" class="button" text="Submit Code" :loading="isSubmitting"/>
     </div>
 </template>
 
@@ -43,46 +47,64 @@ import SubmissionModel from "../../model/submission"
 import RunCode from "./RightConsoleRunCode.vue";
 import Submission from "./RightConsoleSubmission.vue";
 import Button from "../../components/common/Button.vue";
+import RightConsoleJudging from "./RightConsoleJudging.vue";
 import Problem from "@/problem/model/problem";
-import { computed, onMounted, ref, Ref } from "vue";
+import { computed, onMounted, ref, Ref, watch } from "vue";
 import { getTestCasesById } from "../../model/domainLogic/testCase"
 import errorHandler from "@/shared/helpers/errorHandler";
-import { getSubmissionById } from "@/problem/model/domainLogic/submission";
+import { getSubmissionById, submit } from "@/problem/model/domainLogic/submission";
 import { AxiosError } from "axios";
 import { useStore } from "vuex";
+import { ProblemCode, EditorSetting } from '../../store'
 
 const store = useStore()
 const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
+const currentSubmission = computed(() => store.state.problemStore.submission) as Ref<SubmissionModel>
+const currentProblemCode = computed(() => store.state.problemStore.currentProblemCode) as Ref<ProblemCode>
+const editorSettings = computed(() => store.state.problemStore.editorSettings) as Ref<EditorSetting>
 
 const isSubmitting = ref(false)
 const isRunning = ref(false)
+const isJudging = ref(false)
 const showConsole = ref(false)
 const consoleSelected = ref(0)
 const testCases = ref()
 
-const currentSubmission = ref()
+function showSubmissionTab() {
+    showConsole.value = true
+    consoleSelected.value = 2
+}
 
-function runCode() {
+onMounted(async () => {
+    try {
+        testCases.value = await getTestCasesById(problem.value.getId())
+        
+    } catch (error) {
+        errorHandler(error as AxiosError)
+    }
+})
+
+function handleRunCode() {
     console.log('running code ...');
 }
-async function submit() {
+
+async function handleSubmit() {
     try {
-        console.log('submitting');
-        
+        // currentSubmission.value = await getSubmissionById('62ff25b8f86d54687bafb3e8')
+        console.log('submitting')
         isSubmitting.value = true
+        let submissionId = await submit(problem.value, currentProblemCode.value.code, editorSettings.value.language)
+        showSubmissionTab()
+        isSubmitting.value = false
+        console.log(submissionId)
     } catch (error) {
         isSubmitting.value = false
         errorHandler(error as AxiosError)
     }
 }
 
-onMounted(async () => {
-    try {
-        testCases.value = await getTestCasesById(problem.value.getId())
-        // currentSubmission.value = await getSubmissionById('62ff25b8f86d54687bafb3e8')
-    } catch (error) {
-        errorHandler(error as AxiosError)
-    }
+watch(currentSubmission, () => {
+    showSubmissionTab()
 })
 
 </script>

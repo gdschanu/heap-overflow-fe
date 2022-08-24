@@ -11,19 +11,25 @@
                 <col class="memory" />
                 <col class="language" />
             </colgroup>
-            <tr>
+            <tr class="submissions__header">
                 <th>Time submitted</th>
                 <th>Status</th>
                 <th>Runtime</th>
                 <th>Memory</th>
                 <th>Language</th>
             </tr>
-            <tr v-for="(submission, index) in submissions" :key="index">
-                <td>{{ dateFormat(submission.getSubmittedAt()) }}</td>
-                <td class="status" :class="submission.getStatus()">{{ submission.getStatus() }}</td>
-                <td>{{ submission.getRuntime().toNumber() }} ms</td>
-                <td>{{ submission.getMemory().toNumber() }} kb</td>
-                <td>{{ submission.getProgrammingLanguage() }}</td>
+            <tr v-for="(submission, index) in submissions" :key="index"
+                @click="$store.dispatch('problemStore/setSubmission', submission)"
+                :class="isSelecting(submission) ? 'selected' : ''">
+                <td :title="dateFormat(submission.getSubmittedAt())">{{ dateFormat(submission.getSubmittedAt()) }}</td>
+                <td :title="submission.getStatus()" class="status" :class="submission.getStatus()">{{
+                        submission.getStatus()
+                }}</td>
+                <td :title="submission.getRuntime().toNumber().toString()">{{ submission.getRuntime().toNumber() }} ms
+                </td>
+                <td :title="submission.getMemory().toNumber().toString()">{{ submission.getMemory().toNumber() }} kb
+                </td>
+                <td :title="submission.getProgrammingLanguage()">{{ submission.getProgrammingLanguage() }}</td>
             </tr>
         </table>
     </div>
@@ -31,22 +37,33 @@
 
 <script lang="ts" setup>
 import { listSubmission } from '@/problem/model/domainLogic/submission';
+import Problem from '@/problem/model/problem';
 import Submission from '@/problem/model/submission';
 import errorHandler from '@/shared/helpers/errorHandler';
 import { computed } from '@vue/reactivity';
 import { AxiosError } from 'axios';
 import { onMounted, ref, Ref } from 'vue';
+import { useStore } from 'vuex';
 import { dateFormat } from '../../utils/stringFormatter'
 
 const submissions = ref([]) as Ref<Submission[]>
+const store = useStore()
+const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
+const currentSubmission = computed(() => store.state.problemStore.submission) as Ref<Submission>
 
 onMounted(async () => {
     try {
-        submissions.value = await listSubmission(0, 1000, '6268ed01fad0b0e48fbd0ed6', '62fde27ff9b65468f1327fbd')
+        submissions.value = await listSubmission(0, 1000, '6268ed01fad0b0e48fbd0ed6', problem.value.getId())
     } catch (error) {
         errorHandler(error as AxiosError)
     }
 })
+
+function isSelecting(submission: Submission) {
+    if (currentSubmission.value === null)
+        return false
+    return submission.getId() === currentSubmission.value.getId()
+}
 </script>
 
 <style lang="scss" scoped>
@@ -103,6 +120,14 @@ onMounted(async () => {
 
         tr:nth-child(2n + 1) {
             @apply bg-slate-50 hover:bg-slate-200;
+        }
+
+        tr.selected {
+            @apply bg-slate-200;
+        }
+
+        tr.submissions__header {
+            @apply sticky top-0;
         }
     }
 }
