@@ -8,10 +8,9 @@
           <th class="rank__container--title-name">Coder Name</th>
         </tr>
       </thead>
-      <!-- v-for in list rank -->
       <tbody>
-        <tr v-for="(rank, index) in 10">
-          <td class="rank--order">{{ index + 1 }}</td>
+        <tr v-for="participant in ParticipantList" :key="participant.getRank()">
+          <td class="rank--order">{{ participant.getRank() }}</td>
           <td class="rank--name">coderName</td>
         </tr>
       </tbody>
@@ -21,13 +20,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Participant } from "../../model/participant/participant"
+
 
 export default defineComponent({
   name: "RankList",
   props: {
     rankList: {
       type: Array,
-      default: []
+      default: [] as Participant[]
     }
   }
 });
