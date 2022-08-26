@@ -66,6 +66,7 @@ import { Participant } from "../model/participant/participant";
 import RankList from "./detail/RankList.vue";
 import ParticipantList from "./detail/ParticipantList.vue";
 import ContestDescription from "./detail/ContestDescription.vue";
+import errorHandler from "@/shared/helpers/errorHandler";
 
 export default defineComponent({
   name: "ContestDetail",
@@ -99,6 +100,20 @@ export default defineComponent({
       ) as Contest;
     },
 
+    async getParticipantList() {
+      const startTime = new Date(this.getContest.getStartAt())
+      const endTime = new Date(this.getContest.getEndAt())
+      const now = new Date();
+      if (now >= startTime && now < endTime) {
+        try {
+
+        } catch (error) {
+          errorHandler(error as Error)
+        }
+      }
+    },
+
+    async getRankList() {},
     listProblem() {
       const problems = this.getContest.getProblems() as Problem[];
       // console.log(problems);
