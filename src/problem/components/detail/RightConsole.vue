@@ -121,7 +121,7 @@ watch(currentSubmission, () => {
         bottom: var(--nav-height);
         left: -1px;
         right: -1px;
-        height: calc(100vh - 15px - 32px - 15px - var(--nav-height) - 15px);
+        height: calc(60vh);
         overflow: hidden;
         border: 1px solid black;
         background-color: white;

@@ -22,6 +22,9 @@ module.exports = {
 				},
 			}
 		},
+		minWidth: {
+			'small': '5rem',
+		}
 	},
 	plugins: [
 

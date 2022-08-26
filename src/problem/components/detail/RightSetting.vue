@@ -64,7 +64,7 @@ function languageConvert(language: string) {
 
     .choose-language {
         margin-right: auto;
-        margin-left: 5px;
+        margin-left: 10px;
         padding: 0;
     }
 }

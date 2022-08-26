@@ -1,106 +1,72 @@
 <template>
-    <div class="select" @click="isOpening = !isOpening">
+    <div class="select">
         <p class="select__text">{{ selected === null ? text : selected }}</p>
-        <span :class="isOpening ? 'select__icon--flipped' : 'select__icon'">
+        <span class="select__icon">
             <i class="fa-solid fa-chevron-down"></i>
         </span>
-        <ul class="select__list" v-if="isOpening">
-            <li
-                v-for="item in list"
-                :key="item.value"
-                :class="
-                    selected === item.name ? 'select__list__item--selected' : ''
-                "
-                @click="handleSelect(item)"
-            >
+        <ul class="select__list">
+            <li v-for="item in list" :key="item.value" :class="
+                selected === item.name ? 'select__list__item--selected' : ''
+            " @click="$emit('dataUpdated', item)">
                 {{ item.name }}
             </li>
         </ul>
     </div>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { PropType, ref } from 'vue';
 
-export default {
-    name: "Select",
-    data() {
-        return {
-            isOpening: false,
-        };
+const isOpening = ref(false)
+
+const props = defineProps({
+    list: {
+        type: Array as PropType<Array<{
+            name: string,
+            value: string
+        }>>,
+        required: true
     },
-    props: {
-        list: {
-            type: Array,
-            default: [
-                {
-                    name: "", // to render
-                    value: "", // to return
-                },
-            ],
-        },
-        text: {
-            type: String,
-            default: "choose one",
-        },
-        selected: {
-            type: String,
-            default: null,
-        }, // name
+    text: {
+        type: String,
+        default: "choose one",
     },
-    methods: {
-        handleSelect(item) {
-            this.$emit("dataUpdated", item);
-        },
-        getValue(name) {
-            const item = this.list.find((item) => item.name === name);
-            if (value) return item.value;
-            else return "text";
-        },
-    },
-};
+    selected: {
+        type: String,
+        default: null,
+    }
+})
 </script>
 
 <style lang="scss" scoped>
 .select {
-    position: relative;
-    width: fit-content;
-    min-width: 5rem;
-    padding: 8px;
-    margin: 5px;
-    display: flex;
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 10px;
-    justify-content: space-between;
-    cursor: pointer;
+    @apply relative min-w-small py-2.5 px-2 flex items-center justify-between rounded-lg bg-slate-700
+    hover:bg-slate-800 active:bg-slate-900 cursor-pointer;
+
     &__text {
-        margin-right: 5px;
+        @apply mr-2 text-white font-bold;
     }
+
     &__icon {
-        display: flex;
-        align-items: center;
+        @apply flex items-center text-white;
         transform: rotate(0deg);
         transition: transform 0.4s;
     }
-    &__icon--flipped {
-        display: flex;
-        align-items: center;
-        transform: rotate(180deg);
-        transition: transform 0.4s;
-    }
+
     &__list {
-        position: absolute;
-        z-index: 1000;
-        top: calc(100% + 5px);
-        left: 0;
-        padding: 8px;
-        min-width: 5rem;
-        border: 1px solid black;
-        background-color: white;
-        border-radius: 10px;
+        @apply hidden absolute z-50 top-full mt-1 left-0 p-2.5 min-w-small rounded-lg bg-slate-100 border border-slate-700;
+
         &__item--selected {
             font-weight: bold;
         }
+    }
+}
+
+.select:hover {
+    &__icon {
+        @apply block;
+        transform: rotate(180deg);
+        transition: transform 0.4s;
     }
 }
 </style>
