@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { countPosts, getPosts } from '../../model/domainLogic/getPost'
-import Paging from '../../../shared/paging/Paging.vue'
+import { countPosts, getPosts } from '../../../model/domainLogic/getPost'
+import Paging from '../../../../shared/paging/Paging.vue'
 export default {
     name: "Discussions",
     data() {

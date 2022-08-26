@@ -32,6 +32,31 @@
                 <td :title="submission.getProgrammingLanguage()">{{ submission.getProgrammingLanguage() }}</td>
             </tr>
         </table>
+        <div class="running-submissions">
+            <!-- <h4> Running submission </h4> -->
+            <table>
+                <colgroup>
+                    <col class="id" />
+                    <col class="test-case" />
+                </colgroup>
+                <tr>
+                    <th>ID</th>
+                    <th>Running testcase</th>
+                </tr>
+                <tr>
+                    <td>4h204985hf2043857d2n4</td>
+                    <td>5/12</td>
+                </tr>
+                <tr>
+                    <td>4h204985hf2043857d2n4</td>
+                    <td>7/12</td>
+                </tr>
+                <tr>
+                    <td>4h204985hf2043857d2n4</td>
+                    <td>6/12</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -68,6 +93,7 @@ function isSelecting(submission: Submission) {
 
 <style lang="scss" scoped>
 .submissions {
+    // @apply relative;
     .no-submit {
         @apply mt-3 text-center;
     }
@@ -129,6 +155,12 @@ function isSelecting(submission: Submission) {
         tr.submissions__header {
             @apply sticky top-0;
         }
+    }
+
+    .running-submissions {
+        @apply absolute -bottom-1 bg-white border border-slate-900 rounded-xl overflow-hidden;
+        left: -1px;
+        right: -1px;
     }
 }
 </style>
