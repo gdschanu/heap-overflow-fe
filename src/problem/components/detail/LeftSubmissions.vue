@@ -63,6 +63,7 @@
 <script lang="ts" setup>
 import { listSubmission } from '@/problem/model/domainLogic/submission';
 import Problem from '@/problem/model/problem';
+import JudgingTestCase from '@/problem/model/socket/testCase';
 import Submission from '@/problem/model/submission';
 import errorHandler from '@/shared/helpers/errorHandler';
 import { computed } from '@vue/reactivity';
@@ -79,6 +80,7 @@ const currentSubmission = computed(() => store.state.problemStore.submission) as
 onMounted(async () => {
     try {
         submissions.value = await listSubmission(0, 1000, '6268ed01fad0b0e48fbd0ed6', problem.value.getId())
+        JudgingTestCase.getInstance().start()
     } catch (error) {
         errorHandler(error as AxiosError)
     }
