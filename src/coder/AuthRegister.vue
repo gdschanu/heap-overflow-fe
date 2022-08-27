@@ -150,7 +150,6 @@
   </AuthLayout>
 </template>
 
-
 <script lang="ts">
 import { defineComponent } from "vue";
 import { login } from "../coder/auth";
@@ -280,7 +279,7 @@ export default defineComponent({
           localStorage.setItem("accessToken", JSON.stringify(data));
           // move to dashboard
           alert("succesful");
-          //this.$router.go("login")
+          this.$router.push("dashboard");
         } catch (error: any) {
           errorHandler(error);
         }
@@ -290,7 +289,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped >
+<style scoped>
 * {
   font-style: normal;
   font-weight: 700;
