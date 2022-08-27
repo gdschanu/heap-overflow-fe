@@ -36,7 +36,7 @@ import MarkdownRender from "../../components/common/MarkdownRender.vue";
 import Submissions from "./LeftSubmissions.vue";
 import Problem from "@/problem/model/problem";
 import { ref, Ref } from "vue";
-import Discussion from "./Discussions.vue"
+import Discussion from "./discussion/Discussions.vue"
 import { useStore } from "vuex";
 import { computed } from "@vue/reactivity";
 

@@ -106,7 +106,7 @@ function editorSettings() {
 
 </script>
 <style lang="scss" scoped>
-$left-width: 40%;
+$left-width: 45vw;
 $gap: 15px;
 
 .problem-detail {
@@ -127,7 +127,7 @@ $gap: 15px;
 
         .left {
             grid-area: left;
-            width: 40vw;
+            width: $left-width;
             @apply relative resize-x overflow-hidden rounded-xl border border-slate-900 dark:border-none;
         }
 

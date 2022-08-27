@@ -10,7 +10,7 @@
       </thead>
       <!-- v-for in list participant -->
       <tbody>
-        <tr v-for="(rank, index) in 10">
+        <tr v-for="(participant, index) in ParticipantList" :key="index">
           <td class="participant--order">{{ index + 1 }}</td>
           <td class="participant--name">coderName</td>
         </tr>
@@ -21,13 +21,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Participant } from "../../model/participant/participant"
 
 export default defineComponent({
   name: "ParticipantList",
   props: {
     ParticipantList: {
       type: Array,
-      default: [],
+      default: [] as Participant[],
     },
   },
 });

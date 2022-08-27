@@ -19,6 +19,6 @@ import Nav from '@/shared/components/general/Nav.vue';
     @apply mt-8;
 }
 .problem-list-container {
-    @apply mx-auto w-4/5 dark:text-teal-50;
+    @apply mx-auto w-11/12 dark:text-teal-50;
 }
 </style>
