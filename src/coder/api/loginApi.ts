@@ -1,23 +1,28 @@
-import apiService from "../apiService"
+import apiService from "../apiService";
 type LoginRequest = {
-    usernameOrEmail: string
-    password: string
-}
+  usernameOrEmail: string;
+  password: string;
+};
 
 type LoginResponse = {
-    code: null | string
-    message: string
-    data: null | string
-}
+  code: null | string;
+  message: string;
+  data: responseData;
+};
 
- async function loginApi(req: LoginRequest): Promise<string> {
-    try {
-        const response = (await apiService('POST', '/coderAuth/logIn', {}, req)).data as LoginResponse
-        if (response.data === null)
-            throw new Error('Invalid username or password')
-        return response.data
-    } catch (error) {
-        throw error
-    }
+type responseData = {
+  coderId: string | null;
+  token: string | null;
+  username: string | null;
+};
+
+async function loginApi(req: LoginRequest): Promise<LoginResponse> {
+  try {
+    const response = (await apiService("POST", "/coderAuth/logIn", {}, req))
+      .data as LoginResponse;
+    return response;
+  } catch (error) {
+    throw error;
+  }
 }
-export default loginApi
+export { loginApi };

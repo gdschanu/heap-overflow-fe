@@ -50,8 +50,13 @@
         </table>
       </div>
       <!-- rank/list participant -->
-      <RankList v-if="isLated"/>
-      <ParticipantList v-else/>,
+      <RankList v-if="isLated" />
+      <ParticipantList
+        v-else
+        :ParticipantList="participantList"
+        :totalPages="5"
+        @pageChanged="getParticipantList"
+      />,
       <div class="clear"></div>
     </div>
   </div>
@@ -61,12 +66,14 @@
 import { defineComponent } from "vue";
 import { Contest } from "../model/contest/contest";
 import { Problem } from "../model/contest/problem";
-import { createParticipant } from "../model/participant/domainLogic/participant";
+import { getParticipants } from "../model/participant/domainLogic/participant";
 import { Participant } from "../model/participant/participant";
 import RankList from "./detail/RankList.vue";
 import ParticipantList from "./detail/ParticipantList.vue";
 import ContestDescription from "./detail/ContestDescription.vue";
 import errorHandler from "@/shared/helpers/errorHandler";
+import { AxiosError } from "axios";
+import { checkJoined, joinContest } from "../model/contest/domainLogic/contest";
 
 export default defineComponent({
   name: "ContestDetail",
@@ -79,12 +86,23 @@ export default defineComponent({
 
   data() {
     return {
-      participant: {} as Participant,
+      // participant: {} as Participant,
       isJoin: false,
+      participantList: [] as Participant[],
+      perPage: 10,
     };
   },
 
-  created() {},
+  async created() {
+    const contestId = this.getContest.getId() as string;
+    try {
+      const response = (await checkJoined(contestId)) as boolean;
+      console.log(response);
+      this.isJoin = response;
+    } catch (error) {
+      errorHandler(error as AxiosError);
+    }
+  },
 
   computed: {
     getContest() {
@@ -100,20 +118,10 @@ export default defineComponent({
       ) as Contest;
     },
 
-    async getParticipantList() {
-      const startTime = new Date(this.getContest.getStartAt())
-      const endTime = new Date(this.getContest.getEndAt())
-      const now = new Date();
-      if (now >= startTime && now < endTime) {
-        try {
-
-        } catch (error) {
-          errorHandler(error as Error)
-        }
-      }
+    async getRankList() {
+      return 10;
     },
 
-    async getRankList() {},
     listProblem() {
       const problems = this.getContest.getProblems() as Problem[];
       // console.log(problems);
@@ -138,12 +146,29 @@ export default defineComponent({
   methods: {
     // create participant when click to join button
     // need to remember when the participant joined
-    joinContest() {
+    async joinContest() {
       const contestID = this.getContest.getId() as string;
-      const participant = createParticipant(contestID);
-      this.participant = participant;
-      // console.log(this.participant._contestId);
-      this.isJoin = true;
+      try {
+        const response = await joinContest(contestID);
+        alert(response);
+        this.isJoin = true;
+      } catch (error) {
+        errorHandler(error as AxiosError);
+      }
+    },
+
+    async getParticipantList(page: number) {
+      this.participantList = [];
+      const contestId = this.getContest.getId() as string;
+      try {
+        const response = await getParticipants(contestId, page, this.perPage);
+        console.log(response);
+        response.forEach((item) => {
+          this.participantList.push(item);
+        });
+      } catch (error) {
+        errorHandler(error as Error);
+      }
     },
 
     backToListContest() {

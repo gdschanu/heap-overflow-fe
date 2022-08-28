@@ -16,21 +16,41 @@
         </tr>
       </tbody>
     </table>
+    <div class="pagination">
+      <Pagination :totalPages="totalPages" @pageClicked="toPage"/>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Participant } from "../../model/participant/participant"
+import { Participant } from "../../model/participant/participant";
+import Pagination from "./Pagination.vue";
 
 export default defineComponent({
   name: "ParticipantList",
+
+  components: {
+    Pagination,
+  },
+
   props: {
     ParticipantList: {
       type: Array,
       default: [] as Participant[],
     },
+    totalPages: {
+      type: Number,
+      required: true,
+    },
   },
+
+  methods: {
+    toPage(page: number) {
+      console.log(page);
+      this.$emit("pageChanged", page)
+    }
+  }
 });
 </script>
 
@@ -89,6 +109,10 @@ export default defineComponent({
 
   .participant__container--title-order {
     width: 10%;
+  }
+
+  .pagination {
+    margin-top: 10px;
   }
 }
 </style>

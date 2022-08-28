@@ -2,6 +2,8 @@ import { createContestAPI } from "../api/createContest";
 import { searchContestAPI } from "../api/searchContest";
 import { countContestAPI } from "../api/countContest";
 import { Contest } from "../contest";
+import { joinContestAPI } from "../api/joinContest";
+import { checkJoinedAPI } from "../api/checkJoined";
 
 async function createContest(contest: Contest): Promise<string | null> {
   const response = await createContestAPI({
@@ -46,4 +48,14 @@ async function countContest(): Promise<string | null> {
   return response.data!;
 }
 
-export { createContest, searchContest, countContest };
+async function joinContest(contestId: string): Promise<string | null> {
+  const response = await joinContestAPI(contestId);
+  return response.message!;
+}
+
+async function checkJoined(contestId: string): Promise<boolean | null> {
+  const response = await checkJoinedAPI(contestId);
+  return response.data!;
+}
+
+export { createContest, searchContest, countContest, joinContest, checkJoined };

@@ -247,7 +247,7 @@ export default defineComponent({
           this.setUser();
           this.isLoading = true;
           const data = await login(this.setUser());
-
+          console.log(data);
           // add accessToken to localStorage
           localStorage.setItem("accessToken", data);
 
