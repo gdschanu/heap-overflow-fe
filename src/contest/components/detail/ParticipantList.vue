@@ -12,7 +12,7 @@
       <tbody>
         <tr v-for="(participant, index) in ParticipantList" :key="index">
           <td class="participant--order">{{ index + 1 }}</td>
-          <td class="participant--name">coderName</td>
+          <td class="participant--name">{{ participant._coderId }}</td>
         </tr>
       </tbody>
     </table>
