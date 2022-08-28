@@ -20,9 +20,9 @@ async function loginApi(req: LoginRequest): Promise<LoginResponse> {
   try {
     const response = (await apiService("POST", "/coderAuth/logIn", {}, req))
       .data as LoginResponse;
-    return response;
+    return response ;
   } catch (error) {
     throw error;
   }
 }
-export { loginApi };
+export { loginApi} ;
