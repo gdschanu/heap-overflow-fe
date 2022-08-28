@@ -50,7 +50,7 @@ async function countContest(): Promise<string | null> {
 
 async function joinContest(contestId: string): Promise<string | null> {
   const response = await joinContestAPI(contestId);
-  return response.data!;
+  return response.message!;
 }
 
 async function checkJoined(contestId: string): Promise<boolean | null> {

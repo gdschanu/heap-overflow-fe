@@ -150,8 +150,8 @@ export default defineComponent({
       const contestID = this.getContest.getId() as string;
       try {
         const response = await joinContest(contestID);
-        console.log(response);
-        return response;
+        alert(response);
+        this.isJoin = true;
       } catch (error) {
         errorHandler(error as AxiosError);
       }
