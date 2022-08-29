@@ -15,5 +15,13 @@ export default [
         meta: {
             type: 'auth'
         }
+    },
+    {
+        path: '/userProfile',
+        name: 'Profile',
+        component:  () => import("./userProfile.vue"), //paste the component needed
+        meta: {
+            type: 'protected'
+        }
     }
 ]

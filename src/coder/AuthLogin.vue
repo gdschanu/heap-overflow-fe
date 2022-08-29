@@ -249,10 +249,10 @@ export default defineComponent({
           const data = await login(this.setUser());
           console.log(data);
           // add accessToken to localStorage
-          localStorage.setItem("accessToken", data);
+          localStorage.setItem("accessToken", JSON.stringify(data));
 
           // move to dashboard
-          //this.$router.go("dashboard");
+          this.$router.push("dashboard");
           alert("successful");
           this.isLoading = false;
         } catch (error: any) {
