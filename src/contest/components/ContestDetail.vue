@@ -158,6 +158,7 @@ export default defineComponent({
         const response = await joinContest(contestID);
         alert(response);
         this.isJoin = true;
+        location.reload();
       } catch (error) {
         errorHandler(error as AxiosError);
       }
