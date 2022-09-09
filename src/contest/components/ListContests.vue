@@ -32,7 +32,7 @@
         </tbody>
       </table>
       <div class="pagination">
-        <Pagination :totalPages="totalPages" @pageClicked="toPage" />
+        <Pagination v-if="totalPages" :totalPages="totalPages" @pageClicked="toPage" />
       </div>
     </div>
   </Nav>
@@ -47,8 +47,7 @@ import errorHandler from "../../shared/helpers/errorHandler";
 import Loading from "./detail/Loading.vue";
 import { AxiosError } from "axios";
 import Nav from "@/shared/components/general/Nav.vue";
-import Pagination from "./detail/Pagination.vue";
-
+import Pagination from "@/shared/components/general/Pagination.vue";
 export default defineComponent({
   name: "ListContests",
 
@@ -64,7 +63,7 @@ export default defineComponent({
       perPage: 21,
       contestData: [] as Contest[],
       isLoading: true, // true
-      numberOfContests: 0,
+      numberOfContests: new Number() as number,
     };
   },
 
@@ -81,17 +80,19 @@ export default defineComponent({
     }
     // contestCount
     try {
-      const response = (await countContest()) as unknown as number;
-      // console.log(response);
-      this.numberOfContests = response as number;
+      const numberOfContests = (await countContest()) as unknown as number;
+      this.numberOfContests = numberOfContests;
+      // console.log(numberOfContests);
     } catch (error) {
       errorHandler(error as AxiosError);
     }
   },
 
   computed: {
-    totalPages(): number {
-      return Math.ceil(this.numberOfContests / this.perPage);
+    totalPages(): number{
+      const pages = Math.ceil(this.numberOfContests / this.perPage);
+      // console.log(pages);
+      return pages;
     },
   },
 

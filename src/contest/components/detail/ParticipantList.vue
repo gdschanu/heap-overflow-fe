@@ -16,9 +16,6 @@
         </tr>
       </tbody>
     </table>
-    <div class="pagination">
-      <Pagination :totalPages="totalPages" @pageClicked="toPage"/>
-    </div>
   </div>
 </template>
 
