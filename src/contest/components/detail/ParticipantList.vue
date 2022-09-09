@@ -22,14 +22,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Participant } from "../../model/participant/participant";
-import Pagination from "./Pagination.vue";
 
 export default defineComponent({
   name: "ParticipantList",
-
-  components: {
-    Pagination,
-  },
 
   props: {
     ParticipantList: {
