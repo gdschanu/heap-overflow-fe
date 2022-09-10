@@ -84,6 +84,13 @@ export default defineComponent({
       if (this.currentPage === this.totalPages) {
         return this.totalPages - this.maxVisibleButtons + 1;
       }
+      // on pre-last page
+      if (this.currentPage === this.totalPages - 1) {
+        if (this.currentPage - 3 <= 0) {
+          return 1;
+        }
+        return this.currentPage - 3;
+      }
       // on between
       if (this.currentPage == 2) {
         return 1;
