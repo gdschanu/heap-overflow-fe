@@ -70,7 +70,6 @@ export default defineComponent({
     };
   },
 
-
   computed: {
     startPage(): number {
       if (this.totalPages < this.maxVisibleButtons) {
@@ -208,11 +207,6 @@ export default defineComponent({
     border-radius: 5px;
   }
 
-  .previous,
-  .next {
-    font-size: 22px;
-  }
-
   button[disabled] {
     color: #c9c2e0;
     background-color: #f1f5f9;
@@ -238,8 +232,6 @@ export default defineComponent({
       font-size: 14px;
       background-color: unset;
     }
-
-    
   }
 }
 </style>
