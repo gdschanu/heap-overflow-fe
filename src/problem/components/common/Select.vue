@@ -1,5 +1,5 @@
 <template>
-    <div class="select">
+    <div class="select" tabindex="0">
         <p class="select__text">{{ selected === null ? text : selected }}</p>
         <span class="select__icon">
             <i class="fa-solid fa-chevron-down"></i>
@@ -40,7 +40,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .select {
-    @apply relative min-w-small py-2.5 px-2 flex items-center justify-between rounded-lg bg-slate-700
+    @apply relative min-w-small py-2.5 px-2 flex items-center justify-between rounded-lg bg-slate-700 focus:ring-2 focus:ring-slate-900
     hover:bg-slate-800 active:bg-slate-900 cursor-pointer;
 
     &__text {
@@ -62,11 +62,14 @@ const props = defineProps({
     }
 }
 
-.select:hover {
-    &__icon {
+.select:focus {
+    .select__icon {
         @apply block;
         transform: rotate(180deg);
-        transition: transform 0.4s;
+    }
+
+    .select__list {
+        @apply block;
     }
 }
 </style>
