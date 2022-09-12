@@ -231,7 +231,8 @@ export default defineComponent({
     async login(user: any) {
       try {
         const data = await login(user);
-        localStorage.setItem("accessToken", JSON.stringify(data));
+
+        localStorage.setItem("accessToken", JSON.parse(data).token);
       } catch (error: any) {
         this.isLoading = false;
         errorHandler(error);
@@ -278,7 +279,6 @@ export default defineComponent({
           // store accessToken to localStorage
           localStorage.setItem("accessToken", JSON.stringify(data));
           // move to dashboard
-          alert("succesful");
           this.$router.push("dashboard");
         } catch (error: any) {
           errorHandler(error);
