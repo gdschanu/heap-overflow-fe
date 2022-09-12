@@ -17,6 +17,6 @@ export async function getPosts(page : number, perPage : number, problemId : stri
   return posts;
 }
 
-export async function countPosts() : Promise<number> {
-  return await countPostsApi();
+export async function countPosts(problemId : string) : Promise<number> {
+  return await countPostsApi(problemId);
 }

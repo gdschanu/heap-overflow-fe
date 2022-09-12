@@ -40,7 +40,7 @@ export default {
     created() {
         (async () => {
             this.posts = await getPosts(0, this.perPage, this.problemId)
-            this.total = await countPosts()
+            this.total = await countPosts(this.problemId)
             this.renderPaging = true;
         })()
     },

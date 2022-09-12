@@ -1,4 +1,11 @@
+import apiService from "@/problem/helpers/apiService";
 import DateTime from "@/shared/models/dateTime";
+
+interface Resp {
+  code : string;
+  message : string;
+  data : GetPostsResp[];
+}
 
 export interface GetPostsResp {
    title : string;
@@ -9,19 +16,20 @@ export interface GetPostsResp {
 };
 
 export async function getPostsApi(page : number, perPage: number, problemId : string) : Promise<GetPostsResp[]> {
-  const res : GetPostsResp[] = [];
-  for (var i=0; i<perPage; i++) {
-    res.push({
-      title: 'Solution 1, Solution 1, Solution 1, Solution 1, Solution 1, Solution 1, Solution 1',
-      author: 'quanvda',
-      createdAt: '2023-03-03T08:42:40.760756Z',
-      updatedAt: '2023-03-03T08:42:40.760756Z',
-      content: 'Some content'
-    })
+  try {
+    const qs = `?page=${page}&perPage=${perPage}`
+    const response : Resp = (await apiService('GET', `/practiceProblem/${problemId}/post` + qs)).data as Resp
+    return response.data
+  } catch (e) {
+    throw e
   }
-  return res;
 }
 
-export async function countPostsApi() {
-  return 500;
+export async function countPostsApi(problemId : string) {
+  try {
+    const response = (await apiService('GET', `/practiceProblem/${problemId}/post/count`)).data
+    return response.data
+  } catch (e) {
+    throw e
+  }
 }
