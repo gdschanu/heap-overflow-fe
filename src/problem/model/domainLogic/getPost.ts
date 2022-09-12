@@ -9,8 +9,8 @@ export async function getPosts(page : number, perPage : number, problemId : stri
     posts.push(new Post({
       title: resp.title,
       author: resp.author,
-      createdAt: new DateTime(resp.createdAt),
-      updatedAt: new DateTime(resp.updatedAt),
+      createdAt: DateTime.fromZonedDateTime(resp.createdAt),
+      updatedAt: DateTime.fromZonedDateTime(resp.updatedAt),
       content: resp.content
     }))
   }

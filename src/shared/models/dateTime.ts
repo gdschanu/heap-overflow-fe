@@ -5,7 +5,17 @@ class DateTime {
   }
 
   public toString() : string {
-    return this.date.toDateString()
+    return this.date.toLocaleString()
+  }
+
+  public static fromZonedDateTime(zdt : string) : DateTime {
+    let s : string = '';
+    for (let i=0; i<zdt.length; i++) {
+      if (zdt[i] == '[')
+        break
+      s += zdt[i];
+    }
+    return new DateTime(s);
   }
 }
 
