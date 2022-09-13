@@ -2,7 +2,7 @@
 import  {loginApi} from "./api/loginApi";
 import logoutApi from "./api/logoutApi";
 import registerApi  from "./api/registerApi";
-import { getUserProfile } from "./api/getUserProfile";
+// import { getUserProfile } from "./api/getUserProfile";
 import User  from "./user";
 
 export async function login(user: User): Promise<string> {
