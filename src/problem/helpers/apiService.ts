@@ -4,8 +4,7 @@ const api = `http://${process.env.VUE_APP_URL}:${process.env.VUE_APP_PORT}`; //b
 
 // VD: apiService("GET", "/api/getUser", "{id: 3j8T46Yc7J3d4DS30K}");
 export default async function (method: string, address: string, params?: object, body?: object) {
-
-    const accessToken = localStorage.getItem('accessToken')?.replace('"', '').replace('"', '');;
+    const accessToken = JSON.parse(localStorage.getItem('accessToken')!);
     const headers = {
         'Content-Type': 'Application/json',
         'access-token': `${accessToken}`,
