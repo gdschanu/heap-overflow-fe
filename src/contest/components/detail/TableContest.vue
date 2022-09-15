@@ -53,10 +53,7 @@ export default defineComponent({
   methods: {
     startTime(contest: Contest) {
       const time = new Date(contest.getStartAt());
-      const string = `${time.getDate()}-${
-        time.getMonth() + 1
-      }-${time.getFullYear()} / ${time.getHours()}:${time.getMinutes()}`;
-      return string;
+      return time.toLocaleString();
     },
 
     endTime(contest: Contest) {
@@ -64,7 +61,7 @@ export default defineComponent({
       const string = `${time.getDate()}-${
         time.getMonth() + 1
       }-${time.getFullYear()} / ${time.getHours()}:${time.getMinutes()}`;
-      return string;
+      return time.toLocaleString();
     },
 
     contestStatus(contest: Contest) {
@@ -120,7 +117,7 @@ export default defineComponent({
   }
 
   .item--content {
-    color: #9288c1;
+    color: #4e39ab;
   }
 
   .content--name {
