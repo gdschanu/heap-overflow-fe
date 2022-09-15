@@ -53,18 +53,12 @@ export default defineComponent({
   methods: {
     startTime(contest: Contest) {
       const time = new Date(contest.getStartAt());
-      const string = `${time.getDate()}-${
-        time.getMonth() + 1
-      }-${time.getFullYear()} / ${time.getHours()}:${time.getMinutes()}`;
-      return string;
+      return time.toLocaleString()
     },
 
     endTime(contest: Contest) {
       const time = new Date(contest.getEndAt());
-      const string = `${time.getDate()}-${
-        time.getMonth() + 1
-      }-${time.getFullYear()} / ${time.getHours()}:${time.getMinutes()}`;
-      return string;
+      return time.toLocaleString()
     },
 
     contestStatus(contest: Contest) {
