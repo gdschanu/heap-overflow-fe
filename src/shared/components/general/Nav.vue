@@ -99,8 +99,8 @@ const routeList = ref([
 
                 &__name {
                     @apply mx-3;
-                    color: #57489c
                 }
+                color: #57489c
             }
             &__item.router-link-active {
                 @apply text-slate-900 font-bold;
