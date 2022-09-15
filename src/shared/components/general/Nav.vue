@@ -6,7 +6,7 @@
                     <div class="nav__header__img-container">
                         <img src="https://cdn.dribbble.com/users/2328616/screenshots/12472594/media/b1fc462905004066ffd045edf0890478.png?compress=1&resize=400x300&vertical=top" alt="logo">
                     </div>
-                    <h5 class="nav__header__title">Hanu Code</h5>
+                    <h5 class="nav__header__title">Heap Overflow</h5>
                 </div>
                 <div class="nav__route">
                     <router-link v-for="(route, index) in routeList" :to="route.path" :key="index"
