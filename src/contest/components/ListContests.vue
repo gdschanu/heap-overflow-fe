@@ -25,7 +25,7 @@ import Loading from "./detail/Loading.vue";
 import { AxiosError } from "axios";
 import Nav from "@/shared/components/general/Nav.vue";
 import Pagination from "@/shared/components/general/Pagination.vue";
-import TableContest from "@/shared/components/general/tables/TableContest.vue";
+import TableContest from "@/contest/components/detail/TableContest.vue";
 
 export default defineComponent({
   name: "ListContests",
