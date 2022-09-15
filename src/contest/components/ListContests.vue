@@ -1,17 +1,19 @@
 <template>
   <Nav>
-    <Loading v-show="isLoading" />
-    <h1 class="contest__title">Contests</h1>
-    <div class="contest__container">
-      <TableContest v-if="contestData" :contests="contestData" />
-      <div class="pagination">
-        <Pagination
-          v-if="totalPages"
-          :totalPages="totalPages"
-          @pageClicked="toPage"
-        />
+    <p style="background-image: linear-gradient(30deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);">
+      <Loading v-show="isLoading" />
+      <h1 class="contest__title">Contests</h1>
+      <div class="contest__container">
+        <TableContest v-if="contestData" :contests="contestData" />
       </div>
-    </div>
+      <div class="pagination">
+          <Pagination
+            v-if="totalPages"
+            :totalPages="totalPages"
+            @pageClicked="toPage"
+          />
+      </div>
+    </p>
   </Nav>
 </template>
 
@@ -40,7 +42,7 @@ export default defineComponent({
   data() {
     return {
       page: 0,
-      perPage: 21,
+      perPage: 16,
       contestData: [] as Contest[],
       isLoading: false, // true
       numberOfContests: new Number() as number,
@@ -97,23 +99,20 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .contest__title {
-  margin: 2%;
+  padding: 2%;
   text-align: center;
   font-size: 25px;
 }
 
 .pagination {
-  width: 100%;
-  background-color: #fff;
-  position: fixed;
   padding: 20px 0;
-  bottom: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .contest__container {
   display: flex;
   justify-content: center;
-  padding-bottom: 6%;
 }
 
 //

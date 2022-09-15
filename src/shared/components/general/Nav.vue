@@ -72,9 +72,12 @@ const routeList = ref([
 
 .nav-container {
     @apply relative;
+    padding-right: 20px;
+    background-color: white;
 
     .nav {
         @apply sticky top-0 w-52;
+
 
         &__header {
             @apply flex justify-center items-center py-2;

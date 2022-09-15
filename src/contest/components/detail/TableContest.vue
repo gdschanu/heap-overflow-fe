@@ -87,6 +87,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .wrapper {
+  background-color: white;
   display: grid;
   width: 85%;
   border: 2px solid #cbd5e1;
