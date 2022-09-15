@@ -99,6 +99,7 @@ export default defineComponent({
 .contest__title {
   margin: 2%;
   text-align: center;
+  font-size: 25px;
 }
 
 .pagination {

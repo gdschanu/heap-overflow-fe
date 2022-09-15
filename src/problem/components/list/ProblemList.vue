@@ -79,6 +79,7 @@ function calculateNumberOfProblemPerPage() {
 .title {
     margin: 2%;
     text-align: center;
+    font-size: 25px;
 }
 
 .list {}
