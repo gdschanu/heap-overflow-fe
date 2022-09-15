@@ -4,7 +4,7 @@
             <div class="nav">
                 <div class="nav__header">
                     <div class="nav__header__img-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" alt="logo">
+                        <img src="https://cdn.dribbble.com/users/2328616/screenshots/12472594/media/b1fc462905004066ffd045edf0890478.png?compress=1&resize=400x300&vertical=top" alt="logo">
                     </div>
                     <h5 class="nav__header__title">Hanu Code</h5>
                 </div>
@@ -99,6 +99,7 @@ const routeList = ref([
 
                 &__name {
                     @apply mx-3;
+                    color: #57489c
                 }
             }
             &__item.router-link-active {

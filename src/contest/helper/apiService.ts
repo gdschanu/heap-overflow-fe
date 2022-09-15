@@ -9,7 +9,7 @@ export default async function (
   params: any,
   body: any
 ) {
-  const accessToken = JSON.parse(localStorage.getItem("accessToken")!);
+  const accessToken = localStorage.getItem("accessToken");
   const headers = {
     "Content-Type": "Application/json",
     "access-token": `${accessToken}`,

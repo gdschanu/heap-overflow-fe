@@ -120,7 +120,7 @@ export default defineComponent({
   }
 
   .item--content {
-    color: #9288c1;
+    color: #57489c;
   }
 
   .content--name {

@@ -1,6 +1,6 @@
 <template>
     <div class="discussion">
-        <button class="createpost" @click="renderCreatePostBox()">Open create post form</button>
+        <button class="createpost" @click="renderCreatePostBox()">Create post form</button>
         <div v-if="isRenderCreatePostBox">
             <label>Title</label>
             <input type="text" v-model="createPostTitle" placeholder="Insert title here">
@@ -21,7 +21,7 @@
             <tr v-for="post in posts" class="row" :key="post">
                 <td class="title">{{post.getTitle()}}</td>
                 <td>{{post.getCreatedAt().toString()}}</td>
-                <td>{{post.getNumberOfComments()}}</td>
+                <td>{{post.getNumberOfComments()}}</td><!--  -->
                 <td>10</td>
                 <td>20</td>
             </tr>
