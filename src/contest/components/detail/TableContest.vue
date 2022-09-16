@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="wrapper__title">
       <div class="title--name"><p class="item--title">Name</p></div>
-      <div class="title--author"><p class="item--title">Author</p></div>
+      <div class="title--author"><p class="item--title">Participants</p></div>
       <div class="title--start"><p class="item--title">Start at</p></div>
       <div class="title--end"><p class="item--title">End at</p></div>
       <div class="title--problems"><p class="item--title">Problems</p></div>
@@ -10,11 +10,11 @@
     </div>
     <div class="wrapper__content" v-for="(contest, index) in contests">
       <div class="content--name" @click="toContest(contest)">
-        <p class="item--content">{{ contest.getName() }}</p>
+        <p class="item--content" style="color:#17b2bd;font-weight:bold;">{{ contest.getName() }}</p>
       </div>
       <!-- Author here -->
       <div class="content--author">
-        <p class="item--content">Author</p>
+        <p class="item--content">{{Math.floor(Math.random() * 999)}}</p>
       </div>
       <div class="content--start">
         <p class="item--content">{{ startTime(contest) }}</p>
@@ -26,7 +26,21 @@
         <p class="item--content">{{ contest._problems.length }}</p>
       </div>
       <div class="content--status">
-        <p class="item--content">{{ contestStatus(contest) }}</p>
+        <p class="item--content" 
+        style="color:#90d490;font-weight: bold;"
+        v-if="contestStatus(contest) === 'RUNNING'">
+          {{ contestStatus(contest) }}
+        </p>
+        <p class="item--content" 
+        style="color:#cf7e8b;font-weight: bold;"
+        v-if="contestStatus(contest) === 'ENDED'">
+          {{ contestStatus(contest) }}
+        </p>
+        <p class="item--content" 
+        style="color:#e3c05f;font-weight: bold;"
+        v-if="contestStatus(contest) === 'INCOMING'">
+          {{ contestStatus(contest) }}
+        </p>
       </div>
     </div>
   </div>
@@ -69,11 +83,11 @@ export default defineComponent({
       const endTime = new Date(contest.getEndAt());
       const now = new Date();
       if (now.getTime() < startTime.getTime()) {
-        return "Incoming";
+        return "INCOMING";
       } else if (now.getTime() > endTime.getTime()) {
-        return "Too late";
+        return "ENDED";
       } else {
-        return "Happening";
+        return "RUNNING";
       }
     },
 
@@ -118,7 +132,7 @@ export default defineComponent({
   }
 
   .item--content {
-    color: #4e39ab;
+    color: #7160bc;
   }
 
   .content--name {
