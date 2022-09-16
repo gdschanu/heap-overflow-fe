@@ -10,7 +10,7 @@
     </div>
     <div class="wrapper__content" v-for="(contest, index) in contests">
       <div class="content--name" @click="toContest(contest)">
-        <p class="item--content" style="color:#17b2bd;font-weight:bold;">{{ contest.getName() }}</p>
+        <p class="item--content" style="color:#02a9b5;font-weight:bold;">{{ contest.getName() }}</p>
       </div>
       <!-- Author here -->
       <div class="content--author">
@@ -27,17 +27,17 @@
       </div>
       <div class="content--status">
         <p class="item--content" 
-        style="color:#90d490;font-weight: bold;"
+        style="color:#62d162;font-weight: bold;"
         v-if="contestStatus(contest) === 'RUNNING'">
           {{ contestStatus(contest) }}
         </p>
         <p class="item--content" 
-        style="color:#cf7e8b;font-weight: bold;"
+        style="color:#d66779;font-weight: bold;"
         v-if="contestStatus(contest) === 'ENDED'">
           {{ contestStatus(contest) }}
         </p>
         <p class="item--content" 
-        style="color:#e3c05f;font-weight: bold;"
+        style="color:#e6b93e;font-weight: bold;"
         v-if="contestStatus(contest) === 'INCOMING'">
           {{ contestStatus(contest) }}
         </p>
