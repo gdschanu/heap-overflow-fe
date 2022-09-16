@@ -5,9 +5,12 @@
             <i class="fa-solid fa-chevron-down"></i>
         </span>
         <ul class="select__list">
-            <li v-for="item in list" :key="item.value" :class="
-                selected === item.name ? 'select__list__item--selected' : ''
-            " @click="$emit('dataUpdated', item)">
+            <li 
+                v-for="item in list"
+                :key="item.value"
+                :class="'select__list__item ' + (selected === item.name ? 'select__list__item--selected' : '')"
+                @click="$emit('dataUpdated', item)"
+            >
                 {{ item.name }}
             </li>
         </ul>
@@ -54,9 +57,14 @@ const props = defineProps({
     }
 
     &__list {
-        @apply hidden absolute z-50 top-full mt-1 left-0 p-2.5 min-w-small rounded-lg bg-slate-100 border border-slate-700;
+        @apply hidden absolute z-50 top-full mt-1 py-2 left-0 min-w-small rounded-lg bg-slate-50 border border-slate-700;
+
+        &__item {
+            @apply px-3 py-1 hover:bg-slate-200;
+        }
 
         &__item--selected {
+            @apply bg-slate-300 hover:bg-slate-300;
             font-weight: bold;
         }
     }

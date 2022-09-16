@@ -1,4 +1,4 @@
-import apiService from "@/contest/helper/apiService"
+import apiService from "@/problem/helpers/apiService"
 import ProgrammingLanguage from "../../programmingLanguage"
 import Status from "../../status"
 

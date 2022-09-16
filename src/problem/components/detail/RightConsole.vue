@@ -1,8 +1,8 @@
 <template>
     <div class="problem-console">
         <div class="console-window" v-show="showConsole">
-            <TabBar :tabBarList="['Test case', 'Run code', 'Submission']" class="tab-bar" :selected="consoleSelected"
-                @selectUpdated="(value) => { consoleSelected = value; }">
+            <TabBar :tabBarList="['Test case', 'Run code', 'Submission']" class="tab-bar" :selected="tabBarSelected"
+                @selectUpdated="(value) => { tabBarSelected = value; }">
                 <template v-slot:Testcase>
                     <TestCase :testCases="testCases" />
                 </template>
@@ -10,11 +10,7 @@
                     <RunCode :runCodeResult="{}" />
                 </template>
                 <template v-slot:Submission>
-                    <Submission :submission="currentSubmission" :is-judging="isJudging">
-                        <template #judging>
-                            <RightConsoleJudging />
-                        </template>
-                    </Submission>
+                    <Submission :submission="currentSubmission" :is-judging="isJudging" />
                 </template>
                 <template v-slot:Testcase-icon>
                     <i class="fa-solid fa-gear"></i>
@@ -47,9 +43,8 @@ import SubmissionModel from "../../model/submission"
 import RunCode from "./RightConsoleRunCode.vue";
 import Submission from "./RightConsoleSubmission.vue";
 import Button from "../../components/common/Button.vue";
-import RightConsoleJudging from "./RightConsoleJudging.vue";
 import Problem from "@/problem/model/problem";
-import { computed, onMounted, ref, Ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, Ref, watch } from "vue";
 import { getTestCasesById } from "../../model/domainLogic/testCase"
 import errorHandler from "@/shared/helpers/errorHandler";
 import { getSubmissionById, submit } from "@/problem/model/domainLogic/submission";
@@ -67,12 +62,12 @@ const isSubmitting = ref(false)
 const isRunning = ref(false)
 const isJudging = ref(false)
 const showConsole = ref(false)
-const consoleSelected = ref(0)
+const tabBarSelected = ref(0)
 const testCases = ref()
 
 function showSubmissionTab() {
     showConsole.value = true
-    consoleSelected.value = 2
+    tabBarSelected.value = 2
 }
 
 onMounted(async () => {
@@ -90,13 +85,13 @@ function handleRunCode() {
 
 async function handleSubmit() {
     try {
-        // currentSubmission.value = await getSubmissionById('62ff25b8f86d54687bafb3e8')
-        console.log('submitting')
         isSubmitting.value = true
         let submissionId = await submit(problem.value, currentProblemCode.value.code, editorSettings.value.language)
         showSubmissionTab()
         isSubmitting.value = false
-        console.log(submissionId)
+        store.dispatch('problemStore/setRunningSubmissionId', submissionId)
+        await nextTick()
+        isJudging.value = true
     } catch (error) {
         isSubmitting.value = false
         errorHandler(error as AxiosError)
@@ -105,6 +100,7 @@ async function handleSubmit() {
 
 watch(currentSubmission, () => {
     showSubmissionTab()
+    isJudging.value = false
 })
 
 </script>
