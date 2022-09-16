@@ -2,7 +2,7 @@ export default [
     {
         path: '/problem',
         name: 'Problem',
-        component: () => import('./components/Problem.vue'),
+        component: () => import('./components/list/ProblemList.vue'),
 		meta: {
 			type: 'protected'
 		}

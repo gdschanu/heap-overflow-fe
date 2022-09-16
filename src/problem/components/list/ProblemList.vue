@@ -1,115 +1,142 @@
 <template>
-    <h1 class="title"> Practice Problems </h1>
-    <div class="list">
-        <div class="list-container">
-            <table>
-                <colgroup>
-                    <col class="id" />
-                    <col class="name" />
-                    <col class="difficulty" />
-                </colgroup>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Difficulty</th>
-                </tr>
-                <Item v-for="(problem, index) in problems[currentPage]" :key="index"
-                    :tableId="index + 1 + perPage * currentPage" :id="problem.getId()" :name="problem.getName()"
-                    :difficulty="problem.getDifficulty()" />
-            </table>
-        </div>
-        <TabNavigate :numberOfProblem="numberOfProblem" :perPage="perPage" :currentPage="currentPage" @gotoPage="gotoPage"/>
-    </div>
+  <Nav>
+    <p style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);">
+      <Loading v-show="isLoading" />
+      <h1 class="contest__title">Problems</h1>
+      <div class="contest__container">
+        <TableProblem v-if="problemData" :problems="problemData" />
+      </div>
+      <div class="pagination">
+          <Pagination
+            v-if="totalPages"
+            :totalPages="totalPages"
+            @pageClicked="toPage"
+          />
+      </div>
+    </p>
+  </Nav>
 </template>
 
-<script lang="ts" setup>
-import Item from './Item.vue';
-import TabNavigate from './TabNavigate.vue';
+<script lang="ts">
+import { defineComponent } from "vue";
+import errorHandler from "../../../shared/helpers/errorHandler";
+import { AxiosError } from "axios";
+import Nav from "@/shared/components/general/Nav.vue";
+import Pagination from "@/shared/components/general/Pagination.vue";
+import TableProblem from "./TableProblem.vue";
 import { countProblems, listProblem } from '@/problem/model/domainLogic/problem';
 import { onMounted, Ref, ref, watch } from 'vue';
-import errorHandler from '@/shared/helpers/errorHandler';
-import { AxiosError } from 'axios';
 import Problem from '@/problem/model/problem';
 
-const problems: Ref<Array<Array<Problem>>> = ref([])
-const currentPage = ref(0)
-const perPage = ref(calculateNumberOfProblemPerPage())
-const numberOfProblem = ref(50)
 
-function gotoPage(page: number) {
-    currentPage.value = page
-}
+export default defineComponent({
+  name: "ListProblem",
 
-async function getProblemBaseOnPage() {
-    problems.value[currentPage.value] = await listProblem(currentPage.value, perPage.value)
-}
+  components: {
+    Pagination,
+    TableProblem,
+    Nav,
+  },
 
-onMounted(async () => {
+  data() {
+    return {
+      page: 0,
+      perPage: 16,
+      problemData: [] as Problem[],
+      isLoading: false, // true
+      numberOfProblems: new Number() as number,
+    };
+  },
+
+  async created() {
     try {
-        numberOfProblem.value = await countProblems()
-        await getProblemBaseOnPage()
+      const response = await listProblem(0, this.perPage);
+      // console.log(response);
+      response.forEach((item) => {
+        this.problemData.push(item);
+      });
+      this.isLoading = false;
     } catch (error) {
-        errorHandler(error as AxiosError)
+      errorHandler(error as AxiosError);
     }
-})
-
-watch(currentPage, async () => {
+    // contestCount
     try {
-        await getProblemBaseOnPage()
+      const numberOfProblems = (await countProblems()) as unknown as number;
+      this.numberOfProblems = numberOfProblems;
+      // console.log(numberOfProblems);
     } catch (error) {
-        errorHandler(error as AxiosError)
+      errorHandler(error as AxiosError);
     }
-})
+  },
 
-watch(perPage, async () => {
-    try {
-        await getProblemBaseOnPage()
-    } catch (error) {
-        errorHandler(error as AxiosError)
-    }
-})
+  computed: {
+    totalPages(): number {
+      const pages = Math.ceil(this.numberOfProblems / this.perPage);
+      // console.log(pages);
+      return pages;
+    },
+  },
 
-function calculateNumberOfProblemPerPage() {
-    return Math.floor((window.innerHeight - 250) / 50);
-}
-
+  methods: {
+    async toPage(page: number) {
+      this.isLoading = true;
+      this.problemData = [];
+      // console.log(page)
+      try {
+        const response = await listProblem(page - 1, this.perPage);
+        response.forEach((item) => {
+          this.problemData.push(item);
+        });
+        this.isLoading = false;
+      } catch (error) {
+        errorHandler(error as AxiosError);
+      }
+    },
+  },
+});
 </script>
 
 <style lang="scss" scoped>
-.title {
-    margin: 2%;
-    text-align: center;
-    font-size: 25px;
+.contest__title {
+  padding: 2%;
+  text-align: center;
+  font-size: 25px;
 }
 
-.list {}
-
-.list-container {
-    @apply border rounded-lg border-black pl-2 pr-2 bg-slate-100;
+.pagination {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
 }
 
-table {
-    @apply table-fixed w-full rounded-lg border-separate;
-    border-spacing: 0 10px;
-
-    .id {
-        width: 20%;
-    }
-
-    .name {
-        width: 50%;
-    }
-
-    .difficulty {
-        width: 30%;
-    }
-
-    tr {
-        @apply bg-white hover:bg-slate-200;
-
-        th {
-            @apply p-2 bg-slate-100;
-        }
-    }
+.contest__container {
+  display: flex;
+  justify-content: center;
 }
+
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               RUN FLUENTLY         NO BUG
+//
 </style>

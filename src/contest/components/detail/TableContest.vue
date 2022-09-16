@@ -8,8 +8,8 @@
       <div class="title--problems"><p class="item--title">Problems</p></div>
       <div class="title--status"><p class="item--title">Status</p></div>
     </div>
-    <div class="wrapper__content" v-for="(contest, index) in contests">
-      <div class="content--name" @click="toContest(contest)">
+    <div class="wrapper__content" v-for="(contest, index) in contests" @click="toContest(contest)">
+      <div class="content--name">
         <p class="item--content" style="color:#02a9b5;font-weight:bold;">{{ contest.getName() }}</p>
       </div>
       <!-- Author here -->
@@ -124,6 +124,10 @@ export default defineComponent({
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  .wrapper__content:hover {
+    background-color: rgb(241, 227, 249);
   }
 
   .item--title {
