@@ -12,6 +12,6 @@ export interface Resp {
 }
 
 export async function createPostApi(problemId : string, req : Req) :Promise<Resp> {
-  const resp : any = await apiService('POST', `/practiceProblem/${problemId}/post`, {}, req);
+  const resp : any = await apiService('POST', `/practiceProblem/problem/${problemId}/post`, {}, req);
   return resp.data
 }
