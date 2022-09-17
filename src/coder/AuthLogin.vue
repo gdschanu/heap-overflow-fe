@@ -254,6 +254,7 @@ export default defineComponent({
          const user = JSON.parse(data)
          console.log(user)
          localStorage.setItem("accessToken", user.token)
+         localStorage.setItem("coderId", user.coderId)
           this.$store.dispatch('coderStore/setUser', user)
           // move to dashboard
           this.$router.push("dashboard");
