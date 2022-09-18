@@ -231,7 +231,6 @@ export default defineComponent({
     async login(user: any) {
       try {
         const data = await login(user);
-
         localStorage.setItem("accessToken", JSON.parse(data).token);
       } catch (error: any) {
         this.isLoading = false;
