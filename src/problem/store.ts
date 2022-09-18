@@ -34,12 +34,14 @@ export default {
 		currentProblemCode: {},
 		editorSettings: {},
 		problem: {},
-		submission: null
+		submission: null,
+		runningSubmissionId: null,
 	} as {
 		currentProblemCode: ProblemCode,
 		editorSettings: EditorSetting,
 		problem: Problem,
-		submission: Submission | null
+		submission: Submission | null,
+		runningSubmissionId: string | null,
 	},
 	mutations: {
 		setCurrentProblemCode(state, currentProblem: ProblemCode) {
@@ -53,6 +55,9 @@ export default {
 		},
 		setSubmission(state, submission: Submission) {
 			state.submission = submission
+		},
+		setRunningSubmissionId(state, runningSubmissionId: string | null) {
+			state.runningSubmissionId = runningSubmissionId
 		}
 	},
 	actions: {
@@ -85,6 +90,9 @@ export default {
 		},
 		setSubmission(state, submission: Submission) {
 			state.commit("setSubmission", submission)
+		},
+		setRunningSubmissionId(state, runningSubmissionId: string | null) {
+			state.commit("setRunningSubmissionId", runningSubmissionId)
 		}
 	},
 } as Module<any, any>

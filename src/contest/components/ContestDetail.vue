@@ -38,12 +38,15 @@
           </thead>
           <tbody>
             <tr>
-              <td>
-                <p class="">Click join button to join the contest</p>
+              <td v-if="!isLated">
+                <p>Click join button to join the contest</p>
                 <button v-if="!isJoin" class="join--btn" @click="joinContest">
                   Join
                 </button>
                 <button v-else class="join--btn joined" disabled>Joined</button>
+              </td>
+              <td v-else>
+                <p>This contest was ended</p>
               </td>
             </tr>
           </tbody>
@@ -94,6 +97,7 @@ export default defineComponent({
   },
 
   async created() {
+    // check Joined or not
     const contestId = this.getContest.getId() as string;
     try {
       const response = (await checkJoined(contestId)) as boolean;
@@ -102,6 +106,8 @@ export default defineComponent({
     } catch (error) {
       errorHandler(error as AxiosError);
     }
+    // get first participant list
+    this.getParticipantList(1);
   },
 
   computed: {
@@ -152,6 +158,7 @@ export default defineComponent({
         const response = await joinContest(contestID);
         alert(response);
         this.isJoin = true;
+        location.reload();
       } catch (error) {
         errorHandler(error as AxiosError);
       }
@@ -161,7 +168,11 @@ export default defineComponent({
       this.participantList = [];
       const contestId = this.getContest.getId() as string;
       try {
-        const response = await getParticipants(contestId, page, this.perPage);
+        const response = await getParticipants(
+          contestId,
+          page - 1,
+          this.perPage
+        );
         console.log(response);
         response.forEach((item) => {
           this.participantList.push(item);

@@ -64,7 +64,7 @@ function clicked() {
     @apply bg-slate-100 text-slate-300 cursor-not-allowed;
 }
 .secondary {
-    @apply bg-transparent text-slate-700 border border-slate-700 hover:text-slate-800 hover:border-slate-800
+    @apply bg-transparent text-slate-700 border border-slate-700 hover:text-slate-900 hover:border-slate-900
     active:text-slate-900 active:border-slate-900 focus:ring-1 focus:ring-slate-900
     dark:text-slate-50 dark:border-slate-50 dark:hover:border-slate-100 dark:hover:text-slate-100
     dark:active:border-slate-200 dark:active:text-slate-200 dark:focus:ring-slate-50;

@@ -1,6 +1,7 @@
 import  {loginApi} from "./api/loginApi";
 import logoutApi from "./api/logoutApi";
 import registerApi  from "./api/registerApi";
+// import { getUserProfile } from "./api/getUserProfile";
 import User  from "./user";
 
 export async function login(user: User): Promise<string> {
@@ -9,7 +10,7 @@ export async function login(user: User): Promise<string> {
         usernameOrEmail,
         password: user.getPassword()
     }))).data;
-    return accessToken.token as string
+    return JSON.stringify(accessToken)
 }
 
 export async function register(user: User): Promise<void> {
@@ -24,6 +25,7 @@ export async function logout(data: string): Promise<void> {
         token : data
     })
 }
+
 export default {
     login,
     register,

@@ -9,7 +9,7 @@ let routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
 		name: 'Landing',
-		component: () => import('@/shared/views/Landing.vue'),
+		component: () => import('@/homepage/components/HomePage.vue'),
 		meta: {
 			type: 'public'
 		}

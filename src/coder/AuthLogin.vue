@@ -6,7 +6,7 @@
         <!-- form heading -->
         <div class="form__heading flex--space-between">
           <div class="form__heading__logoContainer">
-            <img src="../coder/assets/img/logoHighCode.png" alt="logo" />
+            <img src="https://cdn.dribbble.com/users/2328616/screenshots/12472594/media/b1fc462905004066ffd045edf0890478.png?compress=1&resize=400x300&vertical=top" alt="logo" />
             <h2>High Code</h2>
           </div>
           <div class="form__singUp">
@@ -125,6 +125,7 @@ import Button from "./components/Button.vue";
 import LoadingIcon from "./components/LoadingIcon.vue";
 import errorHandler from "../shared/helpers/errorHandler";
 import Alert from "../shared/components/general/Alert.vue";
+import { mapMutations } from "vuex";
 export default defineComponent({
   components: {
     InputText,
@@ -151,6 +152,7 @@ export default defineComponent({
   },
 
   methods: {
+    ...mapMutations(['set_User']),
     setEmailOrUsername(value: any) {
       // check input type is email or username
       // email -> setEmail, username -> setUsername
@@ -207,6 +209,7 @@ export default defineComponent({
         user.setPassword(this.input.password);
       }
       return user;
+      
     },
     repOK() {
       if (!this.input.username && !this.input.email && !this.input.password) {
@@ -247,13 +250,14 @@ export default defineComponent({
           this.setUser();
           this.isLoading = true;
           const data = await login(this.setUser());
-          console.log(data);
           // add accessToken to localStorage
-          localStorage.setItem("accessToken", JSON.stringify(data));
-
+         const user = JSON.parse(data)
+         console.log(user)
+         localStorage.setItem("accessToken", user.token)
+         localStorage.setItem("coderId", user.coderId)
+          this.$store.dispatch('coderStore/setUser', user)
           // move to dashboard
           this.$router.push("dashboard");
-          alert("successful");
           this.isLoading = false;
         } catch (error: any) {
           this.isLoading = false;
@@ -310,8 +314,8 @@ export default defineComponent({
 }
 
 .form__heading__logoContainer img {
-  width: 2em;
-  height: 2em;
+  width: 4em;
+  height: 3em;
 }
 
 .form__heading__logoContainer h2 {

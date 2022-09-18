@@ -12,27 +12,19 @@
       <tbody>
         <tr v-for="(participant, index) in ParticipantList" :key="index">
           <td class="participant--order">{{ index + 1 }}</td>
-          <td class="participant--name">coderName</td>
+          <td class="participant--name">{{ participant._coderId }}</td>
         </tr>
       </tbody>
     </table>
-    <div class="pagination">
-      <Pagination :totalPages="totalPages" @pageClicked="toPage"/>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Participant } from "../../model/participant/participant";
-import Pagination from "./Pagination.vue";
 
 export default defineComponent({
   name: "ParticipantList",
-
-  components: {
-    Pagination,
-  },
 
   props: {
     ParticipantList: {

@@ -4,7 +4,7 @@
             Your submission will be showed here
         </h4>
         <div v-if="submitting">
-            <slot name="judging"></slot>
+            <RightConsoleJudging />
         </div>
         <div v-if="afterSubmit">
             <template v-if="submission">
@@ -53,6 +53,8 @@ import Submission from "@/problem/model/submission";
 import { computed, onMounted, PropType } from "vue";
 import Button from "../common/Button.vue";
 import Console from "../common/Console.vue";
+import RightConsoleJudging from "./RightConsoleJudging.vue";
+
 
 const props = defineProps({
     submission: {
@@ -72,6 +74,7 @@ const afterSubmit = computed(() => props.submission !== null && props.isJudging 
     @apply p-3;
 
     .status {
+        @apply relative;
         .title {
             @apply text-red-600 mb-2;
         }

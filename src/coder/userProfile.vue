@@ -15,7 +15,7 @@
                 type="text"
                 placeholder="Enter your first name"
                 
-                :value="firstname"
+               
               />
             </div>
             <div class="form_control">
@@ -178,33 +178,28 @@ import { ref, onMounted, watch } from "vue";
 import errorHandler from "@/shared/helpers/errorHandler";
 import logout from "./api/logoutApi";
 import user from "./user";
-
-
+import getInfor from "./auth";
+import axios from "axios";
+import { mapGetters } from "vuex";
 export default defineComponent({
+  computed:{
+    ...mapGetters(['user'])
+  },
   components: {
     Nav,
   },
   data() {
     return {
-      user: null,
+      
       token: "",
-      firstname: "",
-      // last_name: "",
-      // birthday: "",
-      // gender: "",
-      // email: "",
-      // phone: "",
-      // address: "",
-      // number: "",
-      // city: "",
-      //  zip: "",
-    };
-  },
-  created() {
-    const response = localStorage.getItem("accessToken");
-    if (response) {
-      const a = JSON.parse(response);
-      this.user = a;
+      name: "",
+      age : "",
+      university: "",
+      slogan: "",
+      avatar: "",
+      gender: "",
+      phone : "",
+      address: ""
     }
   },
 
@@ -335,6 +330,8 @@ h2 {
 .select_photo {
   margin-top: 20px;
 }
+
+
 
 
 </style>

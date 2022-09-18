@@ -1,3 +1,4 @@
+import getRunningSubmissionApi from "../api/submission/getRunningSubmissionApi";
 import getSubmissionApi from "../api/submission/getSubmissionApi";
 import listSubmissionApi from "../api/submission/listSubmission";
 import submitApi from "../api/submission/submitApi";
@@ -72,8 +73,18 @@ async function listSubmission(page: number, perPage: number, coderId: string, pr
     ))
 }
 
+async function getRunningSubmission(coderId: string, problemId: string) {
+    return await getRunningSubmissionApi({
+        coderId,
+        problemId,
+        page: 0,
+        perPage: 100
+    })
+}
+
 export {
     getSubmissionById,
     submit,
-    listSubmission
+    listSubmission,
+    getRunningSubmission
 }

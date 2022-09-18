@@ -6,7 +6,7 @@
         <!-- form heading -->
         <div class="form__heading flex--space-between">
           <div class="form__heading__logoContainer">
-            <img src="../coder/assets/img/logoHighCode.png" alt="logo" />
+            <img src="https://cdn.dribbble.com/users/2328616/screenshots/12472594/media/b1fc462905004066ffd045edf0890478.png?compress=1&resize=400x300&vertical=top" alt="logo" />
             <h2>High Code</h2>
           </div>
           <div class="form__singUp">
@@ -231,7 +231,7 @@ export default defineComponent({
     async login(user: any) {
       try {
         const data = await login(user);
-        localStorage.setItem("accessToken", JSON.stringify(data));
+        localStorage.setItem("accessToken", JSON.parse(data).token);
       } catch (error: any) {
         this.isLoading = false;
         errorHandler(error);
@@ -278,7 +278,6 @@ export default defineComponent({
           // store accessToken to localStorage
           localStorage.setItem("accessToken", JSON.stringify(data));
           // move to dashboard
-          alert("succesful");
           this.$router.push("dashboard");
         } catch (error: any) {
           errorHandler(error);
@@ -332,8 +331,8 @@ export default defineComponent({
 }
 
 .form__heading__logoContainer img {
-  width: 2em;
-  height: 2em;
+  width: 4em;
+  height: 3em;
 }
 
 .form__heading__logoContainer h2 {

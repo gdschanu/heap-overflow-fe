@@ -1,11 +1,25 @@
+import { Socket } from "socket.io-client";
+import io from "socket.io-client"
+
 const socketUrl = `ws://${process.env.VUE_APP_URL}:${process.env.VUE_APP_SOCKET_PORT}`;
+
+type RunningSubmission = {
+    id: string,
+    coderId: string,
+    problemId: string,
+    submittedAt: string,
+    judgingTestCase: number,
+    totalTestCases: number
+}
 
 export default class JudgingTestCase {
     private static instance: JudgingTestCase;
-    private socket: WebSocket | null
+    private socket: Socket | null
+    private loopers: Map<string, any>
 
     private constructor() {
         this.socket = null
+        this.loopers = new Map()
     }
 
     public static getInstance(): JudgingTestCase {
@@ -18,19 +32,57 @@ export default class JudgingTestCase {
     isConnecting() {
         if (this.socket === null)
             return false
-        if (this.socket.readyState !== WebSocket.OPEN)
+        if (!this.socket.connected)
             return false
         return true
     }
 
     start() {
-        this.socket = new WebSocket(socketUrl)
+        this.close()
+        this.socket = io(socketUrl, { transports: ['websocket'] })
+        const socket = this.socket
+        return new Promise<void>((resolve, reject) => {
+            socket.on('connect', function () {
+                resolve()
+            })
+        })
+    }
+
+    queryRunningSubmission(runningSubmissionId: string) {
+        if (this.socket === null)
+            return
+        const socket = this.socket
+        const loopers = this.loopers
+        if (loopers.has(runningSubmissionId))
+            return
+        loopers.set(runningSubmissionId, setInterval(() => {
+            socket.emit('GET_RUNNING_SUBMISSION', runningSubmissionId)
+        }, 2000))
+    }
+
+    getRunningSubmission(callback: (data: RunningSubmission | string) => void) {
+        if (this.socket === null)
+            return
         
+        const socket = this.socket
+        const loopers = this.loopers
+        socket.on('RETURN_RUNNING_SUBMISSION', function (data: RunningSubmission) {
+            callback(data)
+            if (typeof data === 'string') {
+                clearInterval(loopers.get(data))
+                loopers.delete(data)
+            } else {
+                
+            }
+        })
     }
 
     close() {
-        this.socket?.close()
+        this.loopers.forEach((looper, runningSubmissionId) => {
+            clearInterval(looper)
+        })
+        this.loopers.clear()
+        this.socket?.disconnect()
         this.socket === null
     }
-
 }

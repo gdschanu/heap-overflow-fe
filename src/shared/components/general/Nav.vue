@@ -2,12 +2,14 @@
     <div class="nav-layout">
         <div class="nav-container">
             <div class="nav">
-                <div class="nav__header">
-                    <div class="nav__header__img-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" alt="logo">
+                <router-link to="/">
+                    <div class="nav__header">
+                        <div class="nav__header__img-container">
+                            <img src="https://cdn.dribbble.com/users/2328616/screenshots/12472594/media/b1fc462905004066ffd045edf0890478.png?compress=1&resize=400x300&vertical=top" alt="logo">
+                        </div>
+                        <h5 class="nav__header__title">Heap Overflow</h5>
                     </div>
-                    <h5 class="nav__header__title">Hanu Code</h5>
-                </div>
+                </router-link>
                 <div class="nav__route">
                     <router-link v-for="(route, index) in routeList" :to="route.path" :key="index"
                         class="nav__route__item">
@@ -72,24 +74,24 @@ const routeList = ref([
 
 .nav-container {
     @apply relative;
+    padding-right: 20px;
 
     .nav {
-        @apply sticky top-0 w-52;
+        @apply sticky top-0 w-16 lg:w-52;
 
         &__header {
-            @apply flex justify-center items-center py-2;
+            @apply flex justify-center items-center py-2 h-20;
 
             img {
                 @apply block w-20;
             }
 
             &__title {
-                @apply font-medium;
+                @apply font-medium hidden lg:block;
             }
         }
 
         &__route {
-
             &__item {
                 @apply relative flex items-center py-3 pl-3 text-slate-500 hover:text-slate-600 active:text-slate-700;
 
@@ -98,8 +100,9 @@ const routeList = ref([
                 }
 
                 &__name {
-                    @apply mx-3;
+                    @apply mx-3 hidden lg:block;
                 }
+                color: #57489c
             }
             &__item.router-link-active {
                 @apply text-slate-900 font-bold;

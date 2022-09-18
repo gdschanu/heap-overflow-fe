@@ -12,7 +12,7 @@
                <Discussion :problemId="problem.getId()"/>
             </template>
             <template v-slot:Submission>
-                <Submissions />
+                <Submissions @selectUpdated="(value) => { tabBarSelected = value; }" />
             </template>
             <template v-slot:Problem-icon>
                 <i class="fa-solid fa-fire"></i>
