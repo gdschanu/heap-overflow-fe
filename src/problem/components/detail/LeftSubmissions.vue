@@ -40,11 +40,10 @@ const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
 const runningSubmissionId = computed(() => store.state.problemStore.runningSubmissionId) as Ref<string | null>
 
 async function init() {
-    console.log('rerender');
-    
     try {
-        submissions.value = await listSubmission(0, 1000, '6268ed01fad0b0e48fbd0ed6', problem.value.getId())
-        runningSubmissions.value = await getRunningSubmission('6268ed01fad0b0e48fbd0ed6', problem.value.getId())
+        const coderId : string = localStorage.getItem('coderId') as string;
+        submissions.value = await listSubmission(0, 1000, coderId, problem.value.getId())
+        runningSubmissions.value = await getRunningSubmission(coderId, problem.value.getId())
         
         if (runningSubmissions.value.length !== 0) {
             JudgingTestCase.getInstance().start()

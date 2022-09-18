@@ -18,11 +18,11 @@ export interface GetPostsResp {
 
 export async function getPostsApi(page : number, perPage: number, problemId : string) : Promise<GetPostsResp[]> {
     const qs = `?page=${page}&perPage=${perPage}`
-    const response : Resp = (await apiService('GET', `/practiceProblem/${problemId}/post` + qs)).data as Resp
+    const response : Resp = (await apiService('GET', `/practiceProblem/problem/${problemId}/post` + qs)).data as Resp
     return response.data
 }
 
 export async function countPostsApi(problemId : string) {
-    const response = (await apiService('GET', `/practiceProblem/${problemId}/post/count`)).data
+    const response = (await apiService('GET', `/practiceProblem/problem/${problemId}/post/count`)).data
     return response.data
 }
