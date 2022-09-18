@@ -74,6 +74,7 @@ const routeList = ref([
 
 .nav-container {
     @apply relative;
+    padding-right: 20px;
 
     .nav {
         @apply sticky top-0 w-16 lg:w-52;
