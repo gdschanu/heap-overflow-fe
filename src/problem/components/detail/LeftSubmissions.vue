@@ -53,7 +53,7 @@ async function init() {
                         return runningSubmission.id !== data
                     })
                     await init()
-                    store.dispatch('problemStore/setSubmission', submissions.value.at(-1))
+                    store.dispatch('problemStore/setSubmission', submissions.value.at(0))
                 } else {
                     runningSubmissions.value.forEach((runningSubmission) => {
                         if (runningSubmission.id === data.id) {
