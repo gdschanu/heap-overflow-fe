@@ -1,4 +1,3 @@
-
 import  {loginApi} from "./api/loginApi";
 import logoutApi from "./api/logoutApi";
 import registerApi  from "./api/registerApi";
@@ -11,9 +10,7 @@ export async function login(user: User): Promise<string> {
         usernameOrEmail,
         password: user.getPassword()
     }))).data;
-   
     return JSON.stringify(accessToken)
-
 }
 
 export async function register(user: User): Promise<void> {
