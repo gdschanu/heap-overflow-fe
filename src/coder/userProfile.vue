@@ -124,7 +124,8 @@
                               />
             </div>
           </div>
-          <div class="button">
+          
+            <div class="button">
             <button @click="submitProfile" class="btn btn-primary">
               Update
             </button>
@@ -133,7 +134,9 @@
             <button @click="handlelogout" class="btn btn-primary">
               Logout
             </button>
+          
           </div>
+         
         </div>
       </div>
       <div class="right_content">
@@ -141,8 +144,8 @@
           <div class="profile">
             <div>
               <img src="../coder/assets/img/meme-la-gi.jpg" alt="Opps" />
-
-              <h4 v-if="user">{{ user.username }}</h4>
+                <!-- demo -->
+              <h4 v-if="user_infor">{{ user_infor.data.coderId }}</h4>
               <h5>Full stack developer</h5>
               <p>Ha Noi, Viet Nam</p>
               <div class="link">
@@ -174,44 +177,36 @@
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 import Nav from "@/shared/components/general/Nav.vue";
-import { ref, onMounted, watch } from "vue";
 import errorHandler from "@/shared/helpers/errorHandler";
 import logout from "./api/logoutApi";
-import user from "./user";
-import getInfor from "./auth";
-import axios from "axios";
-import { mapGetters } from "vuex";
+import { getUserInfor } from "./auth";
 export default defineComponent({
-  computed:{
-    ...mapGetters(['user'])
+  data() {
+    return {
+      user_infor : ""
+    }
+  },
+  async created(){
+    const data = localStorage.getItem("coderId")
+    if (data){  
+    const response = await getUserInfor(data)
+    console.log(response)
+    this.user_infor =JSON.parse(response)
+    }
   },
   components: {
     Nav,
   },
-  data() {
-    return {
-      
-      token: "",
-      name: "",
-      age : "",
-      university: "",
-      slogan: "",
-      avatar: "",
-      gender: "",
-      phone : "",
-      address: ""
-    }
-  },
+
 
   methods: {
     async handlelogout() {
       let response = localStorage.getItem("accessToken");
       if (response) {
         try {
-          const a = JSON.parse(response);
-          localStorage.clear();
+          localStorage.removeItem("accessToken");
           this.$router.push("login");
-          await logout(a);
+          await logout(JSON.parse(response));
         } catch (error: any) {
           errorHandler(error);
         }
@@ -267,6 +262,10 @@ h2 {
 }
 .input::placeholder {
   color: #9288c1;
+}
+.btn{
+  display: flex;
+  justify-content: space-between;
 }
 .button {
   margin-top: 20px;
