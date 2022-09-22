@@ -1,20 +1,21 @@
 <template>
-  <Nav>
-    <p style="height: 100vh;background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);">
-      <Loading v-show="isLoading" />
-      <h1 class="contest__title">Problems</h1>
-      <div class="contest__container">
-        <TableProblem v-if="problemData" :problems="problemData" />
-      </div>
-      <div class="pagination">
-          <Pagination
-            v-if="totalPages"
-            :totalPages="totalPages"
-            @pageClicked="toPage"
-          />
-      </div>
+<Nav>
+    <p style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);">
+        <div class="container">
+            <div class="container--contest">
+                <Loading v-show="isLoading" />
+                <h1 class="contest__title">Problems</h1>
+                <div class="contest__container">
+                    <TableProblem v-if="problemData" :problems="problemData" />
+                </div>
+                <div class="pagination">
+                    <Pagination v-if="totalPages" :totalPages="totalPages" @pageClicked="toPage" />
+                </div>
+            </div>
+            <RightBar />
+        </div>
     </p>
-  </Nav>
+</Nav>
 </template>
 
 <script lang="ts">
@@ -27,6 +28,7 @@ import TableProblem from "./TableProblem.vue";
 import { countProblems, listProblem } from '@/problem/model/domainLogic/problem';
 import { onMounted, Ref, ref, watch } from 'vue';
 import Problem from '@/problem/model/problem';
+import RightBar from "@/shared/components/general/RightBar.vue";
 
 
 export default defineComponent({
@@ -35,6 +37,7 @@ export default defineComponent({
   components: {
     Pagination,
     TableProblem,
+    RightBar,
     Nav,
   },
 
@@ -97,21 +100,36 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+
+    .container--contest {
+        width: 100%;
+    }
+}
+
 .contest__title {
-  padding: 2%;
-  text-align: center;
-  font-size: 25px;
+    padding: 2%;
+    text-align: center;
+    font-size: 25px;
 }
 
 .pagination {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .contest__container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 //
