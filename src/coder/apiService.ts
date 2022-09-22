@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
-const api = process.env.VUE_APP_API; //base url
+const api = `http://${process.env.VUE_APP_URL}:${process.env.VUE_APP_PORT}`; //base url
 
 // VD: apiService("GET", "/api/getUser", "{id: 3j8T46Yc7J3d4DS30K}");
-export default async function(method, address, params, body) {
+export default async function(method: string, address: string, params ? : object, body ? : object) {
     const accessToken = localStorage.getItem('accessToken');
     const headers = {
         'Content-Type': 'Application/json',
@@ -20,7 +20,8 @@ export default async function(method, address, params, body) {
         });
         return response;
     } catch (error) {
-        throw error;
+        const err = error as AxiosError
+        throw err;
     };
 
 };

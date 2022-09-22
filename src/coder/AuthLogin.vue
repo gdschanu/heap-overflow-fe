@@ -255,6 +255,7 @@ export default defineComponent({
          console.log(user)
          localStorage.setItem("accessToken", user.token)
          localStorage.setItem("coderId", user.coderId)
+         localStorage.setItem("username", user.username)
           this.$store.dispatch('coderStore/setUser', user)
           // move to dashboard
           this.$router.push("dashboard");
