@@ -77,7 +77,7 @@ props: {
 })
 </script>
 
-<style>
+<style scoped>
 
   .wrapper__title,
   .wrapper__content {

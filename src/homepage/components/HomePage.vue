@@ -64,7 +64,7 @@ export default defineComponent({
 
 </script>
 
-<style>
+<style scoped>
 .main-content{
      font-family: 'Roboto';
      font-style: normal;
