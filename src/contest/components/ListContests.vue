@@ -106,6 +106,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+p { 
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+}
+
 .container {
   display: flex;
   width: 100%;
