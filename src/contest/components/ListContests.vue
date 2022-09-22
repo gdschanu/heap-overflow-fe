@@ -1,7 +1,7 @@
 <template>
   <Nav>
-    <div
-      class="container" style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white)">
+    <p style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);">
+      <div class="container">
       <div class="container--contest">
         <Loading v-show="isLoading" />
         <h1 class="contest__title">Contests</h1>
@@ -18,6 +18,7 @@
       </div>
       <RightBar />
     </div>
+    </p>
   </Nav>
 </template>
 
@@ -107,6 +108,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container {
   display: flex;
+  width: 100%;
   .container--contest {
     width: 100%;
   }

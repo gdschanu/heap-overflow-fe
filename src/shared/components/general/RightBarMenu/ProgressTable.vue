@@ -88,8 +88,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .wrapper {
   display: grid;
+  height: 100%;
   // margin: 0 auto;
   justify-items: center;
+  align-content: space-around;
   font-size: 12px;
 
   .wrapper__title,

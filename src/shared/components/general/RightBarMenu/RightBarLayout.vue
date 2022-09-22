@@ -45,7 +45,7 @@ export default defineComponent({
   }
 
   .topPerform__container {
-    height: 50%;
+    height: 55%;
     width: 90%;
     padding: 20px;
     border: 2px solid #cbd5e1;
