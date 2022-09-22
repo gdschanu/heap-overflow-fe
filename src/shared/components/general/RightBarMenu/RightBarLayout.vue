@@ -32,7 +32,7 @@ export default defineComponent({
   height: 95vh;
   width: 30%;
   margin: auto 0 auto auto;
-  margin-top: 4.3vh;
+  margin-top: 5.9vh;
   // overflow: hidden;
 
   .process__container {
