@@ -52,7 +52,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" scoped>
 import Problem from "@/problem/model/problem";
 import { defineComponent } from "vue";
 
@@ -77,7 +77,7 @@ props: {
 })
 </script>
 
-<style scoped>
+<style>
 
   .wrapper__title,
   .wrapper__content {
