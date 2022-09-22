@@ -137,6 +137,19 @@ export default defineComponent({
         }
       }
     }
+    .progressCircle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      font-weight: 500;
+      border: 5px solid #302f4e;
+      border-radius: 50%;
+      background-color:#fff;
+      height:100px;
+      border-radius:50%;
+      width:100px;
+    }
   }
 
   .wrapper__text {
