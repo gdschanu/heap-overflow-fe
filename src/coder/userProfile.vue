@@ -221,7 +221,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .main_content {
   display: flex;
   height: 100vh;
