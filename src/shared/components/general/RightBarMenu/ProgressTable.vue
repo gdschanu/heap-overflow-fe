@@ -143,7 +143,7 @@ export default defineComponent({
       align-items: center;
       font-size: 40px;
       font-weight: 500;
-      border: 5px solid #302f4e;
+      border: 3px solid #302f4e;
       border-radius: 50%;
       background-color:#fff;
       height:100px;
