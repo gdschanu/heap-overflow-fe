@@ -1,19 +1,23 @@
 <template>
   <Nav>
-    <p style="height: 100vh;background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);">
-      <Loading v-show="isLoading" />
-      <h1 class="contest__title">Contests</h1>
-      <div class="contest__container">
-        <TableContest v-if="contestData" :contests="contestData" />
-      </div>
-      <div class="pagination">
+    <div
+      class="container" style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white)">
+      <div class="container--contest">
+        <Loading v-show="isLoading" />
+        <h1 class="contest__title">Contests</h1>
+        <div class="contest__container">
+          <TableContest v-if="contestData" :contests="contestData" />
+        </div>
+        <div class="pagination">
           <Pagination
             v-if="totalPages"
             :totalPages="totalPages"
             @pageClicked="toPage"
           />
+        </div>
       </div>
-    </p>
+      <RightBar />
+    </div>
   </Nav>
 </template>
 
@@ -28,6 +32,7 @@ import { AxiosError } from "axios";
 import Nav from "@/shared/components/general/Nav.vue";
 import Pagination from "@/shared/components/general/Pagination.vue";
 import TableContest from "@/contest/components/detail/TableContest.vue";
+import RightBar from "@/shared/components/general/RightBar.vue";
 
 export default defineComponent({
   name: "ListContests",
@@ -36,6 +41,7 @@ export default defineComponent({
     Loading,
     Pagination,
     TableContest,
+    RightBar,
     Nav,
   },
 
@@ -68,6 +74,7 @@ export default defineComponent({
     } catch (error) {
       errorHandler(error as AxiosError);
     }
+    
   },
 
   computed: {
@@ -98,6 +105,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.container {
+  display: flex;
+  .container--contest {
+    width: 100%;
+  }
+}
+
 .contest__title {
   padding: 2%;
   text-align: center;
