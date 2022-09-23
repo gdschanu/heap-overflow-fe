@@ -94,7 +94,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .wrapper {
-   background-color: white;
+  background-color: white;
   display: flex;
   width: 95%;
   height: 100vh;
