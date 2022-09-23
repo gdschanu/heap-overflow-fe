@@ -90,7 +90,7 @@ props: {
     text-align: center;
   }
   .wrapper{
-    width: 800px;
+    width: 90%;
     background: #FFFFFF;
     /* blueGray/300 */
     border: 1px solid #CBD5E1;
