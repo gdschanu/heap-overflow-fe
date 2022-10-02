@@ -88,7 +88,7 @@ props: {
     width: 95%;
     min-height: 50px;
     text-align: center;
-    font-family: 'Roboto';
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-style: normal;
   }
   .wrapper{
@@ -99,7 +99,7 @@ props: {
     border-radius: 20px;
     margin-left: 53px;
     margin-top: 20px;
-    font-family: 'Roboto';
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-style: normal;
     font-weight: 600;
     border-radius: 20px;
