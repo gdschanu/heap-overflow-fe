@@ -225,7 +225,6 @@ export default defineComponent({
 .main_content {
   display: flex;
   height: 100vh;
-
 }
 form {
   width: 150%;

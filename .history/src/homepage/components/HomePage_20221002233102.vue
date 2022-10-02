@@ -76,7 +76,6 @@ export default defineComponent({
   justify-content: center;
   font-family: "Roboto";
   font-style: normal;
-  margin: auto;
 }
 
 .main-content {
@@ -85,6 +84,7 @@ export default defineComponent({
   font-weight: 500;
   height: 100vh;
   width: 100%;
+  margin-left: 2%;
 }
 .header {
   margin-left: 58px;
