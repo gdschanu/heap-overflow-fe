@@ -52,7 +52,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" scoped>
 import Problem from "@/problem/model/problem";
 import { defineComponent } from "vue";
 
@@ -88,8 +88,6 @@ props: {
     width: 95%;
     min-height: 50px;
     text-align: center;
-    font-family: 'Roboto';
-    font-style: normal;
   }
   .wrapper{
     width: 90%;

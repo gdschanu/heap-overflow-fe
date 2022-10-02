@@ -85,6 +85,7 @@ export default defineComponent({
   font-weight: 500;
   height: 100vh;
   width: 100%;
+  margin-left: 2%;
 }
 .header {
   margin-left: 58px;

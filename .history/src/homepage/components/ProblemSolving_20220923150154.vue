@@ -88,8 +88,6 @@ props: {
     width: 95%;
     min-height: 50px;
     text-align: center;
-    font-family: 'Roboto';
-    font-style: normal;
   }
   .wrapper{
     width: 90%;

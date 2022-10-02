@@ -225,7 +225,7 @@ export default defineComponent({
 .main_content {
   display: flex;
   height: 100vh;
-
+  font-family: "Roboto";
 }
 form {
   width: 150%;
