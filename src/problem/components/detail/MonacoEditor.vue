@@ -77,16 +77,26 @@ export default {
 };
 </script>
 <style lang="scss">
+.monaco-editor, .monaco-editor .inputarea {
+    background-color: transparent;
+}
 .monaco-editor {
+    
     transition: none;
     .monaco-editor.vs {
+        .monaco-editor-background {
+            background-color: transparent !important;
+        }
+        .glyph-margin {
+            background-color: transparent !important;
+        }
     }
     .monaco-editor.vs-dark {
         .monaco-editor-background {
-            background-color: var(--container-color);
+            // background-color:;
         }
         .glyph-margin {
-            background-color: var(--container-color);
+            // background-color:;
         }
         .line-numbers {
             color: #595c63;;

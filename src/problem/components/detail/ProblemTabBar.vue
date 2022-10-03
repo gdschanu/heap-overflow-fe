@@ -1,6 +1,6 @@
 <template>
     <div :class="'tab__bar--special'">
-        <div class="problem-tabbar-nav">
+        <div class="problem-tabbar-nav" ref="nav">
             <div v-for="(item, index) in tabBarList" :class="'nav-item ' + (selected === index ? 'selected' : '')"
                 :key="index" @click="switchTab(index)">
                 <div class="wrapper">
@@ -19,11 +19,12 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { removeSpace } from "../../utils/removeSpace";
 import { PropType } from "vue";
 
 const emit = defineEmits(['selectUpdated'])
+const nav = ref<HTMLElement>()
 
 const props = defineProps({
     tabBarList: {
@@ -45,19 +46,19 @@ function switchTab(index: number) {
 }
 
 onMounted(() => {
-    const navs = document.getElementsByClassName("problem-tabbar-nav");
-
-    for(let nav of navs) {
+    const navRef = nav.value;
+    if (navRef) {
         const observer = new ResizeObserver(() => {
-            if (nav.clientWidth / props.tabBarList.length < 120) {
-                nav.classList.add("hide-item-name");
+            
+            if (navRef.clientWidth / props.tabBarList.length < 120) {
+                navRef.classList.add("hide-item-name");
             } else {
-                nav.classList.remove("hide-item-name");
+                navRef.classList.remove("hide-item-name");
             }
+            
         });
-        observer.observe(nav);
+        observer.observe(navRef);
     }
-
 })
 </script>
 
@@ -70,7 +71,6 @@ onMounted(() => {
         position: relative;
         height: var(--nav-height);
         table-layout: fixed;
-        font-weight: var(--font-semi-bold);
         overflow: hidden;
 
         .nav-item {
@@ -79,9 +79,10 @@ onMounted(() => {
             width: 2%;
             text-align: center;
             line-height: var(--nav-height);
-            border-bottom: 1px solid;
+            border-bottom: 2px solid #9288c1;
             cursor: pointer;
-            color: #5a5a5a;
+            color: #9288c1;
+            font-weight: bold;
 
             .wrapper {
                 position: relative;
@@ -93,6 +94,9 @@ onMounted(() => {
                     margin-left: 5px;
                 }
             }
+        }
+        .selected {
+            color: #000;
         }
 
         .selected:after {

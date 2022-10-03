@@ -21,17 +21,9 @@ export default {
 <style lang="scss">
 .markdown-u {
     white-space: pre-line;
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: var(--first-color);
-    }
     code {
-        background: var(--container-color-darker);
-        border: 1px solid black;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.15);
         padding: 2px;
     }
     blockquote {
