@@ -23,8 +23,9 @@ export default {
     white-space: pre-line;
     code {
         border-radius: 5px;
-        background-color: rgba(0, 0, 0, 0.15);
-        padding: 2px;
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 3px;
+        font-family: 'Courier New', Courier, monospace;
     }
     blockquote {
         border-left: 4px solid black;
