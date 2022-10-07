@@ -1,15 +1,13 @@
 <template>
   <div class="description__container">
-    <table>
-      <thead>
-        <span class="description__container--title"><p>Description</p></span>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="description__container--content"><MarkdownRender :description="description"/></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container__title">
+      <div class="title"><p>Description</p></div>
+    </div>
+    <div class="container__content">
+      <div class="description">
+        <MarkdownRender :description="description" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,55 +31,30 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .description__container {
-  span {
-    display: block;
-    width: 20%;
-    text-align: left;
-    font-size: 20px;
-    font-weight: 600;
-    padding: 4px 0;
-    margin-left: -0.5px;
-    background-color: #ccc;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+  background-color: white;
+  display: flex;
+  width: 100%;
+  border: 2px solid #cbd5e1;
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
 
-    p {
-      margin-left: 5px;
-    }
-  }
-
-  table {
-    width: 100%;
-    border-top: unset;
-    border-right: unset;
-    border-left: unset;
-  }
-
-  .description__container--title {
+  .container__title,
+  .container__content {
+    width: 90%;
+    min-height: 50px;
+    color: #302f4e;
+    font-weight: 500;
     margin-top: 20px;
   }
 
-  tbody {
-    p {
-      text-align: left;
-      font-size: 14px;
-      padding: 10px;
-    }
-  }
-
-  tr,
-  td {
-    width: 100%;
-    padding: 5px 30px;
-  }
-
-  th,
-  td {
-    border: 1px solid #aaa9a9;
-    border-collapse: collapse;
-    font-size: 16px;
+  .container__content {
+    color: #7160bc;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 </style>

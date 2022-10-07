@@ -1,68 +1,64 @@
 <template>
-  <h1 class="page__title">Contest detail</h1>
-  <div class="backBtn">
-    <i class="fa-solid fa-circle-arrow-left" @click="backToListContest"></i>
-  </div>
-  <div class="container">
-    <div class="container__left">
-      <div class="container__left--problems">
-        <table>
-          <thead>
-            <span><p>Problem</p></span>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(problem, index) in listProblem" :key="index">
-              <td>{{ problem.ordinal }}</td>
-              <td class="problem--name">
-                <p>{{ problem.name }}</p>
-              </td>
-              <td>{{ problem.score }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <ContestDescription :description="getDescription" />
+  <!-- <p style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white); width: 100%; height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;"> -->
+  <p class="background">
+    <div class="header">
+      <i
+        class="fa-sharp fa-solid fa-arrow-left header--icon"
+        @click="backToListContest()"
+      ></i>
+      <h1 class="header--title">Contest Detail</h1>
     </div>
-
-    <div class="container__right">
-      <div class="container__right-joinContest--table">
-        <table>
-          <thead>
-            <span><p>Join</p></span>
-          </thead>
-          <tbody>
-            <tr>
-              <td v-if="!isLated">
-                <p>Click join button to join the contest</p>
-                <button v-if="!isJoin" class="join--btn" @click="joinContest">
-                  Join
-                </button>
-                <button v-else class="join--btn joined" disabled>Joined</button>
-              </td>
-              <td v-else>
-                <p>This contest was ended</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="container">
+      <div class="container--left">
+        <div class="wrapper">
+          <div class="left--header"><p>Problems</p></div>
+          <div class="wrapper__title">
+            <div class="title--no"><p class="item--title">No.</p></div>
+            <div class="title--name"><p class="item--title">Name</p></div>
+            <div class="title--score"><p class="item--title">Score</p></div>
+          </div>
+          <div class="wrapper__content" v-for="(problem, index) in listProblem">
+            <div class="content--no">
+              <p class="item--content">{{ index }}</p>
+            </div>
+            <div class="content--name">
+              <p
+                class="item--content"
+                style="color: #02a9b5; font-weight: bold"
+              >
+                {{ problem.name }}
+              </p>
+            </div>
+            <div class="content--score">
+              <p class="item--content">{{ problem.score }}</p>
+            </div>
+          </div>
+        </div>
+        <ContestDescription :description="getDescription" />
       </div>
-      <!-- rank/list participant -->
-      <RankList v-if="isLated" />
-      <ParticipantList
-        v-else
-        :ParticipantList="participantList"
-        :totalPages="5"
-        @pageChanged="getParticipantList"
-      />,
-      <div class="clear"></div>
+      <div class="container--right">
+        <div class="join">
+          <p v-if="!isJoined" class="description">
+            Click the button bellow to join the contest
+          </p>
+          <p v-else class="description">You've joined this button</p>
+          <button v-if="!isJoined" class="btn" @click="joinContest">
+            Join
+          </button>
+          <button v-else="isJoined" class="btn--disabled">Joined</button>
+        </div>
+        <!-- rank/list participant -->
+        <RankList v-if="isLated" />
+        <ParticipantList
+          v-else
+          :participantList="participantList"
+          :totalPages="5"
+          @pageChanged="getParticipantList"
+        />
+      </div>
     </div>
-  </div>
+  </p>
+  <!-- </p> -->
 </template>
 
 <script lang="ts">
@@ -90,7 +86,7 @@ export default defineComponent({
   data() {
     return {
       // participant: {} as Participant,
-      isJoin: false,
+      isJoined: false,
       participantList: [] as Participant[],
       perPage: 10,
     };
@@ -102,7 +98,7 @@ export default defineComponent({
     try {
       const response = (await checkJoined(contestId)) as boolean;
       console.log(response);
-      this.isJoin = response;
+      this.isJoined = response;
     } catch (error) {
       errorHandler(error as AxiosError);
     }
@@ -157,7 +153,7 @@ export default defineComponent({
       try {
         const response = await joinContest(contestID);
         alert(response);
-        this.isJoin = true;
+        this.isJoined = true;
         location.reload();
       } catch (error) {
         errorHandler(error as AxiosError);
@@ -190,178 +186,160 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.backBtn {
-  top: -60px;
-  left: 10%;
-  position: relative;
-  font-size: 28px;
-  i {
-    &:hover {
-      color: rgba(0, 0, 0, 0.6);
-      cursor: pointer;
-    }
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.background {
+  background-image: linear-gradient(
+    25deg,
+    white,
+    white,
+    white,
+    white,
+    #96e7ff,
+    #fcbdf3,
+    #ebb0ff,
+    white,
+    white,
+    white,
+    white
+  );
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: auto;
+  z-index: -10;
+}
+
+.header {
+  margin-left: 7%;
+  padding: 30px 0;
+  padding-top: 10&;
+
+  .header--title {
+    display: inline;
+    margin: 25px;
+    font-size: 25px;
+  }
+
+  .header--icon {
+    font-size: 22px;
+    cursor: pointer;
   }
 }
-@mixin text-center {
-  text-align: center;
-}
 
-@mixin none-TopLeftRight-border {
-  border-top: unset;
-  border-right: unset;
-  border-left: unset;
-}
-
-.page__title {
-  @include text-center;
-  font-size: 30px;
-  padding-bottom: 30px;
-  padding-top: 50px;
-}
 .container {
-  @include text-center;
   display: flex;
-  align-items: flex-start;
-  width: 80%;
-  margin: 10px auto;
+  justify-content: space-around;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
 
-  .container__left {
-    width: 70%;
+  .container--left {
+    width: 60%;
+    .wrapper {
+      background-color: white;
+      display: flex;
+      width: 100%;
+      border: 2px solid #cbd5e1;
+      border-radius: 20px;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
 
-    .problem--name {
-      color: #7b61ff;
-      &:hover {
-        color: #7b61ff77;
+      .left--header {
+        margin-top: 20px;
+        color: #302f4e;
+        font-weight: 500;
       }
 
-      p:hover {
-        cursor: pointer;
+      .wrapper__title,
+      .wrapper__content {
+        display: grid;
+        grid-template-columns: 20% 50% 30%;
+        justify-items: center;
+        align-items: center;
+        width: 90%;
+        min-height: 50px;
       }
-    }
 
-    span {
-      margin-left: -0.5px;
-    }
+      .wrapper__title {
+        margin-top: 10px;
+      }
 
-    tr,
-    td {
-      padding: 10px 30px;
-    }
+      .wrapper__content {
+        border: 1px solid #c9c2e0;
+        border-radius: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
 
-    .prob--name {
-      color: #7b61ff;
-      &:hover {
-        color: #7b61ff77;
+      .wrapper__content:hover {
+        background-color: rgb(241, 227, 249);
+      }
+
+      .item--title {
+        color: #302f4e;
+        font-weight: 500;
+      }
+
+      .item--content {
+        color: #7160bc;
       }
     }
   }
 
-  span {
-    display: block;
-    width: 100.2%;
-    text-align: left;
-    font-size: 20px;
-    font-weight: 600;
-    padding: 4px 0;
-    margin-left: -1px;
-    background-color: #ccc;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+  .container--right {
+    width: 20%;
 
-    p {
-      margin-left: 5px;
-    }
-  }
+    .join {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      min-height: 50px;
+      background-color: white;
+      border: 2px solid #cbd5e1;
+      border-radius: 20px;
+      margin-bottom: 40px;
 
-  table {
-    width: 100%;
-    border-bottom: none;
-  }
-
-  th,
-  td {
-    border: 1px solid #aaa9a9;
-    border-collapse: collapse;
-    font-size: 16px;
-  }
-
-  .container__right {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    width: 30%;
-    padding-left: 20px;
-
-    .container__right-joinContest--table {
-      table {
-        @include none-TopLeftRight-border;
-
-        span {
-          width: 30%;
-          p {
-            font-weight: 600;
-            font-size: 20px;
-          }
-        }
+      .description {
+        color: #302f4e;
+        font-weight: 500;
+        margin-bottom: 1.3rem;
       }
 
-      tbody {
-        p {
-          text-align: left;
-          font-size: 14px;
-          padding: 10px;
-        }
+      .btn {
+        border: 1px solid #c9c2e0;
+        border-radius: 10px;
+        background-color: #7160bc;
+        font-size: 18px;
+        color: white;
+        width: 30%;
+        height: 2em;
       }
 
-      .join--btn {
-        padding: 4px 14px;
-        margin: 0 auto;
-        color: whitesmoke;
-        background-color: #7b61ff;
-        border-radius: 4px;
-        margin: 6px;
-        &:hover {
-          background-color: #7b61ff77;
-          color: unset;
-          cursor: pointer;
-        }
-      }
-
-      .joined {
+      .btn--disabled {
+        border: 1px solid #c9c2e0;
+        border-radius: 10px;
         background-color: #ccc;
-        color: unset;
-        &:hover {
-          background-color: #ccc;
-        }
+        font-size: 18px;
+        color: white;
+        width: 30%;
+        height: 2em;
+        // something to disabled the button here
       }
     }
   }
 }
-
-//
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//
-//
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//
-//               RUN FLUENTLY         NO BUG
-//
 </style>

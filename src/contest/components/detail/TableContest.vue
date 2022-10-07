@@ -18,8 +18,8 @@
           {{ contest.getName() }}
         </p>
       </div>
-      <div class="content--participant">
-        <p class="item--content">{{ Math.floor(Math.random() * 999) }}</p>
+      <div v-if="getNumberOfParticipants(contest)" class="content--participant">
+        <p class="item--content">{{ numberOfParticipants }}</p>
       </div>
       <div class="content--start">
         <p class="item--content">{{ startTime(contest) }}</p>
@@ -60,6 +60,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Contest } from "@/contest/model/contest/contest";
+import { getParticipants } from "../../model/participant/domainLogic/participant";
+import errorHandler from "@/shared/helpers/errorHandler";
 
 export default defineComponent({
   name: "TableContest",
@@ -72,7 +74,9 @@ export default defineComponent({
   },
 
   data() {
-    return {};
+    return {
+      numberOfParticipants: new Number(),
+    };
   },
 
   methods: {
@@ -99,6 +103,18 @@ export default defineComponent({
         return "ENDED";
       } else {
         return "RUNNING";
+      }
+    },
+
+    // get number of participants by get all participants list and return the length of the list
+    // need api count number of participants
+    async getNumberOfParticipants(contest: Contest) {
+      const contestId = contest.getId();
+      try {
+        const response = await getParticipants(contestId, 0, 100);
+        this.numberOfParticipants = response.length;
+      } catch (error) {
+        errorHandler(error as Error);
       }
     },
 
@@ -155,12 +171,5 @@ export default defineComponent({
   .item--content {
     color: #7160bc;
   }
-
-  .content--name {
-    p {
-      :hover {
-      }
-    }
   }
-}
 </style>

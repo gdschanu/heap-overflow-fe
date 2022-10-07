@@ -40,6 +40,8 @@ import Nav from "@/shared/components/general/Nav.vue";
 import Pagination from "@/shared/components/general/Pagination.vue";
 import TableContest from "@/contest/components/detail/TableContest.vue";
 import RightBar from "@/shared/components/general/RightBar.vue";
+import { getParticipants } from "../model/participant/domainLogic/participant"
+import { Participant } from "../model/participant/participant";
 
 export default defineComponent({
     name: "ListContests",
@@ -107,7 +109,7 @@ export default defineComponent({
                 errorHandler(error as AxiosError);
             }
         },
-    },
+    }
 });
 </script>
 
