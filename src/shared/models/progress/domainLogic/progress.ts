@@ -17,5 +17,4 @@ async function getProgress(): Promise<Progress[]> {
   return progressList;
 }
 
-
-export { getProgress}
+export { getProgress };
