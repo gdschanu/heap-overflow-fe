@@ -85,7 +85,6 @@ props: {
     grid-template-columns: 25% 15% repeat(2, 20%) 20% 15%;
     justify-items: center;
     align-items: center;
-    width: 95%;
     min-height: 50px;
     text-align: center;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
