@@ -2,9 +2,9 @@
   <div class="wrapper">
     <div class="wrapper__title">
       <div class="title"><p>Coders</p></div>
-      <div class="dots">
+      <!-- <div class="dots">
         <i class="fa-solid fa-ellipsis"></i>
-      </div>
+      </div> -->
     </div>
     <div class="wrapper__header">
       <div class="header--rank"><p class="header">#</p></div>
@@ -124,8 +124,8 @@ export default defineComponent({
   }
 
   .user--avatar {
-    width: 25px;
-    height: 39px;
+    width: 35px;
+    height: 35px;
     clip-path: circle();
   }
 }

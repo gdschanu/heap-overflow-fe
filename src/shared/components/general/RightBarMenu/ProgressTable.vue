@@ -2,9 +2,9 @@
   <div class="wrapper">
     <div class="wrapper__title">
       <div class="title"><p>Your Process</p></div>
-      <div class="dots">
+      <!-- <div class="dots">
         <i class="fa-solid fa-ellipsis"></i>
-      </div>
+      </div> -->
     </div>
     <div class="wrapper__content">
       <div class="content--level">
@@ -124,6 +124,7 @@ export default defineComponent({
         align-content: center;
         align-items: center;
         color: #c9c2e0;
+        cursor: pointer;
 
         p {
           margin-left: 12px;
