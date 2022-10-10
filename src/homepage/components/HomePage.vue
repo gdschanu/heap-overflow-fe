@@ -9,7 +9,7 @@
         </div>
         <div class="swiper">
           <div class="swiper__left-content">
-            <p>Take our best Exciting Problem</p>
+            <p>Take our most Exciting Problem</p>
             <button>
               <span id="btn">Solve now</span>
               <span><img src="@/coder/assets/img/Vector.png" alt="" /> </span>
@@ -52,7 +52,7 @@ export default defineComponent({
   },
   async created() {
     try {
-      const response = await listRecProblem(3);
+      const response = await listRecProblem(12);
       console.log(response);
       response.forEach((item) => {
         this.problemData.push(item);

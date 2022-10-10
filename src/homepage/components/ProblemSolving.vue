@@ -1,6 +1,6 @@
 <template>
    <div class="wrapper">
-    <h4>Problem Solving</h4>
+    <h4>Recommended Problems</h4>
     <div class="wrapper__title">
       <div class="title--name"><p class="item--title">Name</p></div>
       <div class="title--acceptance"><p class="item--title">Acceptance</p></div>
