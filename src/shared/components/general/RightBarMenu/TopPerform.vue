@@ -19,8 +19,7 @@
       :key="index"
     >
       <div class="content--rank">
-        <!-- <p>{{ user.getRank() }}</p> -->
-        <p>{{ index + 1 }}</p>
+        <p>{{ user.getRank() }}</p>
       </div>
       <div class="content--userImg">
         <!-- int img -> :src="getTopRankUser.getAvatar()"" -->
@@ -116,8 +115,6 @@ export default defineComponent({
   .wrapper__footer {
     border: 1px solid #9288c1;
     border-radius: 10px;
-    // margin-top: 10px;
-    // margin-bottom: 10px;
   }
 
   .title {

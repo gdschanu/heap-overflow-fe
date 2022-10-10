@@ -83,7 +83,6 @@ export default defineComponent({
     border: 1px solid #c9c2e0;
     border-radius: 20px;
     margin-top: 10px;
-    margin-bottom: 10px;
   }
 
   .container__title {

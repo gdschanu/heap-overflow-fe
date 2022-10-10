@@ -37,8 +37,8 @@ export default defineComponent({
 
   .process__container {
     height: 35%;
-    width: 90%;
-    padding: 20px;
+    width: 95%;
+    padding: 15px;
     border: 2px solid #cbd5e1;
     border-radius: 20px;
     background-color: white;
@@ -46,8 +46,8 @@ export default defineComponent({
 
   .topPerform__container {
     height: 55%;
-    width: 90%;
-    padding: 20px;
+    width: 95%;
+    padding: 15px;
     border: 2px solid #cbd5e1;
     border-radius: 20px;
     background-color: white;

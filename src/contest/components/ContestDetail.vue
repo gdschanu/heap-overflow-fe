@@ -1,5 +1,4 @@
 <template>
-  <!-- <p style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white); width: 100%; height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;"> -->
   <p class="background">
     <div class="header">
       <i
@@ -41,7 +40,7 @@
           <p v-if="!isJoined" class="description">
             Click the button bellow to join the contest
           </p>
-          <p v-else class="description">You've joined this button</p>
+          <p v-else class="description">You've joined this contest</p>
           <button v-if="!isJoined" class="btn" @click="joinContest">
             Join
           </button>
@@ -58,7 +57,6 @@
       </div>
     </div>
   </p>
-  <!-- </p> -->
 </template>
 
 <script lang="ts">
@@ -207,17 +205,12 @@ html {
     white,
     white
   );
-  position: fixed;
-  top: 0;
-  left: 0;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
-  height: auto;
-  z-index: -10;
 }
 
 .header {
