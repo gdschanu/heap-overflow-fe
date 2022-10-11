@@ -11,7 +11,7 @@
                 </p>
             </div>
             <div class="list-item__right__info">
-                <div class="avatar">
+                <div class="list-item__right__info__avatar">
                     <img :src="coder.avatar" alt="avatar">
                 </div>
                 <div class="list-item__right__info__name">{{coder.name}}</div>
@@ -22,6 +22,7 @@
                 </div>
             </div>
         </div>
+        <ListItemOptions class="list-item__options" />
     </div>
 </template>
 
@@ -36,6 +37,7 @@ import MarkdownRender from '@/shared/components/general/MarkdownRender.vue';
 import errorHandler from '@/shared/helpers/errorHandler';
 import { AxiosError } from 'axios';
 import { getCoder } from '@/shared/models/coder/coder';
+import ListItemOptions from './ListItemOptions.vue';
 
 const store = useStore()
 const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
@@ -70,6 +72,7 @@ onMounted(async () => {
     padding: 20px;
     padding-left: 10px;
     margin-bottom: 20px;
+    position: relative;
 
     &__vote {
         flex: 1;
@@ -89,6 +92,18 @@ onMounted(async () => {
             display: flex;
             align-items: center;
 
+            &__avatar {
+                background-color: rgb(128, 213, 153);
+                width: 35px;
+                height: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                color: white;
+                font-size: 20px;
+            }
+
             &__name {
                 margin-left: 5px;
             }
@@ -104,17 +119,11 @@ onMounted(async () => {
             }
         }
     }
-}
 
-.avatar {
-    background-color: rgb(128, 213, 153);
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    color: white;
-    font-size: 20px;
+    &__options {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }
 </style>
