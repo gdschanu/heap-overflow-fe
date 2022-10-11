@@ -15,17 +15,19 @@ export async function login(user: User): Promise<string> {
 
 }
 
-export async function register(user: User): Promise<void> {
-    await registerApi({
+export async function register(user: User): Promise<string> {
+   const response =  (await registerApi({
         email: user.getEmail(),
         username: user.getName(),
         password: user.getPassword()
-    })
+    })).data
+    return JSON.stringify(response)
 }
-export async function logout(data: string): Promise<void> {
-    await logoutApi({
+export async function logout(data: string): Promise<string> {
+   const response =  await logoutApi({
         token : data
     })
+    return JSON.stringify(response)
 }
 export async function getUserInfor(data: string): Promise<string> {
   const response =  await getUserApi({

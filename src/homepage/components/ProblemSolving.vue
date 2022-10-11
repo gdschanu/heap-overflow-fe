@@ -5,7 +5,6 @@
       <div class="title--name"><p class="item--title">Name</p></div>
       <div class="title--acceptance"><p class="item--title">Acceptance</p></div>
       <div class="title--difficulty"><p class="item--title">Difficulty</p></div>
-      
       <div class="title--status"><p class="item--title">Tag</p></div>
       <div class="title--tag"><p class="item--title">Status</p></div>
     </div>
@@ -82,10 +81,10 @@ props: {
   .wrapper__title,
   .wrapper__content {
     display: grid;
-    grid-template-columns: 25% 15% repeat(2, 20%) 20% 15%;
+    grid-template-columns: 25% 15% repeat(2, 20%) 20%;
     justify-items: center;
     align-items: center;
-    width: 95%;
+    width: 100%;
     min-height: 50px;
     text-align: center;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -124,3 +123,4 @@ props: {
     color: #7160bc;
   }
 </style>
+

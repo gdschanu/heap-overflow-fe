@@ -53,7 +53,6 @@ export default defineComponent({
   async created() {
     try {
       const response = await listRecProblem(3);
-      console.log(response);
       response.forEach((item) => {
         this.problemData.push(item);
       });
