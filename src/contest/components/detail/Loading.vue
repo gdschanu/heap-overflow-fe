@@ -15,7 +15,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .img__container {
   display: flex;
   align-items: center;

@@ -43,7 +43,7 @@ function pushToProblem() {
 
 function likeClicked() {
     if (like.value) like.value = false;
-    else {/*  */
+    else {
         like.value = true;
         dislike.value = false;
     }
@@ -73,7 +73,7 @@ function dislikeClicked() {
 
     .problem-info {
         @apply absolute right-0 flex rounded-xl w-72;
-        border: 2px solid #9288c1;
+        border: 1px solid #9288c1;
 
         .EASY {
             color: rgb(43, 223, 43);
@@ -93,7 +93,7 @@ function dislikeClicked() {
     }
 
     .problem-info>*:not(:last-child) {
-        border-right: 2px solid #9288c1;
+        border-right: 1px solid #9288c1;
     }
 }
 </style>

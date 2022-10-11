@@ -10,10 +10,11 @@
             </div>
         </div>
         <div class="content">
-            <div v-for="(item, index) in tabBarList" :key="index" :class="'content-item ' + item"
-                v-show="index === selected">
-                <slot :name="rmSpace(item)"></slot>
-            </div>
+            <template v-for="(item, index) in tabBarList" :key="index">
+                <div :class="'content-item ' + item" v-show="index === selected">
+                    <slot :name="rmSpace(item)"></slot>
+                </div>
+            </template>
         </div>
     </div>
 </template>
@@ -62,7 +63,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .tab__bar--special {
     height: 100%;
 
@@ -79,7 +80,7 @@ onMounted(() => {
             width: 2%;
             text-align: center;
             line-height: var(--nav-height);
-            border-bottom: 2px solid #9288c1;
+            border-bottom: 1px solid #9288c1;
             cursor: pointer;
             color: #9288c1;
             font-weight: bold;

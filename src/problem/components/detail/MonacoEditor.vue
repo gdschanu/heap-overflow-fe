@@ -76,7 +76,7 @@ export default {
     },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .monaco-editor, .monaco-editor .inputarea {
     background-color: transparent;
 }

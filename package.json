@@ -10,6 +10,7 @@
     "autoprefixer": "^10",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
+    "easymde": "^2.18.0",
     "postcss": "^8",
     "socket.io-client": "^2.3.1",
     "tailwindcss": "^3",

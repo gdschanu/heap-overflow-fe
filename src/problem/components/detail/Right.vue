@@ -49,7 +49,7 @@ const languages = computed(() => {
     .setting {
         width: 100%;
         height: var(--nav-height);
-        border-bottom: 2px solid #9288c1;
+        border-bottom: 1px solid #9288c1;
     }
 
     .editor {
@@ -62,7 +62,7 @@ const languages = computed(() => {
         width: 100%;
         height: var(--nav-height);
         vertical-align: bottom;
-        border-top: 2px solid #9288c1;
+        border-top: 1px solid #9288c1;
     }
 }
 </style>
