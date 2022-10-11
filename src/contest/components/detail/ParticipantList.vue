@@ -1,21 +1,19 @@
 <template>
   <div class="participant__container">
-    <table>
-      <thead>
-        <span class="participant__container--title"><p>Participant</p></span>
-        <tr>
-          <th class="participant__container--title-order">#</th>
-          <th class="participant__container--title-name">Coder Name</th>
-        </tr>
-      </thead>
-      <!-- v-for in list participant -->
-      <tbody>
-        <tr v-for="(participant, index) in ParticipantList" :key="index">
-          <td class="participant--order">{{ index + 1 }}</td>
-          <td class="participant--name">{{ participant._coderId }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="header"><p>Participants</p></div>
+    <div class="container__title">
+      <div class="title--order"><p>No.</p></div>
+      <div class="title--name"><p>Name</p></div>
+    </div>
+    <div
+      v-if="participantList"
+      class="container__content"
+      v-for="(participant, index) in participantList"
+      :key="index"
+    >
+      <div class="participant--order">{{ index + 1 }}</div>
+      <div class="participant--name">{{ getUsername(participant) }}</div>
+    </div>
   </div>
 </template>
 
@@ -27,9 +25,9 @@ export default defineComponent({
   name: "ParticipantList",
 
   props: {
-    ParticipantList: {
+    participantList: {
       type: Array,
-      default: [] as Participant[],
+      required: true,
     },
     totalPages: {
       type: Number,
@@ -40,71 +38,56 @@ export default defineComponent({
   methods: {
     toPage(page: number) {
       console.log(page);
-      this.$emit("pageChanged", page)
-    }
-  }
+      this.$emit("pageChanged", page);
+    },
+
+    getUsername(participant: Participant) {
+      console.log(participant);
+      return participant.getUsername();
+    },
+  },
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .participant__container {
-  span {
-    display: block;
-    width: 101%;
-    text-align: left;
-    font-size: 20px;
-    font-weight: 600;
-    padding: 4px 0;
-    margin: -1px;
-    background-color: #ccc;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+  background-color: white;
+  display: flex;
+  border: 2px solid #cbd5e1;
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 
-    p {
-      margin-left: 5px;
-    }
+  .header {
+    color: #302f4e;
+    font-weight: 500;
   }
 
-  table {
-    border-top: unset;
-    border-right: unset;
-    border-left: unset;
+  .container__title,
+  .container__content {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
   }
 
-  .participant__container--title {
-    margin-top: 20px;
-  }
-
-  tbody {
-    p {
-      text-align: left;
-      font-size: 14px;
-      padding: 10px;
-    }
-  }
-
-  tr,
-  td {
-    padding: 5px 50px;
-  }
-
-  th,
-  td {
-    border: 1px solid #aaa9a9;
-    border-collapse: collapse;
-    font-size: 16px;
-  }
-
-  .participant__container--title-name {
-    width: 90%;
-  }
-
-  .participant__container--title-order {
-    width: 10%;
-  }
-
-  .pagination {
+  .container__title {
     margin-top: 10px;
+  }
+
+  .container__content {
+    color: #7160bc;
+    border: 1px solid #c9c2e0;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  .container__title {
+    color: #302f4e;
+    font-weight: 500;
   }
 }
 </style>

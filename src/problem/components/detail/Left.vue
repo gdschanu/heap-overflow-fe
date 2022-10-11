@@ -32,18 +32,22 @@
 
 <script lang="ts" setup>
 import TabBar from "./ProblemTabBar.vue";
-import MarkdownRender from "../../components/common/MarkdownRender.vue";
+import MarkdownRender from "@/shared/components/general/MarkdownRender.vue";
 import Submissions from "./LeftSubmissions.vue";
 import Problem from "@/problem/model/problem";
-import { ref, Ref } from "vue";
+import { ref, Ref, watch } from "vue";
 import Discussion from "./discussion/Discussions.vue"
 import { useStore } from "vuex";
 import { computed } from "@vue/reactivity";
 
 const store = useStore()
 const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
-
+const runningSubmissionId = computed(() => store.state.problemStore.runningSubmissionId) as Ref<string | null>
 const tabBarSelected = ref(0)
+
+watch(runningSubmissionId, async () => {
+    tabBarSelected.value = 3
+})
 </script>
 
 <style lang="scss" scoped>

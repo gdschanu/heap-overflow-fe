@@ -35,6 +35,11 @@ const routeList = ref([
         icon: "fa-solid fa-house",
     },
     {
+        path: "/userProfile",
+        name: "Profile",
+        icon: "fa-solid fa-gear",
+    },
+    {
         path: "/problem",
         name: "Problem",
         icon: "fa-solid fa-computer",
@@ -59,11 +64,6 @@ const routeList = ref([
         name: "Help",
         icon: "fa-solid fa-circle-question",
     },
-    {
-        path: "/setting",
-        name: "Setting",
-        icon: "fa-solid fa-gear",
-    },
 ])
 </script>
 
@@ -73,8 +73,7 @@ const routeList = ref([
 }
 
 .nav-container {
-    @apply relative;
-    padding-right: 20px;
+    @apply relative lg:pr-4;
 
     .nav {
         @apply sticky top-0 w-16 lg:w-52;

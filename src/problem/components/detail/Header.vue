@@ -43,7 +43,7 @@ function pushToProblem() {
 
 function likeClicked() {
     if (like.value) like.value = false;
-    else {/*  */
+    else {
         like.value = true;
         dislike.value = false;
     }
@@ -68,11 +68,12 @@ function dislikeClicked() {
     }
 
     .problem-name {
-        @apply ml-3;
+        @apply ml-3 font-bold;
     }
 
     .problem-info {
-        @apply absolute right-0 border flex rounded-xl w-1/3 border-slate-900 dark:border-slate-100;
+        @apply absolute right-0 flex rounded-xl w-72;
+        border: 1px solid #9288c1;
 
         .EASY {
             color: rgb(43, 223, 43);
@@ -92,7 +93,7 @@ function dislikeClicked() {
     }
 
     .problem-info>*:not(:last-child) {
-        @apply border-r border-slate-900 dark:border-slate-100;
+        border-right: 1px solid #9288c1;
     }
 }
 </style>

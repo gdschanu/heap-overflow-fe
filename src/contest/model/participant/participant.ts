@@ -2,16 +2,22 @@ import { assert } from "@vue/compiler-core";
 import { ProblemScore } from "./problemScore";
 
 class Participant {
+  _version: number;
   _coderId: string;
   _rank: number | undefined;
   _problemScores: ProblemScore[];
   _contestId: string;
+  _createdAt: string;
+  _username: string;
 
   constructor(
+    version: number,
     coderId: string,
     rank: number | undefined,
     problemScores: ProblemScore[],
-    contestId: string
+    contestId: string,
+    createdAt: string,
+    username: string
   ) {
     assert(coderId === undefined || typeof coderId === "string");
     this._coderId = coderId;
@@ -28,6 +34,10 @@ class Participant {
 
     assert(contestId !== undefined && typeof contestId === "string");
     this._contestId = contestId;
+
+    this._version = version;
+    this._createdAt = createdAt;
+    this._username = username;
   }
 
   getCoderId(): string {
@@ -40,6 +50,18 @@ class Participant {
 
   getProblemScores() {
     return this._problemScores;
+  }
+
+  getVersion() {
+    return this._version;
+  }
+
+  getCreatedAt() {
+    return this._createdAt;
+  }
+
+  getUsername() {
+    return this._username;
   }
 }
 

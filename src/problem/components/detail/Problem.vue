@@ -111,6 +111,7 @@ $gap: 15px;
 
 .problem-detail {
     @apply fixed w-full h-full top-0 left-0;
+    background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);
 
     .content {
         @apply grid w-full h-full;
@@ -126,14 +127,18 @@ $gap: 15px;
         }
 
         .left {
+            @apply relative resize-x overflow-hidden rounded-xl dark:border-none;
             grid-area: left;
             width: $left-width;
-            @apply relative resize-x overflow-hidden rounded-xl border border-slate-900 dark:border-none;
+            border: 1px solid #9288c1;
+            background-color: white;
         }
 
         .right {
             grid-area: right;
-            @apply relative overflow-hidden rounded-xl border border-slate-900 dark:border-none;
+            border: 1px solid #9288c1;
+            @apply relative overflow-hidden rounded-xl dark:border-none;
+            background-color: white
         }
 
         .right-full-screen {

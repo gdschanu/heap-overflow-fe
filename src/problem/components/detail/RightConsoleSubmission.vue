@@ -43,6 +43,11 @@
                     <h2 class="title"> Compilation error </h2>
                     <Console class="console" :maxLine="1000" :text="submission.getMessage()" />
                 </div>
+                <div class="copy-submission-code">
+                    <i class="fa-regular fa-copy copy-submission-code__copy" title="Copy current code" v-if="!copied" @click="copyCode"></i>
+                    <i class="fa-solid fa-square-check copy-submission-code__copied" v-if="copied"></i>
+                    <div class="copy-submission-code__copied-text" v-if="copied">copied</div>
+                </div>
             </template>
         </div>
     </div>
@@ -50,11 +55,10 @@
 
 <script lang="ts" setup>
 import Submission from "@/problem/model/submission";
-import { computed, onMounted, PropType } from "vue";
+import { computed, onMounted, PropType, ref } from "vue";
 import Button from "../common/Button.vue";
 import Console from "../common/Console.vue";
 import RightConsoleJudging from "./RightConsoleJudging.vue";
-
 
 const props = defineProps({
     submission: {
@@ -64,6 +68,16 @@ const props = defineProps({
     isJudging: Boolean
 })
 
+const copied = ref(false)
+function copyCode() {
+    copied.value = true
+    if (props.submission)
+        navigator.clipboard.writeText(props.submission.getCode());
+    setTimeout(() => {
+        copied.value = false
+    }, 2500);
+}
+
 const beforeSubmit = computed(() => props.submission === null && props.isJudging === false)
 const submitting = computed(() => props.isJudging === true)
 const afterSubmit = computed(() => props.submission !== null && props.isJudging === false)
@@ -71,7 +85,7 @@ const afterSubmit = computed(() => props.submission !== null && props.isJudging 
 
 <style lang="scss" scoped>
 .console-submission {
-    @apply p-3;
+    @apply p-3 relative;
 
     .status {
         @apply relative;
@@ -102,6 +116,17 @@ const afterSubmit = computed(() => props.submission !== null && props.isJudging 
 
     .status.df {
         @apply text-center mt-3;
+    }
+
+    .copy-submission-code {
+        @apply absolute top-3 right-3 text-xl;
+        &__copy {
+            @apply cursor-pointer;
+        }
+        &__copied-text {
+            @apply absolute top-full right-0 text-white bg-black rounded text-sm p-1;
+        }
+
     }
 }
 </style>

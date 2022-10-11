@@ -15,10 +15,13 @@ type Response = {
 };
 
 type participantsData = Array<{
+  version: number;
   coderId: string;
   rank: number | undefined;
   problemScores: ProblemScore[];
   contestId: string;
+  createdAt: string;
+  username: string;
 }>;
 
 async function getParticipantsAPI(request: Request): Promise<Response> {

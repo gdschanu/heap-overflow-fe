@@ -232,6 +232,8 @@ export default defineComponent({
       try {
         const data = await login(user);
         localStorage.setItem("accessToken", JSON.parse(data).token);
+        localStorage.setItem("coderId", JSON.parse(data).coderId)
+        localStorage.setItem("username", JSON.parse(data).username)
       } catch (error: any) {
         this.isLoading = false;
         errorHandler(error);
@@ -272,12 +274,18 @@ export default defineComponent({
       const user = this.setUser();
       if (this.confirmPasswordValidation() && this.userValidate(user)) {
         try {
-          await register(user);
           // login after register
-          const data = this.login(user);
           // store accessToken to localStorage
-          localStorage.setItem("accessToken", JSON.stringify(data));
-          // move to dashboard
+         
+        const data = await register(this.setUser());
+        
+      
+         localStorage.clear()
+         localStorage.setItem("accessToken", JSON.parse(data).token);
+         localStorage.setItem("coderId", JSON.parse(data).coderId)
+          localStorage.setItem("username", JSON.parse(data).username)
+           this.$store.dispatch('coderStore/setUser', user)
+           // move to dashboard
           this.$router.push("dashboard");
         } catch (error: any) {
           errorHandler(error);

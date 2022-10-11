@@ -10,6 +10,7 @@ type logoutresponse = {
 async function logoutApi(req: logout): Promise<void> {
     try {
     (await apiService('POST', '/coderAuth/logOut', {}, req))
+   
     } catch (error) {
         throw error
     }

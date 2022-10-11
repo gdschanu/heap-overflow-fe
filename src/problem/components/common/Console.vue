@@ -21,10 +21,10 @@ const props = defineProps({
 $lh: 20px;
 
 .wrapper {
-    overflow: auto;
-    border-radius: 10px;
-    border: 1px solid black;
-
+    overflow: overlay;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 2px;
     .console {
         font-family: "Courier New", monospace;
         white-space: pre-line;
@@ -33,13 +33,15 @@ $lh: 20px;
         line-height: $lh;
         font-weight: bold;
     }
-
-    .console::-webkit-scrollbar-thumb {
-        display: none;
-    }
-
-    .console:hover::-webkit-scrollbar-thumb {
-        display: block;
-    }
 }
+.wrapper::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
 </style>

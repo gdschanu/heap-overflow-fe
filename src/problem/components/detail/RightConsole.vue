@@ -29,7 +29,7 @@
                 <i class="fa-solid fa-chevron-up"></i>
             </span>
         </div>
-        <Button @clicked="handleRunCode" class="button" text="Run Code" />
+        <Button @clicked="handleRunCode" class="button" text="Run Code" type="secondary" />
         <Button @clicked="handleSubmit" class="button" text="Submit Code" :loading="isSubmitting"/>
     </div>
 </template>
@@ -110,16 +110,15 @@ watch(currentSubmission, () => {
     position: relative;
     display: flex;
     align-items: center;
-    background-color: white;
 
     .console-window {
         position: absolute;
         bottom: var(--nav-height);
-        left: -1px;
-        right: -1px;
+        left: -2px;
+        right: -2px;
         height: calc(60vh);
         overflow: hidden;
-        border: 1px solid black;
+        border: 1px solid #9288c1;
         background-color: white;
         border-bottom: none;
         border-top-left-radius: 10px;

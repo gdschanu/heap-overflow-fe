@@ -1,90 +1,75 @@
 <template>
   <div class="rank__container">
-    <table>
-      <thead>
-        <span class="rank__container--title"><p>Rank</p></span>
-        <tr>
-          <th class="rank__container--title-order">#</th>
-          <th class="rank__container--title-name">Coder Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="participant in ParticipantList" :key="participant.getRank()">
-          <td class="rank--order">{{ participant.getRank() }}</td>
-          <td class="rank--name">coderName</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="header"><p>Rank</p></div>
+    <div class="container__title">
+      <div class="title--order"><p>#</p></div>
+      <div class="title--"><p>Name</p></div>
+    </div>
+    <div
+      class="container__content"
+      v-for="participants in rankList"
+      :key="participant.getRank()"
+    >
+      <div class="participant--order">{{ participant.getRank() }}</div>
+      <div class="participant--name">coderName</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Participant } from "../../model/participant/participant"
-
+import { Participant } from "../../model/participant/participant";
 
 export default defineComponent({
   name: "RankList",
   props: {
     rankList: {
       type: Array,
-      default: [] as Participant[]
-    }
-  }
+      default: [] as Participant[],
+    },
+  },
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .rank__container {
-  span {
-    display: block;
-    width: 101%;
-    text-align: left;
-    font-size: 20px;
-    font-weight: 600;
-    padding: 4px 0;
-    margin-left: -1px;
-    background-color: #ccc;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+  background-color: white;
+  display: flex;
+  border: 2px solid #cbd5e1;
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
 
-    p {
-      margin-left: 5px;
-    }
+  .header {
+    color: #302f4e;
+    font-weight: 500;
   }
 
-  table {
-    border-top: unset;
-    border-right: unset;
-    border-left: unset;
+  .container__title,
+  .container__content {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    justify-items: center;
+    align-items: center;
+    width: 90%;
+    min-height: 50px;
   }
 
-  .rank__container--title {
-    margin-top: 20px;
+  .container__title {
+    margin-top: 10px;
   }
 
-  tbody {
-    p {
-      text-align: left;
-      font-size: 14px;
-      padding: 10px;
-    }
+  .container__content {
+    color: #7160bc;
+    border: 1px solid #c9c2e0;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
-  tr,
-  td {
-    padding: 5px 30px;
-  }
-
-  th,
-  td {
-    border: 1px solid #aaa9a9;
-    border-collapse: collapse;
-    font-size: 16px;
-  }
-
-  .rank__container--title-name {
-    width: 100%;
+  .container__title {
+    color: #302f4e;
+    font-weight: 500;
   }
 }
 </style>

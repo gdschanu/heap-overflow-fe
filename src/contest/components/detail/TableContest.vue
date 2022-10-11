@@ -8,13 +8,18 @@
       <div class="title--problems"><p class="item--title">Problems</p></div>
       <div class="title--status"><p class="item--title">Status</p></div>
     </div>
-    <div class="wrapper__content" v-for="(contest, index) in contests" @click="toContest(contest)">
+    <div
+      class="wrapper__content"
+      v-for="(contest, index) in contests"
+      @click="toContest(contest)"
+    >
       <div class="content--name">
-        <p class="item--content" style="color:#02a9b5;font-weight:bold;">{{ contest.getName() }}</p>
+        <p class="item--content" style="color: #02a9b5; font-weight: bold">
+          {{ contest.getName() }}
+        </p>
       </div>
-      <!-- Author here -->
-      <div class="content--author">
-        <p class="item--content">{{Math.floor(Math.random() * 999)}}</p>
+      <div v-if="getNumberOfParticipants(contest)" class="content--participant">
+        <p class="item--content">{{ numberOfParticipants }}</p>
       </div>
       <div class="content--start">
         <p class="item--content">{{ startTime(contest) }}</p>
@@ -26,19 +31,25 @@
         <p class="item--content">{{ contest._problems.length }}</p>
       </div>
       <div class="content--status">
-        <p class="item--content" 
-        style="color:#62d162;font-weight: bold;"
-        v-if="contestStatus(contest) === 'RUNNING'">
+        <p
+          class="item--content"
+          style="color: #62d162; font-weight: bold"
+          v-if="contestStatus(contest) === 'RUNNING'"
+        >
           {{ contestStatus(contest) }}
         </p>
-        <p class="item--content" 
-        style="color:#d66779;font-weight: bold;"
-        v-if="contestStatus(contest) === 'ENDED'">
+        <p
+          class="item--content"
+          style="color: #d66779; font-weight: bold"
+          v-if="contestStatus(contest) === 'ENDED'"
+        >
           {{ contestStatus(contest) }}
         </p>
-        <p class="item--content" 
-        style="color:#e6b93e;font-weight: bold;"
-        v-if="contestStatus(contest) === 'INCOMING'">
+        <p
+          class="item--content"
+          style="color: #e6b93e; font-weight: bold"
+          v-if="contestStatus(contest) === 'INCOMING'"
+        >
           {{ contestStatus(contest) }}
         </p>
       </div>
@@ -49,6 +60,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Contest } from "@/contest/model/contest/contest";
+import { getParticipants } from "../../model/participant/domainLogic/participant";
+import errorHandler from "@/shared/helpers/errorHandler";
 
 export default defineComponent({
   name: "TableContest",
@@ -61,7 +74,9 @@ export default defineComponent({
   },
 
   data() {
-    return {};
+    return {
+      numberOfParticipants: new Number(),
+    };
   },
 
   methods: {
@@ -91,6 +106,18 @@ export default defineComponent({
       }
     },
 
+    // get number of participants by get all participants list and return the length of the list
+    // need api count number of participants
+    async getNumberOfParticipants(contest: Contest) {
+      const contestId = contest.getId();
+      try {
+        const response = await getParticipants(contestId, 0, 100);
+        this.numberOfParticipants = response.length;
+      } catch (error) {
+        errorHandler(error as Error);
+      }
+    },
+
     toContest(contest: Contest) {
       localStorage.setItem("contest", JSON.stringify(contest));
       this.$router.push(`contest/${contest.getId()}`);
@@ -102,21 +129,27 @@ export default defineComponent({
 <style lang="scss" scoped>
 .wrapper {
   background-color: white;
-  display: grid;
-  width: 85%;
+  display: flex;
+  width: 95%;
+  height: 100vh;
   border: 2px solid #cbd5e1;
   border-radius: 20px;
-  padding-bottom: 10px;
-  justify-items: center;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 2.4%;
 
   .wrapper__title,
   .wrapper__content {
     display: grid;
-    grid-template-columns: 25% 15% repeat(2, 20%) 5% 15%;
+    grid-template-columns: 20% 18% repeat(2, 20%) 6% 16%;
     justify-items: center;
     align-items: center;
     width: 95%;
-    min-height: 50px;
+    height: 50px;
+  }
+
+  .wrapper__title {
+    margin-top: 10px;
   }
 
   .wrapper__content {
@@ -138,13 +171,5 @@ export default defineComponent({
   .item--content {
     color: #7160bc;
   }
-
-  .content--name {
-    p {
-      :hover {
-        cursor: pointer;
-      }
-    }
   }
-}
 </style>

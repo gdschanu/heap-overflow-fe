@@ -1,3 +1,4 @@
+
 import { Module } from 'vuex'
 
 type User = {
@@ -8,19 +9,23 @@ type User = {
 export default {
 	namespaced: true,
 	state: {
-		user: {}
+		user: {},
+
 	} as {
-		user: User
+		user: User,
+
 	},
 	mutations: {
 		setUser(state, user: User) {
 			state.user = user
-		}
+		},
+
 	},
 	actions: {
 		setUser(state, user: User){
 			state.commit('setUser', user)
-		}
+		},
+
 	},
 	modules: {
 	}

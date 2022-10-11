@@ -1,48 +1,43 @@
 <template>
-  <div class="main_content">
+  <div class="main_content" >
     <Nav></Nav>
-    <form>
+    <form style="background-image: linear-gradient(25deg, white, white, white, white, #96e7ff, #fcbdf3, #ebb0ff, white, white, white, white);">
       <div class="left_content">
         <div class="left_content_background">
           <h2>Profile information</h2>
           <div class="row">
             <div class="form_control">
-              <label for="first_name">First Name</label>
+              <label for="full_name">Full name</label>
               <input
-                name="first_name"
+                name="full_name"
                 class="input"
-                id="first_name"
+                id="full_name"
                 type="text"
-                placeholder="Enter your first name"
-                
-               
+                placeholder="Enter your full name"
               />
             </div>
             <div class="form_control">
-              <label for="last_name">Last Name</label>
+              <label for="age">Age</label>
               <input
-                name="last_name"
+                name="age"
                 class="input"
-                id="last_name"
+                id="age"
                 type="text"
-                placeholder="Enter your last name"
-              
+                placeholder="Enter your your age"
               />
             </div>
           </div>
           <div class="row">
             <div class="form_control">
-              <label for="birthday">Birthday</label>
-              <div class="input-group">
-                <input
-                  name="birthday"
-                  data-datepicker=""
-                  class="input"
-                  id="birthday"
-                  type="text"
-                  placeholder="dd/mm/yyyy"
-                />
-              </div>
+              <label for="slogan">Slogan</label>
+              <input
+                name="slogan"
+                class="input"
+                id="slogan"
+                type="text"
+                placeholder="Enter your slogan"
+              />
+            
             </div>
             <div class="form_control">
               <label for="gender">Gender</label>
@@ -56,13 +51,11 @@
           </div>
           <div class="row">
             <div class="form_control">
-              <label for="email">Email</label>
+              <label>University</label>
               <input
-                name="email"
+                name="university"
                 class="input"
-                id="email"
-                type="email"
-                placeholder="name@company.com"
+                placeholder="Enter your university"
               />
             </div>
             <div class="form_control">
@@ -86,7 +79,6 @@
                 id="address"
                 type="text"
                 placeholder="Enter your home address"
-   
               />
             </div>
             <div class="form_control">
@@ -97,7 +89,6 @@
                 id="number"
                 type="number"
                 placeholder="No."
-           
               />
             </div>
           </div>
@@ -110,7 +101,6 @@
                 id="city"
                 type="text"
                 placeholder="City"
-
               />
             </div>
             <div class="form_control">
@@ -121,28 +111,33 @@
                 id="zip"
                 type="tel"
                 placeholder="ZIP"
-                              />
+                />
             </div>
           </div>
-          <div class="button">
-            <button @click="submitProfile" class="btn btn-primary">
-              Update
-            </button>
+          
+            <div class="button">
+            <span><button @click.prevent="submitProfile" class="btn btn-primary"> Updated
+            </button></span>
+          
           </div>
           <div class="button">
-            <button @click="handlelogout" class="btn btn-primary">
+            <span>
+              <button @click="handlelogout" class="btn btn-primary">
               Logout
             </button>
+            </span>
           </div>
+          
+         
         </div>
       </div>
       <div class="right_content">
         <div class="right_content_background">
           <div class="profile">
             <div>
-              <img src="../coder/assets/img/meme-la-gi.jpg" alt="Opps" />
-
-              <h4 v-if="user">{{ user.username }}</h4>
+              <img src="../coder/assets/img/defaultAvatar.jpg" alt="Opps" />
+                <!-- demo -->
+              <h4 v-if="user_infor">{{ user_infor.data.name }}</h4>
               <h5>Full stack developer</h5>
               <p>Ha Noi, Viet Nam</p>
               <div class="link">
@@ -158,10 +153,12 @@
           <div class="picture">
             <h3>Select profile photo</h3>
             <div class="select_photo">
-              <span>
-                <span class="fas fa-paperclip mr-2"></span>
-              </span>
-              <input name="avatar" type="file" />
+              
+              <div>
+                <input type="file" accept="image/*" ref="file" class="hidden" />
+                <button>Browse</button>
+              </div>
+              
               <div></div>
             </div>
           </div>
@@ -174,62 +171,75 @@
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 import Nav from "@/shared/components/general/Nav.vue";
-import { ref, onMounted, watch } from "vue";
 import errorHandler from "@/shared/helpers/errorHandler";
 import logout from "./api/logoutApi";
-import user from "./user";
-import getInfor from "./auth";
-import axios from "axios";
-import { mapGetters } from "vuex";
+import { getUserInfor } from "./auth";
+import Profile from "./profile";
+import InputText from "./components/InputText.vue";
+import Button from "./components/Button.vue";
 export default defineComponent({
-  computed:{
-    ...mapGetters(['user'])
+  data() {
+    return {
+      user_infor : "",
+      scr: null,
+      isError:{
+        slogan: false,
+        university: false
+      },
+      profile:{
+        name: "",
+        phone: "",
+        gender: "",
+        age: "",
+        slogan: "",
+        university: "",
+        address: "",
+        number: "",
+        city: "",
+        zip: ""
+      }
+    }
+  },
+  async created(){
+    const data = localStorage.getItem("coderId")
+    if (data){  
+    const response = await getUserInfor(data)
+    this.user_infor =JSON.parse(response)
+    }
   },
   components: {
     Nav,
-  },
-  data() {
-    return {
-      
-      token: "",
-      name: "",
-      age : "",
-      university: "",
-      slogan: "",
-      avatar: "",
-      gender: "",
-      phone : "",
-      address: ""
-    }
-  },
+    InputText,
+    Button
+},
+
 
   methods: {
     async handlelogout() {
       let response = localStorage.getItem("accessToken");
-      if (response) {
-        try {
-          const a = JSON.parse(response);
-          localStorage.clear();
-          this.$router.push("login");
-          await logout(a);
+      const temp = (JSON.stringify(response))
+      if (temp){
+       try {
+         localStorage.removeItem("accessToken");
+        this.$router.push("login");
+        await logout(JSON.parse(temp));
         } catch (error: any) {
-          errorHandler(error);
+         errorHandler(error);
         }
       }
     },
-
-   submitProfile() {
-      
-  
-    },
+    submitProfile(){
+      alert("Profile Updated")
+    }
   },
 });
 </script>
 
-<style>
+<style scoped>
 .main_content {
   display: flex;
   height: 100vh;
+
 }
 form {
   width: 150%;
@@ -268,6 +278,10 @@ h2 {
 .input::placeholder {
   color: #9288c1;
 }
+.btn{
+  display: flex;
+  justify-content: space-between;
+}
 .button {
   margin-top: 20px;
   background-color: rgb(48, 47, 47);
@@ -276,11 +290,16 @@ h2 {
   color: #f3f6fc;
   padding: 6px;
   border-radius: 7px;
+  display: inline-block;
+  margin-right: 30px;
 }
 
 .right_content {
   width: 50%;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .right_content_background {
   text-align: center;
@@ -326,6 +345,7 @@ h2 {
   border-radius: 20px;
   padding: 43px;
   margin-right: 70px;
+
 }
 .select_photo {
   margin-top: 20px;

@@ -18,8 +18,7 @@ type responseData = {
 
 async function loginApi(req: LoginRequest): Promise<LoginResponse> {
   try {
-    const response = (await apiService("POST", "/coderAuth/logIn", {}, req))
-      .data as LoginResponse;
+    const response = (await apiService("POST", "/coderAuth/logIn", {}, req)).data as LoginResponse;
     return response ;
   } catch (error) {
     throw error;

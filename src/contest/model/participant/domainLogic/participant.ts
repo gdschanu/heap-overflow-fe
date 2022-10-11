@@ -2,11 +2,6 @@ import { assert } from "@vue/compiler-core";
 import { getParticipantsAPI } from "../api/getParticipant";
 import { Participant } from "../participant";
 
-function createParticipant(contestId: string) {
-  assert(typeof contestId === "string");
-  return new Participant("", undefined, [], contestId);
-}
-
 async function getParticipants(
   contestId: string,
   page: number,
@@ -23,13 +18,16 @@ async function getParticipants(
   const response = await getParticipantsAPI({ contestId, page, perPage });
   response.data!.forEach((item) => {
     const participant = new Participant(
+      item.version,
       item.coderId,
       item.rank,
       item.problemScores,
-      item.contestId
+      item.contestId,
+      item.createdAt,
+      item.username
     );
     participants.push(participant);
   });
   return participants;
 }
-export { createParticipant, getParticipants };
+export { getParticipants };

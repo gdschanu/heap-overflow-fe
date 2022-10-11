@@ -1,25 +1,33 @@
 <template>
     <table>
         <colgroup>
-            <col class="id" />
+            <col class="time-submitted" />
+            <col class="language" />
             <col class="test-case" />
         </colgroup>
         <tr>
-            <th>ID</th>
+            <th>Time Submitted</th>
+            <th>Language</th>
             <th>Running testcase</th>
         </tr>
         <tr
             v-for="runningSubmission in runningSubmissions"
             :key="runningSubmission.id"
         >
-            <td>{{runningSubmission.id}}</td>
+            <td>{{formatDate(runningSubmission.submittedAt)}}</td>
+            <td>{{'JAVA'}}</td>
             <td>{{runningSubmission.judgingTestCase}}/{{runningSubmission.totalTestCases}}</td>
         </tr>
     </table>
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
+import DateTime from '@/shared/models/dateTime';
+
+function formatDate(date: string) {
+    return DateTime.fromZonedDateTime(date)
+}
 
 const props = defineProps({
     runningSubmissions: {

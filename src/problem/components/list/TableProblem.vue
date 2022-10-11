@@ -7,42 +7,58 @@
       <div class="title--status"><p class="item--title">Tag</p></div>
       <div class="title--tag"><p class="item--title">Status</p></div>
     </div>
-    <div class="wrapper__content" v-for="(problem, index) in problems" @click="toProblem(problem)">
+    <div
+      class="wrapper__content"
+      v-for="(problem, index) in problems"
+      @click="toProblem(problem)"
+    >
       <div class="content--name">
-        <p class="item--content" style="color:#02a9b5;font-weight:bold;">{{ problem.getName() }}</p>
+        <p class="item--content" style="color: #02a9b5; font-weight: bold">
+          {{ problem.getName() }}
+        </p>
       </div>
       <div class="content--difficulty">
-        <p class="item--content" 
-        style="color:#62d162;font-weight: bold;"
-        v-if="problem.getDifficulty() === 'EASY'">
+        <p
+          class="item--content"
+          style="color: #62d162; font-weight: bold"
+          v-if="problem.getDifficulty() === 'EASY'"
+        >
           {{ problem.getDifficulty() }}
         </p>
-        <p class="item--content" 
-        style="color:#d66779;font-weight: bold;"
-        v-if="problem.getDifficulty() === 'HARD'">
+        <p
+          class="item--content"
+          style="color: #d66779; font-weight: bold"
+          v-if="problem.getDifficulty() === 'HARD'"
+        >
           {{ problem.getDifficulty() }}
         </p>
-        <p class="item--content" 
-        style="color:#e6b93e;font-weight: bold;"
-        v-if="problem.getDifficulty() === 'MEDIUM'">
+        <p
+          class="item--content"
+          style="color: #e6b93e; font-weight: bold"
+          v-if="problem.getDifficulty() === 'MEDIUM'"
+        >
           {{ problem.getDifficulty() }}
         </p>
       </div>
       <div class="content--acceptance">
-        <p class="item--content">{{Math.floor(Math.random() * 100)}}%</p>
+        <p class="item--content">{{ Math.floor(Math.random() * 100) }}%</p>
       </div>
       <div class="content--tag">
         <p class="item--content">Greedy,Graph</p>
       </div>
       <div class="content--status">
-        <p class="item--content" 
-        style="color:#5fb2f5;font-weight: bold;"
-        v-if="Math.floor(Math.random() * 100) % 2 == 0">
+        <p
+          class="item--content"
+          style="color: #5fb2f5; font-weight: bold"
+          v-if="Math.floor(Math.random() * 100) % 2 == 0"
+        >
           UNDONE
         </p>
-        <p class="item--content" 
-        style="color:#62d162;font-weight: bold;"
-        v-else>
+        <p
+          class="item--content"
+          style="color: #62d162; font-weight: bold"
+          v-else
+        >
           DONE
         </p>
       </div>
@@ -52,8 +68,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Problem from '@/problem/model/problem';
-
+import Problem from "@/problem/model/problem";
 
 export default defineComponent({
   name: "TableProblem",
@@ -70,7 +85,7 @@ export default defineComponent({
   },
 
   methods: {
-    toProblem(problem : Problem) {
+    toProblem(problem: Problem) {
       this.$router.push(`problem/${problem.getId()}`);
     },
   },
@@ -80,12 +95,14 @@ export default defineComponent({
 <style lang="scss" scoped>
 .wrapper {
   background-color: white;
-  display: grid;
-  width: 85%;
+  display: flex;
+  width: 95%;
+  height: 100vh;
   border: 2px solid #cbd5e1;
   border-radius: 20px;
-  padding-bottom: 10px;
-  justify-items: center;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 2.4%;
 
   .wrapper__title,
   .wrapper__content {

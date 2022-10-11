@@ -4,35 +4,44 @@
     </div>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from "vue";
 import Markdown from "vue3-markdown-it";
 
-export default {
-    name: "MarkdownRender",
-    props: {
-        description: String,
-    },
-    components: {
-        Markdown,
-    },
-};
+const props = defineProps({
+    description: {
+        type: String,
+        default: ''
+    }
+})
 </script>
 
 <style lang="scss">
 .markdown-u {
-    white-space: pre-line;
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: var(--first-color);
+    h1 {
+        font-size: 25px;
     }
+    h2 {
+        font-size: 23px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    h4 {
+        font-size: 19px;
+    }
+    h5 {
+        font-size: 18px;
+    }
+    h6 {
+        font-size: 17px;
+    }
+    white-space: pre-line;
     code {
-        background: var(--container-color-darker);
-        border: 1px solid black;
-        padding: 2px;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 3px;
+        font-family: 'Courier New', Courier, monospace;
     }
     blockquote {
         border-left: 4px solid black;
@@ -107,6 +116,16 @@ export default {
     hr {
         border: none;
         border-bottom: 1px solid black;
+    }
+
+    a {
+        text-decoration: underline;
+        font-style: italic;
+        color: rgb(30, 30, 30);
+    }
+
+    a:hover {
+        color: rgb(120, 120, 120);
     }
 }
 </style>
