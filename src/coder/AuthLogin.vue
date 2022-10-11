@@ -252,7 +252,6 @@ export default defineComponent({
           const data = await login(this.setUser());
           // add accessToken to localStorage
          const user = JSON.parse(data)
-         console.log(user)
          localStorage.setItem("accessToken", user.token)
          localStorage.setItem("coderId", user.coderId)
          localStorage.setItem("username", user.username)
