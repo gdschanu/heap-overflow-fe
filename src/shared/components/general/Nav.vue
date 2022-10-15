@@ -35,6 +35,11 @@ const routeList = ref([
         icon: "fa-solid fa-house",
     },
     {
+        path: "/userProfile",
+        name: "Profile",
+        icon: "fa-solid fa-gear",
+    },
+    {
         path: "/problem",
         name: "Problem",
         icon: "fa-solid fa-computer",
@@ -58,11 +63,6 @@ const routeList = ref([
         path: "/help",
         name: "Help",
         icon: "fa-solid fa-circle-question",
-    },
-    {
-        path: "/setting",
-        name: "Setting",
-        icon: "fa-solid fa-gear",
     },
 ])
 </script>
