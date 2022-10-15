@@ -118,7 +118,7 @@ watch(currentSubmission, () => {
         right: -2px;
         height: calc(60vh);
         overflow: hidden;
-        border: 2px solid #9288c1;
+        border: 1px solid #9288c1;
         background-color: white;
         border-bottom: none;
         border-top-left-radius: 10px;

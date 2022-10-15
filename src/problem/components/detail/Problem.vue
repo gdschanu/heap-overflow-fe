@@ -130,13 +130,13 @@ $gap: 15px;
             @apply relative resize-x overflow-hidden rounded-xl dark:border-none;
             grid-area: left;
             width: $left-width;
-            border: 2px solid #9288c1;
+            border: 1px solid #9288c1;
             background-color: white;
         }
 
         .right {
             grid-area: right;
-            border: 2px solid #9288c1;
+            border: 1px solid #9288c1;
             @apply relative overflow-hidden rounded-xl dark:border-none;
             background-color: white
         }

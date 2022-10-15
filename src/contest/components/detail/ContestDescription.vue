@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import MarkdownRender from "./MarkdownRender.vue";
+import MarkdownRender from "@/shared/components/general/MarkdownRender.vue";
 
 export default defineComponent({
   name: "ContestDescription",
