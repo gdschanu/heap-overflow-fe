@@ -30,20 +30,24 @@
         </p>
       </div>
       <div class="content--acceptance">
-        <p class="item--content">{{Math.floor(Math.random() * 100)}}%</p>
+        <p class="item--content"> {{problem.getAcceptance()}}% </p>
       </div>
       <div class="content--tag">
-        <p class="item--content">Greedy,Graph</p>
+        <p class="item--content">{{problem.getTags().join(',')}}</p>
       </div>
       <div class="content--status">
-        <p class="item--content" 
-        style="color:#5fb2f5;font-weight: bold;"
-        v-if="Math.floor(Math.random() * 100) % 2 == 0">
+        <p
+          class="item--content"
+          style="color: #5fb2f5; font-weight: bold"
+          v-if="problem.getStatus() === 'UNDONE'"
+        >
           UNDONE
         </p>
-        <p class="item--content" 
-        style="color:#62d162;font-weight: bold;"
-        v-else>
+        <p
+          class="item--content"
+          style="color: #62d162; font-weight: bold"
+          v-else
+        >
           DONE
         </p>
       </div>
