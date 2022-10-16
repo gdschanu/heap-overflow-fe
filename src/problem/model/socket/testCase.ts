@@ -1,5 +1,6 @@
 import { Socket } from "socket.io-client";
 import io from "socket.io-client"
+import ProgrammingLanguage from "../programmingLanguage";
 
 const socketUrl = `ws://${process.env.VUE_APP_URL}:${process.env.VUE_APP_SOCKET_PORT}`;
 
@@ -9,7 +10,8 @@ type RunningSubmission = {
     problemId: string,
     submittedAt: string,
     judgingTestCase: number,
-    totalTestCases: number
+    totalTestCases: number,
+    programmingLanguage: ProgrammingLanguage
 }
 
 export default class JudgingTestCase {
@@ -66,7 +68,7 @@ export default class JudgingTestCase {
         
         const socket = this.socket
         const loopers = this.loopers
-        socket.on('RETURN_RUNNING_SUBMISSION', function (data: RunningSubmission) {
+        socket.on('RETURN_RUNNING_SUBMISSION', function (data: RunningSubmission | string) {
             callback(data)
             if (typeof data === 'string') {
                 clearInterval(loopers.get(data))

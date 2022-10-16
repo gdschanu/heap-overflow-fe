@@ -41,16 +41,16 @@
         </p>
       </div>
       <div class="content--acceptance">
-        <p class="item--content">{{ Math.floor(Math.random() * 100) }}%</p>
+        <p class="item--content"> {{problem.getAcceptance()}}% </p>
       </div>
       <div class="content--tag">
-        <p class="item--content">Greedy,Graph</p>
+        <p class="item--content">{{problem.getTags().join(',')}}</p>
       </div>
       <div class="content--status">
         <p
           class="item--content"
           style="color: #5fb2f5; font-weight: bold"
-          v-if="Math.floor(Math.random() * 100) % 2 == 0"
+          v-if="problem.getStatus() === 'UNDONE'"
         >
           UNDONE
         </p>
@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import Problem from "@/problem/model/problem";
 
 export default defineComponent({
@@ -75,7 +75,7 @@ export default defineComponent({
 
   props: {
     problems: {
-      type: Array,
+      type: Array as PropType<Array<Problem>>,
       required: true,
     },
   },
@@ -107,7 +107,7 @@ export default defineComponent({
   .wrapper__title,
   .wrapper__content {
     display: grid;
-    grid-template-columns: 25% 15% repeat(2, 20%) 5% 15%;
+    grid-template-columns: 20% 20% 15% 25% 20%;
     justify-items: center;
     align-items: center;
     width: 95%;
@@ -119,6 +119,7 @@ export default defineComponent({
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
   }
 
   .wrapper__content:hover {

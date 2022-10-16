@@ -14,7 +14,16 @@ async function listRecProblem(count: number): Promise<Problem[]> {
 
     const problems: Problem[] = []
     responseData.forEach(item => {
-        const problem = new Problem(item.id, item.name, item.description, item.author, item.difficulty)
+        const problem = new Problem(
+            item.id,
+            item.name,
+            item.description,
+            item.author,
+            item.difficulty,
+            item.acceptance,
+            item.tags,
+            item.status
+        )
         item.memoryLimits.forEach(memoryLimit => {
             problem.addMemoryLimit(new MemoryLimit(memoryLimit.programmingLanguage, new Kilobyte(memoryLimit.memoryLimit)))            
         })

@@ -1,6 +1,6 @@
 import apiService from "@/problem/helpers/apiService"
 import ProgrammingLanguage from "../../programmingLanguage"
-import Status from "../../status"
+import Status from "../../submissionStatus"
 
 type ListSubmissionRequest = {
     page: number,

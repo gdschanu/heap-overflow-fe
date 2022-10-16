@@ -12,7 +12,16 @@ import countProblemsApi from '../api/countProblemsApi'
 async function getProblemById(id: string): Promise<Problem> {
     const responseData = await getProblemApi({ id })
 
-    const problem = new Problem(responseData.id, responseData.name, responseData.description, responseData.author, responseData.difficulty)
+    const problem = new Problem(
+        responseData.id,
+        responseData.name,
+        responseData.description,
+        responseData.author,
+        responseData.difficulty,
+        responseData.acceptance,
+        responseData.tags,
+        responseData.status
+    )
     responseData.memoryLimits.forEach(memoryLimit => {
         problem.addMemoryLimit(new MemoryLimit(memoryLimit.programmingLanguage, new Kilobyte(memoryLimit.memoryLimit)))
     })
@@ -34,7 +43,16 @@ async function listProblem(page: number, perPage: number): Promise<Problem[]> {
 
     const problems: Problem[] = []
     responseData.forEach(item => {
-        const problem = new Problem(item.id, item.name, item.description, item.author, item.difficulty)
+        const problem = new Problem(
+            item.id,
+            item.name,
+            item.description,
+            item.author,
+            item.difficulty,
+            item.acceptance,
+            item.tags,
+            item.status
+        )
         item.memoryLimits.forEach(memoryLimit => {
             problem.addMemoryLimit(new MemoryLimit(memoryLimit.programmingLanguage, new Kilobyte(memoryLimit.memoryLimit)))            
         })

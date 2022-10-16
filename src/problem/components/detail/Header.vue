@@ -72,7 +72,7 @@ function dislikeClicked() {
     }
 
     .problem-info {
-        @apply absolute right-0 flex rounded-xl w-72;
+        @apply absolute right-0 flex rounded-xl;
         border: 1px solid #9288c1;
 
         .EASY {
@@ -89,7 +89,7 @@ function dislikeClicked() {
     }
 
     .problem-info>* {
-        @apply text-center flex-1 p-1 cursor-pointer;
+        @apply text-center flex-1 px-4 py-1 cursor-pointer;
     }
 
     .problem-info>*:not(:last-child) {

@@ -1,6 +1,7 @@
 import apiService from "../../helpers/apiService"
 import ProgrammingLanguage from '../programmingLanguage'
 import Difficulty from '../difficulty'
+import { ProblemStatus } from "../problemStatus";
 
 type GetProblemRequest = {
     id: string;
@@ -27,6 +28,9 @@ type GetProblemResponseData = {
         timeLimit: number
     }>
     allowedProgrammingLanguages: ProgrammingLanguage[]
+    acceptance: number
+    tags: string[]
+    status: ProblemStatus
 }
 
 async function getProblemApi(req: GetProblemRequest): Promise<GetProblemResponseData> {

@@ -106,7 +106,7 @@ function editorSettings() {
 
 </script>
 <style lang="scss" scoped>
-$left-width: 45vw;
+$left-width: 48vw;
 $gap: 15px;
 
 .problem-detail {

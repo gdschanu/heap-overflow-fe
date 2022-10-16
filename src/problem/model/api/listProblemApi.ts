@@ -1,5 +1,6 @@
 import apiService from "../../helpers/apiService"
 import Difficulty from "../difficulty"
+import { ProblemStatus } from "../problemStatus"
 import ProgrammingLanguage from "../programmingLanguage"
 
 type ListProblemRequest = {
@@ -27,7 +28,10 @@ type ListProblemResponseData = Array<{
         programmingLanguage: ProgrammingLanguage
         timeLimit: number
     }>
-    allowedProgrammingLanguages: ProgrammingLanguage[]
+    allowedProgrammingLanguages: ProgrammingLanguage[],
+    acceptance: number,
+    tags: string[],
+    status: ProblemStatus
 }>
 
 async function listProblemApi(req: ListProblemRequest): Promise<ListProblemResponseData> {

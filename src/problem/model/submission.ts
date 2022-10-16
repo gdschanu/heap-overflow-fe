@@ -2,7 +2,7 @@ import FailedTestCase from "./failedTestCase"
 import Kilobyte from "./kilobyte"
 import Millisecond from "./millisecond"
 import ProgrammingLanguage from "./programmingLanguage"
-import Status from "./status"
+import Status from "./submissionStatus"
 
 class Submission {
     private id: string

@@ -35,11 +35,6 @@ const routeList = ref([
         icon: "fa-solid fa-house",
     },
     {
-        path: "/userProfile",
-        name: "Profile",
-        icon: "fa-solid fa-gear",
-    },
-    {
         path: "/problem",
         name: "Problem",
         icon: "fa-solid fa-computer",
@@ -48,6 +43,11 @@ const routeList = ref([
         path: "/contest",
         name: "Contest",
         icon: "fa-brands fa-free-code-camp",
+    },
+    {
+        path: "/userProfile",
+        name: "Profile",
+        icon: "fa-solid fa-gear",
     },
     {
         path: "/discussion",

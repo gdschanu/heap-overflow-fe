@@ -13,8 +13,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     margin-top: 5px;
 }
 </style>

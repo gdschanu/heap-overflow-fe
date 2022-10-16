@@ -1,7 +1,7 @@
 <template>
     <div class="run-code-result">
         <div class="before-run" v-if="detailIsEmpty">
-            <h3>feature will be released soon</h3>
+            <h3>Feature will be released soon</h3>
         </div>
         <div class="ran" v-else>
             <h3 class="status">Accepted</h3>
@@ -31,6 +31,7 @@ const detailIsEmpty = computed(() => {
 
 <style lang="scss" scoped>
 .run-code-result {
+    @apply p-2;
     .before-run {
         @apply text-center;
     }

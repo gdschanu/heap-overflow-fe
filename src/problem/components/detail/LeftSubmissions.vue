@@ -24,6 +24,7 @@ import { computed } from '@vue/reactivity';
 import { AxiosError } from 'axios';
 import { onMounted, onUnmounted, ref, Ref, watch } from 'vue';
 import { useStore } from 'vuex';
+import ProgrammingLanguage from '@/problem/model/programmingLanguage';
 
 const store = useStore()
 const emit = defineEmits(['selectUpdated'])
@@ -34,7 +35,8 @@ const runningSubmissions = ref([]) as Ref<Array<{
     problemId: string,
     submittedAt: string,
     judgingTestCase: number,
-    totalTestCases: number
+    totalTestCases: number,
+    programmingLanguage: ProgrammingLanguage
 }>>
 const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
 const runningSubmissionId = computed(() => store.state.problemStore.runningSubmissionId) as Ref<string | null>
@@ -80,7 +82,7 @@ watch(runningSubmissionId, async () => {
     if (runningSubmissionId.value) {
         await init()
     }
-    emit('selectUpdated', 3)
+    emit('selectUpdated', 2)
 })
 </script>
 

@@ -1,6 +1,6 @@
 import apiService from "@/contest/helper/apiService";
 import ProgrammingLanguage from '../../programmingLanguage'
-import Status from "../../status";
+import Status from "../../submissionStatus";
 
 type getSubmissionRequest = {
     id: string

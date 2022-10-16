@@ -2,6 +2,7 @@ import MemoryLimit from './memoryLimit'
 import TimeLimit from './timeLimit'
 import ProgrammingLanguage from './programmingLanguage'
 import Difficulty from './difficulty'
+import { ProblemStatus } from './problemStatus'
 
 class Problem {
     private id: string
@@ -12,21 +13,30 @@ class Problem {
     private timeLimits: TimeLimit[]
     private allowedProgrammingLanguages: ProgrammingLanguage[]
     private difficulty: Difficulty
-
+    private acceptance: number
+    private tags: string[]
+    private status: ProblemStatus
     constructor(
         id: string,
         name: string,
         description: string,
         author: string,
-        difficulty: Difficulty) {
+        difficulty: Difficulty,
+        acceptance: number,
+        tags: string[],
+        status: ProblemStatus
+    ) {
         this.id = id
         this.name = name
         this.description = description
         this.author = author
-        this.difficulty = difficulty
         this.memoryLimits = []
         this.timeLimits = []
         this.allowedProgrammingLanguages = []
+        this.difficulty = difficulty
+        this.acceptance = acceptance
+        this.tags = tags
+        this.status = status
     }
 
     getId(): string {
@@ -59,6 +69,18 @@ class Problem {
 
     getDifficulty(): Difficulty {
         return this.difficulty
+    }
+
+    getAcceptance(): number {
+        return this.acceptance
+    }
+
+    getTags(): string[] {
+        return this.tags
+    }
+    
+    getStatus(): ProblemStatus {
+        return this.status
     }
 
     setName(name: string): void {
@@ -105,6 +127,18 @@ class Problem {
         }
 
         this.allowedProgrammingLanguages.push(newAllowedProgrammingLanguage)
+    }
+
+    setAcceptance(acceptance: number): void {
+        this.acceptance = acceptance
+    }
+
+    setTags(tags: string[]): void {
+        this.tags = tags
+    }
+
+    setStatus(status: ProblemStatus): void {
+        this.status = status
     }
 
 }

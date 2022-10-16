@@ -1,12 +1,9 @@
 <template>
     <div class="problem-left">
-        <TabBar :tabBarList="['Problem', 'Solution', 'Discussion', 'Submission']" class="tab-bar" notBorder="top"
+        <TabBar :tabBarList="['Problem', 'Discussion', 'Submission']" class="tab-bar" notBorder="top"
             :selected="tabBarSelected" @selectUpdated="(value) => { tabBarSelected = value; }">
             <template v-slot:Problem>
                 <MarkdownRender :description="problem.getDescription()" class="problem-description" />
-            </template>
-            <template v-slot:Solution>
-                <p>solution</p>
             </template>
             <template v-slot:Discussion>
                <Discussion :problemId="problem.getId()"/>

@@ -1,8 +1,8 @@
 <template>
     <div class="console-submission">
-        <h4 class="status df" v-if="beforeSubmit">
+        <h3 class="status df" v-if="beforeSubmit">
             Your submission will be showed here
-        </h4>
+        </h3>
         <div v-if="submitting">
             <RightConsoleJudging />
         </div>
@@ -115,7 +115,7 @@ const afterSubmit = computed(() => props.submission !== null && props.isJudging 
     }
 
     .status.df {
-        @apply text-center mt-3;
+        @apply text-center;
     }
 
     .copy-submission-code {

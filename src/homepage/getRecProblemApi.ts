@@ -1,6 +1,7 @@
 import apiService from "../coder/apiService"
 import ProgrammingLanguage from '@/problem/model/programmingLanguage'
 import Difficulty from '@/problem/model/difficulty'
+import { ProblemStatus } from "@/problem/model/problemStatus";
 
 type GetProblemRequest = {
     count: number;
@@ -27,7 +28,10 @@ type GetProblemResponseData = Array<{
         programmingLanguage: ProgrammingLanguage
         timeLimit: number
     }>
-    allowedProgrammingLanguages: ProgrammingLanguage[]
+    allowedProgrammingLanguages: ProgrammingLanguage[],
+    acceptance: number
+    tags: string[]
+    status: ProblemStatus
 }>
 
 async function getRecProblemApi(req: GetProblemRequest): Promise<GetProblemResponseData> {

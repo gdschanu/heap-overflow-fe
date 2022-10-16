@@ -15,7 +15,7 @@
             :key="runningSubmission.id"
         >
             <td>{{formatDate(runningSubmission.submittedAt)}}</td>
-            <td>{{'JAVA'}}</td>
+            <td>{{runningSubmission.programmingLanguage}}</td>
             <td>{{runningSubmission.judgingTestCase}}/{{runningSubmission.totalTestCases}}</td>
         </tr>
     </table>
@@ -24,6 +24,7 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import DateTime from '@/shared/models/dateTime';
+import ProgrammingLanguage from '@/problem/model/programmingLanguage';
 
 function formatDate(date: string) {
     return DateTime.fromZonedDateTime(date)
@@ -37,7 +38,8 @@ const props = defineProps({
             problemId: string,
             submittedAt: string,
             judgingTestCase: number,
-            totalTestCases: number
+            totalTestCases: number,
+            programmingLanguage: ProgrammingLanguage
         }>>
     }
 })
@@ -46,7 +48,9 @@ const props = defineProps({
 <style lang="scss" scoped>
 table {
     @apply table-fixed w-full rounded-lg;
-
+    .time-submitted {
+        width: 50%;
+    }
     th,
     tr {
         th {
@@ -54,16 +58,16 @@ table {
         }
 
         td {
-            @apply text-center p-2 cursor-pointer truncate;
+            @apply text-center p-2 truncate;
         }
     }
 
     tr:nth-child(2n) {
-        @apply bg-slate-100 hover:bg-slate-200;
+        @apply bg-slate-100;
     }
 
     tr:nth-child(2n + 1) {
-        @apply bg-slate-50 hover:bg-slate-200;
+        @apply bg-slate-50;
     }
 
     tr.selected {
