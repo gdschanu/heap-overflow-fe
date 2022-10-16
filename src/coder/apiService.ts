@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-const api = `http://${process.env.VUE_APP_URL}:${process.env.VUE_APP_PORT}`; //base url
+const api = `${process.env.VUE_APP_API}`; //base url
 
 // VD: apiService("GET", "/api/getUser", "{id: 3j8T46Yc7J3d4DS30K}");
 export default async function(method: string, address: string, params ? : object, body ? : object) {
