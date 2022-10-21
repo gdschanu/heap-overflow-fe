@@ -32,8 +32,8 @@
     </div>
     <div class="wrapper__text">
       <p v-if="progressList.length > 0">
-        You've solved <h3>{{ getProgress.getDone() }}/100</h3>
-        {{ getProgress.getDifficulty() }} problems
+        You've solved <h3>{{ getProgress.getDone() }}/{{ getProgress.getProblems() }}</h3>
+        {{ getDifficulty }} problems
       </p>
     </div>
   </div>
@@ -70,12 +70,24 @@ export default defineComponent({
         return this.progress;
       }
     },
+
+    getDifficulty() {
+      if (this.progress.getDifficulty() === "EASY") {
+        return "easy"
+      } 
+      if (this.progress.getDifficulty() === "MEDIUM") {
+        return "medium"
+      }
+      else {
+        return "hard"
+      }
+    }
   },
 
   methods: {
     setProgress(progress: Progress) {
       this.progress = progress as Progress;
-      // console.log(progress);
+      console.log(progress);
     },
 
     isActivatedDifficulty(progress) {
