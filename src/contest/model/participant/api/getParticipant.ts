@@ -29,7 +29,7 @@ async function getParticipantsAPI(request: Request): Promise<Response> {
     const response = (
       await apiService(
         "GET",
-        `/participant/${request.contestId}`,
+        `/contest/${request.contestId}/participant`,
         { page: request.page, perPage: request.perPage },
         {}
       )

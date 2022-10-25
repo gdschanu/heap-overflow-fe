@@ -9,7 +9,7 @@ type Response = {
 async function checkJoinedAPI(contestID: string): Promise<Response> {
   try {
     const response = (await (
-      await apiService("GET", `/contest/${contestID}/joined`, {}, {})
+      await apiService("GET", `/contest/${contestID}/participant/joined`, {}, {})
     ).data) as Response;
     return response;
   } catch (error) {
