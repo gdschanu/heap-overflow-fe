@@ -27,7 +27,20 @@
         </div>
       </div>
       <div class="progressCircle" v-if="progressList.length > 0">
-        {{ getProgress.getPercentage() }}%
+        <el-progress 
+        type="circle" 
+        :width="135" 
+        :percentage="this.getProgress.getPercentage()" 
+        :status="getStatus" 
+        :color="getColor" 
+        :stroke-width="12"
+        > 
+          <template #default="{ percentage }">
+            <span class="percentage-value">{{ percentage }}%</span><br>
+            <span span class="percentage-label" v-if="percentage < 100">Progressing</span>
+            <span span class="percentage-label" v-else>Completed</span>
+          </template>
+        </el-progress>
       </div>
     </div>
     <div class="wrapper__text">
@@ -73,15 +86,30 @@ export default defineComponent({
 
     getDifficulty() {
       if (this.progress.getDifficulty() === "EASY") {
-        return "easy"
-      } 
+        return "easy";
+      }
       if (this.progress.getDifficulty() === "MEDIUM") {
-        return "medium"
+        return "medium";
+      } else {
+        return "hard";
       }
-      else {
-        return "hard"
+    },
+
+    getStatus() {
+      if (this.progress.getPercentage() === 100) {
+        return "success";
+      } else {
+        return "";
       }
-    }
+    },
+
+    getColor() {
+      if (this.progress.getPercentage() === 100) {
+        return "#13CE66";
+      } else {
+        return "#302F4E";
+      }
+    },
   },
 
   methods: {
@@ -90,7 +118,7 @@ export default defineComponent({
       console.log(progress);
     },
 
-    isActivatedDifficulty(progress) {
+    isActivatedDifficulty(progress: Progress) {
       return this.progress._difficulty === progress.getDifficulty();
     },
   },
@@ -154,14 +182,25 @@ export default defineComponent({
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 40px;
-      font-weight: 500;
-      border: 3px solid #302f4e;
-      border-radius: 50%;
-      background-color:#fff;
-      height:100px;
-      border-radius:50%;
-      width:100px;
+      height: 100px;
+      width: 100px;
+
+      .el-progress--circle {
+        margin-right: 3.5em;
+        margin-bottom: 1em;
+      }
+
+      .percentage-value {
+        color: #302f4e;
+        font-size: 30px;
+        font-weight: 500;
+      }
+
+      .percentage-label {
+        color: #302f4e;
+        font-size: 14px;
+        font-weight: 500;
+      }
     }
   }
 
@@ -170,8 +209,8 @@ export default defineComponent({
     font-weight: 400;
     color: #302f4e;
     font-size: 12px;
+    margin-top: 10px;
     // padding-top: 20px;
-
 
     h3 {
       display: inline;
