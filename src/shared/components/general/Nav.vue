@@ -30,7 +30,7 @@ import { ref } from 'vue';
 
 const routeList = ref([
     {
-        path: "/dashboard",
+        path: "/",
         name: "Dashboard",
         icon: "fa-solid fa-house",
     },
