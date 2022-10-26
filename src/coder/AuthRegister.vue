@@ -286,7 +286,7 @@ export default defineComponent({
           localStorage.setItem("username", JSON.parse(data).username)
            this.$store.dispatch('coderStore/setUser', user)
            // move to dashboard
-          this.$router.push("dashboard");
+          this.$router.push("/");
         } catch (error: any) {
           errorHandler(error);
         }

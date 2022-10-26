@@ -257,7 +257,7 @@ export default defineComponent({
          localStorage.setItem("username", user.username)
           this.$store.dispatch('coderStore/setUser', user)
           // move to dashboard
-          this.$router.push("dashboard");
+          this.$router.push("/");
           this.isLoading = false;
         } catch (error: any) {
           this.isLoading = false;

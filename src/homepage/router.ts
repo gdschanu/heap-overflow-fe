@@ -1,7 +1,7 @@
 export default [
     // example:
 	{
-		path: '/dashboard',
+		path: '/',
 		name: 'Dashboard',
 		component: () => import('@/homepage/components/HomePage.vue'),
 		meta: {

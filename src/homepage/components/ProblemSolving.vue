@@ -100,7 +100,6 @@ export default defineComponent({
   grid-template-columns: 25% 15% repeat(2, 20%) 20% 15%;
   justify-items: center;
   align-items: center;
-  width: 95%;
   min-height: 50px;
   text-align: center;
 }
