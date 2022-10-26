@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h4>Problem Solving</h4>
+    <h4>Recommended Problems</h4>
     <div class="wrapper__title">
       <div class="title--name"><p class="item--title">Name</p></div>
       <div class="title--acceptance"><p class="item--title">Difficulty</p></div>
@@ -142,5 +142,8 @@ h4 {
 }
 .item--content {
   color: #7160bc;
+}
+* {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 </style>
