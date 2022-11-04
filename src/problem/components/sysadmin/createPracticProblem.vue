@@ -142,6 +142,8 @@ import TimeLimit from "@/problem/model/timeLimit";
 import Millisecond from "@/problem/model/millisecond";
 import Kilobyte from "@/problem/model/kilobyte";
 import programmingLanguage from "@/problem/model/programmingLanguage";
+import errorHandler from "@/shared/helpers/errorHandler";
+import { AxiosError } from "axios";
 
 export default defineComponent({
   components: {
@@ -274,7 +276,7 @@ export default defineComponent({
           // console.log(this.practiceProblem.getMemoryLimits());
           // console.log(this.practiceProblem.getTimeLimits());
         } catch (error) {
-          alert("This programming language is existed");
+          errorHandler(error as AxiosError);
         }
       } else {
         alert("Please choose programing language");

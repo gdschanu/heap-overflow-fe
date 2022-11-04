@@ -67,6 +67,8 @@ import Select from "../common/Select.vue";
 import Button from "../common/Button.vue";
 import TestCase from "@/problem/model/testCase";
 import { createTestCase } from "@/problem/model/domainLogic/testCase";
+import errorHandler from "@/shared/helpers/errorHandler";
+import { AxiosError } from "axios";
 
 export default defineComponent({
   components: {
@@ -140,7 +142,7 @@ export default defineComponent({
         this.isDisabled = false;
         alert(response);
       } catch (error) {
-        alert(error);
+        errorHandler(error as AxiosError);
       }
     },
   },
