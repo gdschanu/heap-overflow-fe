@@ -7,24 +7,13 @@
       <input @input="setName" type="text" id="pname" class="formInput" />
 
       <!-- Prob des -->
-      <div class="description__container">
-        <div class="description--input">
-          <label for="pdes">Problem description:</label>
-          <MarkdownEditor
-            class="formInput des"
-            id="pdes"
-            @dataUpdated="setDescription"
-          />
-        </div>
-
-        <!-- Markdown render-->
-        <div class="description--render">
-          <label for="">Description result:</label>
-          <MarkdownRender
-            :description="getDescription"
-            class="descriptionRendering"
-          />
-        </div>
+      <div class="description--input">
+        <label for="pdes">Problem description:</label>
+        <MarkdownEditor
+          class="formInput des"
+          id="pdes"
+          @dataUpdated="setDescription"
+        />
       </div>
 
       <!-- Prob difficulty -->
@@ -228,10 +217,6 @@ export default defineComponent({
       ];
     },
 
-    getDescription(): String {
-      return this.practiceProblem.getDescription();
-    },
-
     getDifficulty(): String {
       return this.practiceProblem.getDifficulty();
     },
@@ -245,8 +230,7 @@ export default defineComponent({
 
     setDescription(value) {
       this.practiceProblem.setDescription(value);
-      this.getDescription;
-      console.log(this.practiceProblem.getDescription());
+      // console.log(this.practiceProblem.getDescription());
     },
 
     setDifficulty(item: { name: string; value: Difficulty }) {
@@ -384,12 +368,6 @@ Button {
     width: 45rem;
     height: 30rem;
     margin-right: 3rem;
-  }
-
-  .descriptionRendering {
-    width: 40rem;
-    height: 30rem;
-    background-color: rgb(222, 221, 221);
   }
 
   .formBorder {
