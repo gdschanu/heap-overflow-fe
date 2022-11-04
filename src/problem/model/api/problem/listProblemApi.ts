@@ -1,7 +1,7 @@
-import apiService from "../../helpers/apiService"
-import Difficulty from "../difficulty"
-import { ProblemStatus } from "../problemStatus"
-import ProgrammingLanguage from "../programmingLanguage"
+import apiService from "../../../helpers/apiService"
+import Difficulty from "../../difficulty"
+import { ProblemStatus } from "../../problemStatus"
+import ProgrammingLanguage from "../../programmingLanguage"
 
 type ListProblemRequest = {
     page: number

@@ -1,26 +1,29 @@
-import programmingLanguage from './programmingLanguage'
-import Millisecond from './millisecond'
+import programmingLanguage from "./programmingLanguage";
+import Millisecond from "./millisecond";
 
 class TimeLimit {
-    private programmingLanguage: programmingLanguage
-    private timeLimit: Millisecond
+  private programmingLanguage: programmingLanguage;
+  private timeLimit: Millisecond;
 
-    constructor(programmingLanguage: programmingLanguage, timeLimit: Millisecond) {
-        this.programmingLanguage = programmingLanguage
-        this.timeLimit = timeLimit
-    }
+  constructor(
+    programmingLanguage: programmingLanguage,
+    timeLimit: Millisecond
+  ) {
+    this.programmingLanguage = programmingLanguage;
+    this.timeLimit = timeLimit;
+  }
 
-    setMemoryLimit(timeLimit: Millisecond) {
-        this.timeLimit = timeLimit
-    }
+  setTimeLimit(timeLimit: Millisecond) {
+    this.timeLimit = timeLimit;
+  }
 
-    getProgrammingLanguage(): programmingLanguage {
-        return this.programmingLanguage
-    }
+  getProgrammingLanguage(): programmingLanguage {
+    return this.programmingLanguage;
+  }
 
-    getTimeLimit(): Millisecond {
-        return this.timeLimit
-    }
+  getTimeLimit(): Millisecond {
+    return this.timeLimit;
+  }
 }
 
-export default TimeLimit
+export default TimeLimit;

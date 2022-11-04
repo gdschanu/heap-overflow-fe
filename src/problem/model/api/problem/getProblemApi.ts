@@ -1,7 +1,7 @@
-import apiService from "../../helpers/apiService"
-import ProgrammingLanguage from '../programmingLanguage'
-import Difficulty from '../difficulty'
-import { ProblemStatus } from "../problemStatus";
+import apiService from "../../../helpers/apiService"
+import ProgrammingLanguage from '../../programmingLanguage'
+import Difficulty from '../../difficulty'
+import { ProblemStatus } from "../../problemStatus";
 
 type GetProblemRequest = {
     id: string;
