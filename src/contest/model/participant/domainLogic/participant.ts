@@ -1,4 +1,5 @@
 import { assert } from "@vue/compiler-core";
+import { countParticipantsAPI } from "../api/countParticipant";
 import { getParticipantsAPI } from "../api/getParticipant";
 import { Participant } from "../participant";
 
@@ -30,4 +31,9 @@ async function getParticipants(
   });
   return participants;
 }
-export { getParticipants };
+
+async function countParticipants(contestId: string) {
+  const numberOfParticipants = (await countParticipantsAPI({ contestId })).data;
+  return numberOfParticipants;
+}
+export { getParticipants, countParticipants };

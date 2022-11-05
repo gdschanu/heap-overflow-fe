@@ -19,131 +19,120 @@
 </template>
 
 <script lang="ts">
-import {
-    defineComponent
-} from "vue";
-import {
-    Contest
-} from "../model/contest/contest";
-import {
-    searchContest
-} from "../model/contest/domainLogic/contest";
-import {
-    countContest
-} from "../model/contest/domainLogic/contest";
+import { defineComponent } from "vue";
+import { Contest } from "../model/contest/contest";
+import { searchContest } from "../model/contest/domainLogic/contest";
+import { countContest } from "../model/contest/domainLogic/contest";
 import errorHandler from "../../shared/helpers/errorHandler";
 import Loading from "./detail/Loading.vue";
-import {
-    AxiosError
-} from "axios";
+import { AxiosError } from "axios";
 import Nav from "@/shared/components/general/Nav.vue";
 import Pagination from "@/shared/components/general/Pagination.vue";
 import TableContest from "@/contest/components/detail/TableContest.vue";
 import RightBar from "@/shared/components/general/RightBar.vue";
-import { getParticipants } from "../model/participant/domainLogic/participant"
+import { getParticipants } from "../model/participant/domainLogic/participant";
 import { Participant } from "../model/participant/participant";
 
 export default defineComponent({
-    name: "ListContests",
+  name: "ListContests",
 
-    components: {
-        Loading,
-        Pagination,
-        TableContest,
-        RightBar,
-        Nav,
-    },
+  components: {
+    Loading,
+    Pagination,
+    TableContest,
+    RightBar,
+    Nav,
+  },
 
-    data() {
-        return {
-            page: 0,
-            perPage: 16,
-            contestData: [] as Contest[],
-            isLoading: false, // true
-            numberOfContests: new Number() as number,
-        };
-    },
+  data() {
+    return {
+      page: 0,
+      perPage: 16,
+      contestData: [] as Contest[],
+      isLoading: false, // true
+      numberOfContests: new Number() as number,
+    };
+  },
 
-    async created() {
-        try {
-            const response = await searchContest(0, this.perPage);
-            // console.log(response);
-            response.forEach((item) => {
-                this.contestData.push(item);
-            });
-            this.isLoading = false;
-        } catch (error) {
-            errorHandler(error as AxiosError);
-        }
-        // contestCount
-        try {
-            const numberOfContests = (await countContest()) as unknown as number;
-            this.numberOfContests = numberOfContests;
-            // console.log(numberOfContests);
-        } catch (error) {
-            errorHandler(error as AxiosError);
-        }
-
-    },
-
-    computed: {
-        totalPages(): number {
-            const pages = Math.ceil(this.numberOfContests / this.perPage);
-            // console.log(pages);
-            return pages;
-        },
-    },
-
-    methods: {
-        async toPage(page: number) {
-            this.isLoading = true;
-            this.contestData = [];
-            // console.log(page)
-            try {
-                const response = await searchContest(page - 1, this.perPage);
-                response.forEach((item) => {
-                    this.contestData.push(item);
-                });
-                this.isLoading = false;
-            } catch (error) {
-                errorHandler(error as AxiosError);
-            }
-        },
+  async created() {
+    try {
+      const response = await searchContest(0, this.perPage);
+      // console.log(response);
+      response.forEach((item) => {
+        this.contestData.push(item);
+      });
+      this.isLoading = false;
+    } catch (error) {
+      errorHandler(error as AxiosError);
     }
+    // contestCount
+    try {
+      const numberOfContests = (await countContest()) as unknown as number;
+      this.numberOfContests = numberOfContests;
+      // console.log(numberOfContests);
+    } catch (error) {
+      errorHandler(error as AxiosError);
+    }
+  },
+
+  computed: {
+    totalPages(): number {
+      const pages = Math.ceil(this.numberOfContests / this.perPage);
+      // console.log(pages);
+      return pages;
+    },
+  },
+
+  methods: {
+    async toPage(page: number) {
+      this.isLoading = true;
+      this.contestData = [];
+      // console.log(page)
+      try {
+        const response = await searchContest(page - 1, this.perPage);
+        response.forEach((item) => {
+          this.contestData.push(item);
+        });
+        this.isLoading = false;
+      } catch (error) {
+        errorHandler(error as AxiosError);
+      }
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 
-    .container--contest {
-        width: 100%;
-    }
+  .container--contest {
+    width: 100%;
+  }
 }
 
 .contest__title {
-    padding: 2%;
-    text-align: center;
-    font-size: 25px;
+  padding: 2%;
+  text-align: center;
+  font-size: 25px;
 }
 
 .pagination {
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .contest__container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 //

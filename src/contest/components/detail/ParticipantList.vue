@@ -14,15 +14,23 @@
       <div class="participant--order">{{ index + 1 }}</div>
       <div class="participant--name">{{ getUsername(participant) }}</div>
     </div>
+    <span class="pagination">
+      <Pagination :totalPages="totalPages" @pageClicked="toPage"/>
+    </span>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Participant } from "../../model/participant/participant";
+import Pagination from "@/shared/components/general/Pagination.vue";
 
 export default defineComponent({
   name: "ParticipantList",
+
+  components: {
+    Pagination,
+  },
 
   props: {
     participantList: {
@@ -42,7 +50,7 @@ export default defineComponent({
     },
 
     getUsername(participant: Participant) {
-      console.log(participant);
+      // console.log(participant);
       return participant.getUsername();
     },
   },
@@ -89,5 +97,9 @@ export default defineComponent({
     color: #302f4e;
     font-weight: 500;
   }
+}
+
+.pagination {
+  margin-top: 10px;
 }
 </style>

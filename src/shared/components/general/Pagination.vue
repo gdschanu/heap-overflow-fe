@@ -204,13 +204,13 @@ export default defineComponent({
   }
 
   button {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     background-color: #f4f4f5;
     color: #27272a;
     font-size: 14px;
     font-weight: 500;
-    margin: 0 4px;
+    margin: 0 0.175rem;
     border-radius: 5px;
   }
 

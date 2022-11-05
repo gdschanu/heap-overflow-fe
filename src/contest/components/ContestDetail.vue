@@ -50,8 +50,9 @@
         <RankList v-if="isLated" />
         <ParticipantList
           v-else
+          v-if="totalPages"
           :participantList="participantList"
-          :totalPages="5"
+          :totalPages="totalPages"
           @pageChanged="getParticipantList"
         />
       </div>
@@ -63,7 +64,10 @@
 import { defineComponent } from "vue";
 import { Contest } from "../model/contest/contest";
 import { Problem } from "../model/contest/problem";
-import { getParticipants } from "../model/participant/domainLogic/participant";
+import {
+  countParticipants,
+  getParticipants,
+} from "../model/participant/domainLogic/participant";
 import { Participant } from "../model/participant/participant";
 import RankList from "./detail/RankList.vue";
 import ParticipantList from "./detail/ParticipantList.vue";
@@ -86,7 +90,8 @@ export default defineComponent({
       // participant: {} as Participant,
       isJoined: false,
       participantList: [] as Participant[],
-      perPage: 10,
+      perPage: 5,
+      totalPages: 0,
     };
   },
 
@@ -95,11 +100,24 @@ export default defineComponent({
     const contestId = this.getContest.getId() as string;
     try {
       const response = (await checkJoined(contestId)) as boolean;
-      console.log(response);
+      // console.log(response);
       this.isJoined = response;
     } catch (error) {
       errorHandler(error as AxiosError);
     }
+
+    // count participant
+    try {
+      const numberOfParticipants = await countParticipants(
+        this.getContest.getId()
+      );
+      console.log(numberOfParticipants);
+      this.totalPages = Math.ceil(numberOfParticipants / this.perPage);
+      console.log(this.totalPages);
+    } catch (error) {
+      errorHandler(error as AxiosError);
+    }
+
     // get first participant list
     this.getParticipantList(1);
   },
@@ -167,7 +185,7 @@ export default defineComponent({
           page - 1,
           this.perPage
         );
-        console.log(response);
+        // console.log(response);
         response.forEach((item) => {
           this.participantList.push(item);
         });
