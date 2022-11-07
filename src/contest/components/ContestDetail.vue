@@ -68,7 +68,7 @@ import {
   countParticipants,
   getParticipants,
 } from "../model/participant/domainLogic/participant";
-import { Participant } from "../model/participant/participant";
+import { Participant, Participant } from "../model/participant/participant";
 import RankList from "./detail/RankList.vue";
 import ParticipantList from "./detail/ParticipantList.vue";
 import ContestDescription from "./detail/ContestDescription.vue";
@@ -136,10 +136,6 @@ export default defineComponent({
       ) as Contest;
     },
 
-    async getRankList() {
-      return 10;
-    },
-
     listProblem() {
       const problems = this.getContest.getProblems() as Problem[];
       // console.log(problems);
@@ -177,18 +173,36 @@ export default defineComponent({
     },
 
     async getParticipantList(page: number) {
-      this.participantList = [];
+      //  function to sort descending participants by total score
+      function order(a: Participant, b: Participant) {
+        const totalScoreA = a
+          .getProblemScores()
+          .reduce(
+            (totalScore: number, score) => (totalScore += score.getScore()),
+            0
+          );
+        const totalScoreB = b
+          .getProblemScores()
+          .reduce(
+            (totalScore: number, score) => (totalScore += score.getScore()),
+            0
+          );
+        return totalScoreA < totalScoreB
+          ? -1
+          : totalScoreA > totalScoreB
+          ? 1
+          : 0;
+      }
+
       const contestId = this.getContest.getId() as string;
       try {
-        const response = await getParticipants(
+        const participants = await getParticipants(
           contestId,
           page - 1,
           this.perPage
         );
-        // console.log(response);
-        response.forEach((item) => {
-          this.participantList.push(item);
-        });
+        this.participantList = participants.sort(order).reverse();
+        // console.log(this.participantList);
       } catch (error) {
         errorHandler(error as Error);
       }

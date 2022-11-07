@@ -4,6 +4,7 @@
     <div class="container__title">
       <div class="title--order"><p>No.</p></div>
       <div class="title--name"><p>Name</p></div>
+      <div class="title--score"><p>Score</p></div>
     </div>
     <div
       v-if="participantList"
@@ -13,9 +14,10 @@
     >
       <div class="participant--order">{{ index + 1 }}</div>
       <div class="participant--name">{{ getUsername(participant) }}</div>
+      <div class="participant--score">{{ getScore(participant) }}</div>
     </div>
     <span class="pagination">
-      <Pagination :totalPages="totalPages" @pageClicked="toPage"/>
+      <Pagination :totalPages="totalPages" @pageClicked="toPage" />
     </span>
   </div>
 </template>
@@ -37,6 +39,7 @@ export default defineComponent({
       type: Array,
       required: true,
     },
+
     totalPages: {
       type: Number,
       required: true,
@@ -52,6 +55,15 @@ export default defineComponent({
     getUsername(participant: Participant) {
       // console.log(participant);
       return participant.getUsername();
+    },
+
+    getScore(participant: Participant) {
+      return participant
+        .getProblemScores()
+        .reduce(
+          (totalScore: number, score) => (totalScore += score.getScore()),
+          0
+        );
     },
   },
 });
@@ -75,7 +87,7 @@ export default defineComponent({
   .container__title,
   .container__content {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 15% 60% 25%;
     justify-items: center;
     align-items: center;
     width: 100%;

@@ -1,9 +1,9 @@
 import { assert } from "@vue/compiler-core";
 
 class ProblemScore {
-  _problemId;
-  _score;
-  _tryCount;
+  _problemId: string;
+  _score: number;
+  _tryCount: number;
   constructor(problemId: string, score: number, tryCount: number) {
     assert(typeof problemId === "string");
     this._problemId = problemId;
