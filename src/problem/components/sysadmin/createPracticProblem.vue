@@ -302,8 +302,7 @@ export default defineComponent({
         alert("You have successfully created a new problem");
         this.$router.push(`${problemId}/testCase`);
       } catch (error) {
-        console.log(error);
-        alert(error);
+        errorHandler(error as AxiosError);
       }
     },
   },

@@ -78,6 +78,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  margin-bottom: 20px;
 
   .header {
     color: #302f4e;
