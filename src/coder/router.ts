@@ -23,5 +23,20 @@ export default [
         meta: {
             type: 'protected'
         }
+    },
+    {
+        path: '/admin',
+        name: 'AdminLogin',
+        component:  () => import("./AdminLogin.vue"), //paste the component needed
+        meta: {
+            type: 'public'
+        }
+    },{
+        path: '/AdminDashboard',
+        name: 'AdminDashboard',
+        component:  () => import("./AdminDashboard.vue"), //paste the component needed
+        meta: {
+            type: 'public'
+        }
     }
 ]
