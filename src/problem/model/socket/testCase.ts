@@ -58,7 +58,7 @@ export default class JudgingTestCase {
         if (loopers.has(runningSubmissionId))
             return
         loopers.set(runningSubmissionId, setInterval(() => {
-            socket.emit('GET_RUNNING_SUBMISSION', runningSubmissionId)
+            socket.emit('PRACTICE_PROBLEM.GET_RUNNING_SUBMISSION', runningSubmissionId)
         }, 2000))
     }
 
@@ -68,7 +68,7 @@ export default class JudgingTestCase {
         
         const socket = this.socket
         const loopers = this.loopers
-        socket.on('RETURN_RUNNING_SUBMISSION', function (data: RunningSubmission | string) {
+        socket.on('PRACTICE_PROBLEM.RETURN_RUNNING_SUBMISSION', function (data: RunningSubmission | string) {
             callback(data)
             if (typeof data === 'string') {
                 clearInterval(loopers.get(data))
