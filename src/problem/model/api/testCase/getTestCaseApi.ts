@@ -22,7 +22,7 @@ type getTestCaseResponseData = Array<{
 async function getTestCaseApi(req: getTestCaseRequest) {
   try {
     const response = (
-      await apiService("GET", `/practiceProblem/testCase/sample/${req.id}`)
+      await apiService("GET", `/practiceProblem/problem/${req.id}/testCase/sample`)
     ).data as getTestCaseResponse;
     if (response.data === null) throw new Error("TestCase not found");
     return response.data;
