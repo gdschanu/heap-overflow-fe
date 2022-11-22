@@ -57,16 +57,6 @@ export default defineComponent({
     };
   },
 
-  // watch: {
-  //   contestData: {
-  //     deep: true,
-  //     handler(newContest, oldContest) {
-  //       console.log(newContest);
-  //       console.log(oldContest);
-  //     },
-  //   },
-  // },
-
   async created() {
     try {
       const response = await searchContest(0, this.perPage);
