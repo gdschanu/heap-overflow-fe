@@ -18,8 +18,10 @@
           {{ contest.getName() }}
         </p>
       </div>
-      <div v-if="getNumberOfParticipants(contest)" class="content--participant">
-        <p class="item--content">{{ numberOfParticipants }}</p>
+      <div class="content--participant">
+        <p class="item--content">
+          {{ contest.getParticipants() }}
+        </p>
       </div>
       <div class="content--start">
         <p class="item--content">{{ startTime(contest) }}</p>
@@ -28,7 +30,7 @@
         <p class="item--content">{{ endTime(contest) }}</p>
       </div>
       <div class="content--problems">
-        <p class="item--content">{{ contest._problems.length }}</p>
+        <p class="item--content">{{ contest.getProblems().length }}</p>
       </div>
       <div class="content--status">
         <p
@@ -60,8 +62,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Contest } from "@/contest/model/contest/contest";
-import { getParticipants } from "../../model/participant/domainLogic/participant";
+import {
+  countParticipants,
+  getParticipants,
+} from "../../model/participant/domainLogic/participant";
 import errorHandler from "@/shared/helpers/errorHandler";
+import { Participant } from "@/contest/model/participant/participant";
 
 export default defineComponent({
   name: "TableContest",
@@ -74,10 +80,10 @@ export default defineComponent({
   },
 
   data() {
-    return {
-      numberOfParticipants: new Number(),
-    };
+    return {};
   },
+
+  computed: {},
 
   methods: {
     startTime(contest: Contest) {
@@ -103,18 +109,6 @@ export default defineComponent({
         return "ENDED";
       } else {
         return "RUNNING";
-      }
-    },
-
-    // get number of participants by get all participants list and return the length of the list
-    // need api count number of participants
-    async getNumberOfParticipants(contest: Contest) {
-      const contestId = contest.getId();
-      try {
-        const response = await getParticipants(contestId, 0, 100);
-        this.numberOfParticipants = response.length;
-      } catch (error) {
-        errorHandler(error as Error);
       }
     },
 
@@ -171,5 +165,5 @@ export default defineComponent({
   .item--content {
     color: #7160bc;
   }
-  }
+}
 </style>

@@ -132,7 +132,8 @@ export default defineComponent({
         contest._startAt,
         contest._endAt,
         contest._author,
-        contest._problems
+        contest._problems,
+        contest._participants
       ) as Contest;
     },
 

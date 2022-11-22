@@ -9,6 +9,8 @@ class Contest {
   private _endAt!: string | number | Date;
   private _author: string;
   private _problems: Problem[];
+  private _participants: number;
+
   constructor(
     id: string,
     name: string,
@@ -16,7 +18,8 @@ class Contest {
     startAt: string | number | Date,
     endAt: string | number | Date,
     author: string,
-    problems: Problem[]
+    problems: Problem[],
+    participants: number
   ) {
     this._id = id;
     this._name = name;
@@ -44,10 +47,11 @@ class Contest {
         this._problems.push(problem);
       }
     }
+    this._participants = participants;
   }
 
   static create(): Contest {
-    return new Contest("", "", "", "", "", "", []);
+    return new Contest("", "", "", "", "", "", [], 0);
   }
 
   setName(name: string) {
@@ -110,6 +114,10 @@ class Contest {
     this._endAt = date;
   }
 
+  setParticipants(participants: number) {
+    this._participants = participants;
+  }
+
   getId() {
     return this._id;
   }
@@ -136,6 +144,10 @@ class Contest {
 
   getProblems() {
     return this._problems;
+  }
+
+  getParticipants() {
+    return this._participants;
   }
 }
 

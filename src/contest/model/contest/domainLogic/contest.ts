@@ -4,6 +4,7 @@ import { countContestAPI } from "../api/countContest";
 import { Contest } from "../contest";
 import { joinContestAPI } from "../api/joinContest";
 import { checkJoinedAPI } from "../api/checkJoined";
+import { countParticipants } from "../../participant/domainLogic/participant";
 
 async function createContest(contest: Contest): Promise<string | null> {
   const response = await createContestAPI({
@@ -36,7 +37,8 @@ async function searchContest(
       item.startAt,
       item.endAt,
       item.createdBy,
-      item.problems
+      item.problems,
+      item.participants
     );
     contests.push(contest);
   });
