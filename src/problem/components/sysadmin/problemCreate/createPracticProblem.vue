@@ -127,12 +127,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { createTestCase } from "../../model/domainLogic/testCase";
-import { createProblem } from "../../model/domainLogic/problem";
-import Problem from "../../model/problem";
+import { createTestCase } from "../../../model/domainLogic/testCase";
+import { createProblem } from "../../../model/domainLogic/problem";
+import Problem from "../../../model/problem";
 import Difficulty from "@/problem/model/difficulty";
-import Select from "../common/Select.vue";
-import Button from "../common/Button.vue";
+import Select from "../../common/Select.vue";
+import Button from "../../common/Button.vue";
 import MarkdownRender from "@/shared/components/general/MarkdownRender.vue";
 import MarkdownEditor from "@/shared/components/general/MarkdownEditor.vue";
 import { ProblemStatus } from "@/problem/model/problemStatus";

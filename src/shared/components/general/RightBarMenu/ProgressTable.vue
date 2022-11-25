@@ -29,7 +29,7 @@
       <div class="progressCircle" v-if="progressList.length > 0">
         <el-progress 
         type="circle" 
-        :width="135" 
+        :width="handleResizeWidth()" 
         :percentage="this.getProgress.getPercentage()" 
         :status="getStatus" 
         :color="getColor" 
@@ -69,10 +69,20 @@ export default defineComponent({
   data() {
     return {
       progress: {} as Progress,
+      width: window.innerWidth,
     };
   },
 
-  async created() {},
+  created() {
+    window.addEventListener("resize", this.handleResizeWidth);
+    this.handleResizeWidth();
+  },
+
+  destroyed() {
+    window.removeEventListener("resize", this.handleResizeWidth);
+  },
+
+  watch: {},
 
   computed: {
     getProgress() {
@@ -120,6 +130,23 @@ export default defineComponent({
 
     isActivatedDifficulty(progress: Progress) {
       return this.progress._difficulty === progress.getDifficulty();
+    },
+
+    handleResizeWidth() {
+      this.width = window.innerWidth;
+      if (this.width >= 1400) {
+        return 135;
+      } else if (this.width < 1400 && this.width >= 1300) {
+        return 110;
+      } else if (this.width < 1300 && this.width >= 1200) {
+        return 100;
+      } else if (this.width < 1200 && this.width >= 1100) {
+        return 95;
+      } else if (this.width < 1100 && this.width >= 1000) {
+        return 85;
+      } else if (this.width < 1000) {
+        return 75;
+      }
     },
   },
 });
@@ -186,20 +213,115 @@ export default defineComponent({
       width: 100px;
 
       .el-progress--circle {
-        margin-right: 3.5em;
+        margin-right: 2vw;
         margin-bottom: 1em;
       }
 
       .percentage-value {
         color: #302f4e;
-        font-size: 30px;
+        font-size: 180%;
         font-weight: 500;
       }
 
       .percentage-label {
         color: #302f4e;
-        font-size: 14px;
+        font-size: 90%;
         font-weight: 500;
+      }
+
+      @media all and (max-width: 1024px) {
+        .el-progress--circle {
+          margin-right: 1vw;
+          margin-bottom: 1em;
+        }
+
+        .percentage-value {
+          color: #302f4e;
+          font-size: 120%;
+          font-weight: 500;
+        }
+
+        .percentage-label {
+          color: #302f4e;
+          font-size: 70%;
+          font-weight: 500;
+        }
+      }
+
+      @media all and (min-width: 1025px) {
+        .el-progress--circle {
+          margin-right: 0.01rem;
+          margin-bottom: 1em;
+        }
+
+        .percentage-value {
+          color: #302f4e;
+          font-size: 120%;
+          font-weight: 500;
+        }
+
+        .percentage-label {
+          color: #302f4e;
+          font-size: 70%;
+          font-weight: 500;
+        }
+      }
+
+      @media all and (min-width: 1100px) {
+        .el-progress--circle {
+          margin-bottom: 1em;
+          margin-left: 0.5rem;
+        }
+
+        .percentage-value {
+          color: #302f4e;
+          font-size: 180%;
+          font-weight: 500;
+        }
+
+        .percentage-label {
+          color: #302f4e;
+          font-size: 90%;
+          font-weight: 500;
+        }
+      }
+
+      @media all and (min-width: 1200px) {
+        .el-progress--circle {
+          margin-right: 2vw;
+          margin-bottom: 1em;
+        }
+
+        .percentage-value {
+          color: #302f4e;
+          font-size: 180%;
+          font-weight: 500;
+        }
+
+        .percentage-label {
+          color: #302f4e;
+          font-size: 90%;
+          font-weight: 500;
+        }
+      }
+
+      @media all and (min-width: 1300px) {
+        .el-progress--circle {
+          margin-right: 2.5vw;
+          margin-bottom: 1em;
+        }
+
+        .percentage-value {
+          color: #302f4e;
+          font-size: 180%;
+          font-weight: 500;
+        }
+
+        .percentage-label {
+          color: #302f4e;
+          font-size: 90%;
+          font-weight: 500;
+        }
       }
     }
   }

@@ -30,7 +30,10 @@ import Nav from "@/shared/components/general/Nav.vue";
 import Pagination from "@/shared/components/general/Pagination.vue";
 import TableContest from "@/contest/components/detail/TableContest.vue";
 import RightBar from "@/shared/components/general/RightBar.vue";
-import { getParticipants } from "../model/participant/domainLogic/participant";
+import {
+  countParticipants,
+  getParticipants,
+} from "../model/participant/domainLogic/participant";
 import { Participant } from "../model/participant/participant";
 
 export default defineComponent({
@@ -47,7 +50,7 @@ export default defineComponent({
   data() {
     return {
       page: 0,
-      perPage: 16,
+      perPage: 8,
       contestData: [] as Contest[],
       isLoading: false, // true
       numberOfContests: new Number() as number,
@@ -58,8 +61,10 @@ export default defineComponent({
     try {
       const response = await searchContest(0, this.perPage);
       // console.log(response);
-      response.forEach((item) => {
-        this.contestData.push(item);
+      response.forEach(async (contest) => {
+        contest.setParticipants(await countParticipants(contest.getId()));
+        this.contestData.push(contest);
+        // console.log(this.contestData);
       });
       this.isLoading = false;
     } catch (error) {

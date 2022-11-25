@@ -20,7 +20,7 @@ export default [
   {
     path: "/problem/create",
     name: "problemCreate",
-    component: () => import("./components/sysadmin/createPracticProblem.vue"),
+    component: () => import("./components/sysadmin/problemCreate/createPracticProblem.vue"),
     meta: {
       type: "protected",
     },
@@ -29,7 +29,7 @@ export default [
   {
     path: "/problem/:id/testCase",
     name: "testCase",
-    component: () => import("./components/sysadmin/createTestCase.vue"),
+    component: () => import("./components/sysadmin/problemCreate/createTestCase.vue"),
     meta: {
       type: "protected",
     },

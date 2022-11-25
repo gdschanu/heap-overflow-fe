@@ -21,6 +21,7 @@ type contestData = Array<{
   endAt: string;
   createdBy: string;
   problems: Problem[];
+  participants: number;
 }>;
 
 async function searchContestAPI(request: Request): Promise<Response> {

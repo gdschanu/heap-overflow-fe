@@ -7,7 +7,7 @@
         <div class="form__heading flex--space-between">
           <div class="form__heading__logoContainer">
             <img src="https://cdn.dribbble.com/users/2328616/screenshots/12472594/media/b1fc462905004066ffd045edf0890478.png?compress=1&resize=400x300&vertical=top" alt="logo" />
-            <h2>High Code</h2>
+            <h2>Heap Overflow</h2>
           </div>
           <div class="form__singUp">
             <a
