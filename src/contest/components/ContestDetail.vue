@@ -68,7 +68,7 @@ import {
   countParticipants,
   getParticipants,
 } from "../model/participant/domainLogic/participant";
-import { Participant, Participant } from "../model/participant/participant";
+import { Participant } from "../model/participant/participant";
 import RankList from "./detail/RankList.vue";
 import ParticipantList from "./detail/ParticipantList.vue";
 import ContestDescription from "./detail/ContestDescription.vue";

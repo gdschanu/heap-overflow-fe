@@ -6,7 +6,6 @@
         <LeftSubmissionsList :submissions="submissions" v-else />
 
         <div class="running-submissions" v-if="runningSubmissions.length !== 0">
-            <h4> Running submission </h4>
             <LeftSubmissionsRunning :runningSubmissions="runningSubmissions" />
         </div>
     </div>
