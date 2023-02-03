@@ -6,7 +6,9 @@ const date = new Date();
 
 type ProblemCode = {
 	id: string,
-	code: string,
+	codes: {
+		[key: string]: string,
+	},
 }
 
 type EditorSetting = {
@@ -64,7 +66,7 @@ export default {
 		setCurrentProblemCode(state, currentProblem: ProblemCode) {
 			state.commit("setCurrentProblemCode", currentProblem);
 			localStorage.setItem(`problemID: ${currentProblem.id}`, JSON.stringify({
-				code: currentProblem.code,
+				codes: currentProblem.codes,
 				expiredAt: date.getTime() + 1000 * 60 * 60 * 24 * 30,
 			}));
 		},

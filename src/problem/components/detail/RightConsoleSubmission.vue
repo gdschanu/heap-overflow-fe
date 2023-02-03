@@ -56,7 +56,7 @@
 <script lang="ts" setup>
 import Submission from "@/problem/model/submission";
 import { computed, onMounted, PropType, ref } from "vue";
-import Button from "../common/Button.vue";
+import Button from "../../../shared/components/general/Button.vue";
 import Console from "../common/Console.vue";
 import RightConsoleJudging from "./RightConsoleJudging.vue";
 

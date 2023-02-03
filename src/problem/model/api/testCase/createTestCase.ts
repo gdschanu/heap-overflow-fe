@@ -1,4 +1,4 @@
-import apiService from "../../../helpers/apiService";
+import apiService from '@/shared/helpers/apiService';
 
 type createTestCaseRequest = {
   problemId: String | null;

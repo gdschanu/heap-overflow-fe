@@ -1,4 +1,4 @@
-import apiService from "../../../helpers/apiService"
+import apiService from "@/shared/helpers/apiService"
 import Difficulty from "../../difficulty"
 import { ProblemStatus } from "../../problemStatus"
 import ProgrammingLanguage from "../../programmingLanguage"
@@ -36,7 +36,7 @@ type ListProblemResponseData = Array<{
 
 async function listProblemApi(req: ListProblemRequest): Promise<ListProblemResponseData> {
     try {
-        const response = (await apiService('GET', '/practiceProblem/problem', req)).data as ListProblemResponse
+        const response = (await apiService('GET', '/practiceProblem/problem', req, {})).data as ListProblemResponse
         if (response.data === null)
             throw new Error('Cannot found any problem');
         return response.data

@@ -1,27 +1,23 @@
-import apiService from "../apiService";
+import apiService from "@/shared/helpers/apiService"
 type LoginRequest = {
-  usernameOrEmail: string;
-  password: string;
+  usernameOrEmail: string
+  password: string
 };
 
 type LoginResponse = {
-  code: null | string;
-  message: string;
-  data: responseData;
+  code: null | string
+  message: string
+  data: responseData
 };
 
 type responseData = {
-  coderId: string | null;
-  token: string | null;
-  username: string | null;
+  coderId: string
+  token: string
+  username: string
 };
 
 async function loginApi(req: LoginRequest): Promise<LoginResponse> {
-  try {
-    const response = (await apiService("POST", "/coderAuth/logIn", {}, req)).data as LoginResponse;
-    return response ;
-  } catch (error) {
-    throw error;
-  }
+  const response = (await apiService("POST", "/coderAuth/logIn", {}, req)).data as LoginResponse
+  return response
 }
-export { loginApi} ;
+export default loginApi

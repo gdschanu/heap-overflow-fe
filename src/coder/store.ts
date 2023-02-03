@@ -1,29 +1,21 @@
-
 import { Module } from 'vuex'
-
-type User = {
-	coderId: string,
-	username: string
-}
+import Coder from './coder'
 
 export default {
 	namespaced: true,
 	state: {
-		user: {},
-
+		coder: null,
 	} as {
-		user: User,
-
+		coder: Coder | null
 	},
 	mutations: {
-		setUser(state, user: User) {
-			state.user = user
+		setCoder(state, coder: Coder) {
+			state.coder = coder
 		},
-
 	},
 	actions: {
-		setUser(state, user: User){
-			state.commit('setUser', user)
+		setCoder(state, coder: Coder){
+			state.commit('setCoder', coder)
 		},
 
 	},

@@ -1,19 +1,13 @@
-import apiService from "../apiService"
+import apiService from "@/shared/helpers/apiService"
+
 type logout = {
    token : string
 }
-type logoutresponse = {
-    code : null
-    message: string
-    data :  null
-}
+
 async function logoutApi(req: logout): Promise<void> {
-    try {
-    (await apiService('POST', '/coderAuth/logOut', {}, req))
-   
-    } catch (error) {
-        throw error
-    }
+    await apiService('POST', '/coderAuth/logOut', {}, {}, {
+        'token': req.token
+    })
 }
 
 export default logoutApi

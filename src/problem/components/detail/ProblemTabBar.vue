@@ -75,16 +75,15 @@ onMounted(() => {
         overflow: hidden;
 
         .nav-item {
+            @apply border-b border-slate-300 text-slate-500 dark:border-slate-700
+            ;
             position: relative;
             display: table-cell;
             width: 2%;
             text-align: center;
             line-height: var(--nav-height);
-            border-bottom: 1px solid #9288c1;
             cursor: pointer;
-            color: #9288c1;
             font-weight: bold;
-
             .wrapper {
                 position: relative;
                 height: 100%;
@@ -97,7 +96,7 @@ onMounted(() => {
             }
         }
         .selected {
-            color: #000;
+            @apply text-black dark:text-slate-50;
         }
 
         .selected:after {
@@ -109,7 +108,7 @@ onMounted(() => {
             bottom: -1px;
             height: 4px;
             border-radius: 5px 5px 0px 0px;
-            background-color: black;
+            @apply bg-slate-900 dark:bg-slate-100;
         }
     }
 

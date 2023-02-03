@@ -1,79 +1,63 @@
 <template>
-    <div class="problem-setting">
-        <div class="choose-language">
-            <Select :list="
-                languageList.map((language) => ({
-                    name: languageConvert(language),
-                    value: language,
-                }))
-            " :selected="languageConvert($store.state.problemStore.editorSettings.language)"
-                @dataUpdated="languageChanged" />
-        </div>
-        <!-- <div class="retrieve-to-last-submission" title="retrieve to the last submission">
-            <i class="fa-solid fa-right-from-bracket"></i>
-        </div>
-        <div @click="" class="switch-theme-dark" title="switch theme to dark">
-            <i class="fa-solid fa-circle-half-stroke"></i>
-        </div>
-        <div class="open-setting" title="open setting" @click="showModal = true">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-        </div> -->
-        <div class="enter-full-screen" title="enter full screen" v-if="!fullScreen" @click="$emit('enterFullScreen')">
-            <i class="fa-solid fa-expand"></i>
-        </div>
-        <div class="exit-full-screen" title="thoát toàn màn hình" v-if="fullScreen" @click="$emit('exitFullScreen')">
-            <i class="fa-solid fa-compress"></i>
-        </div>
+  <div class="flex justify-between items-center px-3">
+    <div class="mr-auto">
+      <el-select
+				v-model="store.state.problemStore.editorSettings.language"
+				class="dark:border dark:border-slate-700 rounded-lg"
+				size="large"
+			>
+				<el-option
+					v-for="language in problem.getAllowedProgrammingLanguages()"
+					:key="language"
+					:value="language"
+					:label="languageConvert(language)"
+				/>
+			</el-select>
     </div>
+    <div
+      class="cursor-pointer"
+      title="enter full screen"
+      v-if="!fullScreen"
+      @click="$emit('enterFullScreen')"
+    >
+      <i class="fa-solid fa-expand"></i>
+    </div>
+    <div
+      class="cursor-pointer"
+      title="thoát toàn màn hình"
+      v-if="fullScreen"
+      @click="$emit('exitFullScreen')"
+    >
+      <i class="fa-solid fa-compress"></i>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import Select from "../../components/common/Select.vue";
-import programmingLanguages from "../../../shared/assets/json/programmingLanguage.json"
+import { ElSelect, ElOption } from "element-plus";
+import programmingLanguages from "../../../shared/assets/json/programmingLanguage.json";
 import { useStore } from "vuex";
-import { PropType } from "vue";
+import { PropType, ref, computed, ComputedRef } from "vue";
+import Problem from "@/problem/model/problem";
 
+const store = useStore();
+const problem = computed(() => store.state.problemStore.problem) as ComputedRef<Problem>
 
 const props = defineProps({
-    fullScreen: Boolean,
-    languageList: {
-        type: Array as PropType<Array<string>>,
-        required: true
-    }
-})
+  fullScreen: Boolean,
+  languageList: {
+    type: Array as PropType<Array<string>>,
+    required: true,
+  },
+});
 
-const store = useStore()
-
-function languageChanged(item: { name: string, value: string }) {
-    store.dispatch("problemStore/setEditorSettings", {
-        language: item.value,
-    });
-}
 function languageConvert(language: string) {
-    return programmingLanguages.filter((programmingLanguage) => programmingLanguage.value === language)[0].name;
+  return programmingLanguages.filter(
+    (programmingLanguage) => programmingLanguage.value === language
+  )[0].name;
 }
 </script>
 
 <style lang="scss" scoped>
-.problem-setting {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: var(--normal-font-size);
-
-    .choose-language {
-        margin-right: auto;
-        margin-left: 10px;
-        padding: 0;
-    }
-}
-
-.problem-setting>* {
-    padding: 0 10px;
-}
-
-.problem-setting:hover {
-    cursor: pointer;
-}
 </style>

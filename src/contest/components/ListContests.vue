@@ -12,7 +12,6 @@
                     <Pagination v-if="totalPages" :totalPages="totalPages" @pageClicked="toPage" />
                 </div>
             </div>
-            <RightBar />
         </div>
     </p>
 </Nav>
@@ -26,10 +25,10 @@ import { countContest } from "../model/contest/domainLogic/contest";
 import errorHandler from "../../shared/helpers/errorHandler";
 import Loading from "./detail/Loading.vue";
 import { AxiosError } from "axios";
-import Nav from "@/shared/components/general/Nav.vue";
+import Nav from "@/shared/layout/Nav.vue";
 import Pagination from "@/shared/components/general/Pagination.vue";
 import TableContest from "@/contest/components/detail/TableContest.vue";
-import RightBar from "@/shared/components/general/RightBar.vue";
+// import RightBar from "@/shared/components/general/RightBar.vue";
 import {
   countParticipants,
   getParticipants,
@@ -43,7 +42,7 @@ export default defineComponent({
     Loading,
     Pagination,
     TableContest,
-    RightBar,
+    // RightBar,
     Nav,
   },
 

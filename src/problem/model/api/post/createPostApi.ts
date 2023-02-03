@@ -1,4 +1,4 @@
-import apiService from "@/problem/helpers/apiService";
+import apiService from "@/shared/helpers/apiService";
 
 export interface Req {
   title: string;

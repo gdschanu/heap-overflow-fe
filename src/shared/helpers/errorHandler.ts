@@ -1,7 +1,13 @@
 import router from "@/shared/router";
 import store from "@/shared/store";
 import { AxiosError } from "axios";
-import ResponseForm from './response'
+
+interface ResponseForm {
+    code: number
+    message: '',
+    data: any,
+    error?: any
+}
 
 function showAlert(message: string) {
     store.dispatch("setAlert", {
@@ -11,8 +17,7 @@ function showAlert(message: string) {
     })
 }
 
-export default function(error: AxiosError | Error) {
-    
+export default function(error: unknown) {
     if (error instanceof AxiosError && error.response) {
         const response = error.response;
         const data = response.data as ResponseForm;
@@ -21,18 +26,21 @@ export default function(error: AxiosError | Error) {
         // unauthenticated
         if (response.status === 401) {
             localStorage.removeItem('accessToken')
-            return router.push("/login");
-        };
-        // forbidden
-        if (response.status === 403) {
-            localStorage.removeItem('accessToken')
-            return router.push("/forbidden"); // chưa làm
+            localStorage.removeItem('coderId')
+            return router.push({
+                name: 'Login',
+                query: {
+                    redirect: router.currentRoute.value.fullPath
+                }
+            });
         };
         if (data)
             return showAlert(data.message)
 
-    };
-    // unknown error
-    showAlert(error.message);
-    console.log(error);
+    } else if (error instanceof Error) {
+        showAlert(error.message);    
+    } else {
+        showAlert('Something went wrong, Please try again later');
+        console.log(error);
+    }
 };

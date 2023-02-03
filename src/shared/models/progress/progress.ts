@@ -1,14 +1,16 @@
+import Difficulty from "@/problem/model/difficulty";
+
 class Progress {
-  _difficulty: string | undefined;
-  _done: number | undefined;
-  _problems: number | undefined;
-  _percentage: number | undefined;
+  private _difficulty: Difficulty;
+  private _done: number;
+  private _problems: number;
+  private _percentage: number;
 
   constructor(
-    difficulty: string | undefined,
-    done: number | undefined,
-    problems: number | undefined,
-    percentage: number | undefined
+    difficulty: Difficulty,
+    done: number,
+    problems: number,
+    percentage: number
   ) {
     this._difficulty = difficulty;
     this._done = done;
@@ -16,21 +18,21 @@ class Progress {
     this._percentage = percentage;
   }
 
-  getDifficulty(): string {
+  get difficulty(): Difficulty {
     return this._difficulty!;
   }
 
-  getDone(): number {
+  get done(): number {
     return this._done!;
   }
 
-  getProblems(): number {
+  get problems(): number {
     return this._problems!;
   }
 
-  getPercentage(): number {
+  get percentage(): number {
     return this._percentage!;
   }
 }
 
-export { Progress };
+export default Progress ;

@@ -64,7 +64,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Select from "../../common/Select.vue";
-import Button from "../../common/Button.vue";
+import Button from "../../../../shared/components/general/Button.vue";
 import TestCase from "@/problem/model/testCase";
 import { createTestCase } from "@/problem/model/domainLogic/testCase";
 import errorHandler from "@/shared/helpers/errorHandler";

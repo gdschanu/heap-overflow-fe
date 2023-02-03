@@ -10,11 +10,8 @@
         <MonacoEditor
             class="editor"
             :language="$store.state.problemStore.editorSettings.language"
-            :code="$store.state.problemStore.currentProblemCode.code"
-            @dataUpdated="$store.dispatch('problemStore/setCurrentProblemCode', {
-                id: problem.getId(),
-                code: $event,
-            })"
+            :code="currentCodes[store.state.problemStore.editorSettings.language]"
+            @dataUpdated="handleCodeUpdate"
         />
         <Console class="console" :problem="problem"/>
     </div>
@@ -25,11 +22,12 @@ import Setting from "./RightSetting.vue";
 import Console from "./RightConsole.vue";
 import MonacoEditor from "./MonacoEditor.vue";
 import Problem from "@/problem/model/problem";
-import { computed, PropType, Ref } from "vue";
+import { computed, PropType, Ref, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore()
 const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
+const currentCodes = ref(store.state.problemStore.currentProblemCode.codes)
 
 const props = defineProps({
     fullScreen: Boolean,
@@ -38,6 +36,14 @@ const props = defineProps({
 const languages = computed(() => {
     return problem.value.getAllowedProgrammingLanguages()
 })
+
+function handleCodeUpdate(code: string) {
+    currentCodes.value[store.state.problemStore.editorSettings.language] = code
+    store.dispatch('problemStore/setCurrentProblemCode', {
+        id: store.state.problemStore.problem.getId(),
+        codes: currentCodes.value
+    })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -49,7 +55,7 @@ const languages = computed(() => {
     .setting {
         width: 100%;
         height: var(--nav-height);
-        border-bottom: 1px solid #9288c1;
+        @apply border-b border-slate-300 dark:border-slate-700;
     }
 
     .editor {
@@ -62,7 +68,7 @@ const languages = computed(() => {
         width: 100%;
         height: var(--nav-height);
         vertical-align: bottom;
-        border-top: 1px solid #9288c1;
+        @apply border-t border-slate-300 dark:border-slate-700;
     }
 }
 </style>

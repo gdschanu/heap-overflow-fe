@@ -1,43 +1,48 @@
-import { getUserApi } from "./api/getUserApi";
-import  {loginApi} from "./api/loginApi";
-import logoutApi from "./api/logoutApi";
-import registerApi  from "./api/registerApi";
-import User  from "./user";
+import getCoderApi from "./api/getCoderApi"
+import loginApi from "./api/loginApi"
+import logoutApi from "./api/logoutApi"
+import registerApi from "./api/registerApi"
+import Coder from "./coder"
 
-export async function login(user: User): Promise<string> {
-    const usernameOrEmail = user.getName()? user.getName() : user.getEmail()
-    const accessToken = (await (loginApi({
+export async function login(usernameOrEmail: string, password: string) {
+    const loginResponse = await loginApi({
         usernameOrEmail,
-        password: user.getPassword()
-    }))).data;
-   
-    return JSON.stringify(accessToken)
-
-}
-
-export async function register(user: User): Promise<string> {
-   const response =  (await registerApi({
-        email: user.getEmail(),
-        username: user.getName(),
-        password: user.getPassword()
-    })).data
-    return JSON.stringify(response)
-}
-export async function logout(data: string): Promise<string> {
-   const response =  await logoutApi({
-        token : data
+        password
     })
-    return JSON.stringify(response)
+    const coder = await getCoderInfo(loginResponse.data.coderId)
+    return {
+        coder,
+        accessToken: loginResponse.data.token
+    }
 }
-export async function getUserInfor(data: string): Promise<string> {
-  const response =  await getUserApi({
-        coderId : data
+
+export async function register(username: string, email: string, password: string) {
+    const registerResponse = await registerApi({
+        username,
+        email,
+        password
     })
-    return JSON.stringify(response)
+    const coder = await getCoderInfo(registerResponse.data.coderId)
+    return {
+        coder,
+        accessToken: registerResponse.data.token
+    }
 }
-export default {
-    login,
-    register,
-    logout,
-    getUserInfor
+
+export async function logout(data: string) {
+    await logoutApi({ token: data })
+}
+
+export async function getCoderInfo(coderId: string): Promise<Coder> {
+    const getCoderResponse = await getCoderApi({
+        coderId
+    })
+    if (getCoderResponse.data === null)
+        throw new Error('Coder not found')
+    
+    const coder = new Coder(coderId)
+    coder.name = getCoderResponse.data.name
+    coder.avatar = getCoderResponse.data.avatar
+    coder.age = getCoderResponse.data.age
+    return coder
 }

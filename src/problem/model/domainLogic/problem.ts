@@ -8,6 +8,8 @@ import Kilobyte from "../kilobyte";
 import Millisecond from "../millisecond";
 import listProblemApi from "../api/problem/listProblemApi";
 import countProblemsApi from "../api/problem/countProblemsApi";
+import getRecommendProblemsApi from "../api/problem/getRecommendProblemsApi";
+import Difficulty from "../difficulty";
 
 async function getProblemById(id: string): Promise<Problem> {
   const responseData = await getProblemApi({ id });
@@ -110,4 +112,48 @@ async function countProblems() {
   return await countProblemsApi();
 }
 
-export { getProblemById, listProblem, createProblem, countProblems };
+async function getRecommendProblems(count: number) {
+  const { data } = await getRecommendProblemsApi({ count });
+  if (data === null)
+    throw new Error('Cannot get recommend problems')
+  return data.map(recommendProblem => {
+    const problem = new Problem(
+      recommendProblem.id,
+      recommendProblem.name,
+      recommendProblem.description,
+      recommendProblem.author,
+      recommendProblem.difficulty,
+      recommendProblem.acceptance,
+      recommendProblem.tags,
+      recommendProblem.status
+    )
+    recommendProblem.memoryLimits.forEach((memoryLimit) => {
+      problem.addMemoryLimit(
+        new MemoryLimit(
+          memoryLimit.programmingLanguage,
+          new Kilobyte(memoryLimit.memoryLimit)
+        )
+      )
+    })
+    recommendProblem.timeLimits.forEach((timeLimit) => {
+      problem.addTimeLimit(
+        new TimeLimits(
+          timeLimit.programmingLanguage,
+          new Millisecond(timeLimit.timeLimit)
+        )
+      );
+    });
+    recommendProblem.allowedProgrammingLanguages.forEach((allowedProgrammingLanguage) => {
+      problem.addAllowedProgrammingLanguage(allowedProgrammingLanguage);
+    });
+    return problem
+  })
+}
+
+export {
+  getProblemById,
+  listProblem,
+  createProblem,
+  countProblems,
+  getRecommendProblems
+};

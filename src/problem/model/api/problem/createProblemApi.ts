@@ -1,4 +1,4 @@
-import apiService from '../../../helpers/apiService'
+import apiService from '@/shared/helpers/apiService';
 import Difficulty from '../../difficulty'
 import ProgrammingLanguage from '../../programmingLanguage'
 import MemoryLimit from '../../memoryLimit'

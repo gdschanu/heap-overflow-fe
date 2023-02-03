@@ -21,20 +21,26 @@ export default createStore({
 	},
 	mutations: {
 		setAlert(state, alert: Alert) {
-            state.alert = alert;
-        },
+			state.alert = alert;
+		},
+		setTheme(state, theme: string) {
+			state.theme = theme;
+		}
 	},
 	actions: {
 		setAlert(state, alert: Alert) {
-            state.commit("setAlert", alert);
-        },
+			state.commit("setAlert", alert);
+		},
 		closeAlert(state) {
-            state.commit("setAlert", {
-                isAlert: false,
-                message: state.state.alert.message,
-                type: state.state.alert.type,
-            });
-        },
+			state.commit("setAlert", {
+				isAlert: false,
+				message: state.state.alert.message,
+				type: state.state.alert.type,
+			});
+		},
+		setTheme(state, theme: string) {
+			state.commit("setTheme", theme);
+		}
 	},
 	modules: {
 		coderStore,

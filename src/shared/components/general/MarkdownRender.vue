@@ -1,5 +1,6 @@
 <template>
     <div class="markdown-u">
+        <slot></slot>
         <Markdown :source="description" />
     </div>
 </template>
@@ -25,7 +26,7 @@ const props = defineProps({
         font-size: 23px;
     }
     h3 {
-        font-size: 20px;
+        font-size: 21px;
     }
     h4 {
         font-size: 19px;
@@ -36,26 +37,23 @@ const props = defineProps({
     h6 {
         font-size: 17px;
     }
-    white-space: pre-line;
+    @apply whitespace-pre-line;
     code {
-        border-radius: 5px;
-        background-color: rgba(0, 0, 0, 0.1);
-        padding: 3px;
-        font-family: 'Courier New', Courier, monospace;
+        @apply rounded-lg p-1 font-mono
+        bg-slate-200
+        dark:bg-slate-800;
     }
     blockquote {
-        border-left: 4px solid black;
-        padding: 0 10px;
-        white-space: pre-line;
+        @apply border-l-4 px-3
+        border-slate-900 bg-slate-100
+        dark:border-slate-100 dark:bg-slate-900;
     }
     ol {
-        padding-left: 15px;
-        white-space: normal;
+        @apply pl-5 whitespace-normal list-decimal;
     }
     ul {
+        @apply pl-5 whitespace-normal;
         list-style: disc outside;
-        padding-left: 15px;
-        white-space: normal;
     }
     ul,
     ol {
@@ -76,26 +74,21 @@ const props = defineProps({
         }
     }
     li {
-        white-space: normal;
-    }
-    table,
-    th,
-    td {
-        border-collapse: collapse;
-        border: 1px solid black;
-    }
-    th,
-    td {
-        padding: 5px;
+        @apply whitespace-normal my-2;
     }
     table {
-        thead {
-            tr {
-                background-color: var(--container-color-darker);
-            }
+        @apply my-3 border-separate border-spacing-0 border rounded-lg overflow-hidden
+        border-slate-300
+        dark:border-slate-700;
+        th, td {
+            @apply p-3 border-r last:border-r-0
+            border-r-slate-300
+            dark:border-r-slate-600;
         }
-        tr:nth-child(2n) {
-            background-color: var(--container-color-darker);
+        th {
+            @apply border-b
+            border-b-slate-300
+            dark:border-b-slate-600;
         }
     }
     code.hljs {
@@ -113,19 +106,12 @@ const props = defineProps({
     code.hljs:hover::-webkit-scrollbar-thumb {
         display: block;
     }
+
     hr {
-        border: none;
-        border-bottom: 1px solid black;
+        @apply border-b border-slate-300;
     }
-
     a {
-        text-decoration: underline;
-        font-style: italic;
-        color: rgb(30, 30, 30);
-    }
-
-    a:hover {
-        color: rgb(120, 120, 120);
+        @apply underline italic text-sky-500 hover:text-sky-600;
     }
 }
 </style>

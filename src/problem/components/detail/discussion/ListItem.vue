@@ -66,8 +66,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .list-item {
     // border: 1px solid #9288c1;
-    box-shadow: 2px 2px 10px rgb(193, 193, 193);
-    border-radius: 5px;
+    @apply border border-slate-300 dark:border-slate-700 rounded-lg;
     display: flex;
     padding: 20px;
     padding-left: 10px;

@@ -1,26 +1,31 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteLocationNormalizedLoaded, RouteRecordRaw } from "vue-router";
 import problemRouter from "@/problem/router";
 import coderRouter from "@/coder/router";
 import contestRouter from "@/contest/router";
 import blogRouter from "@/blog/router";
-import homePageRouter from "@/homepage/router";
+import { protectPrivateRoute } from "./helpers/routerGuard";
 
 let routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Landing",
-    component: () => import("@/homepage/components/HomePage.vue"),
+    component: () => import("@/shared/views/Landing.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("@/shared/views/Dashboard.vue"),
+    // beforeEnter(to: RouteLocationNormalizedLoaded, from: RouteLocationNormalizedLoaded) {
+    //   return protectPrivateRoute(to, from)
+		// },
     meta: {
-      type: "public",
-    },
+      layout: 'NavSideBar'
+    }
   },
   {
     path: "/:error",
     name: "Error",
     component: () => import("@/shared/views/Error.vue"),
-    meta: {
-      type: "public",
-    },
   },
 ];
 
@@ -30,7 +35,6 @@ routes = [
   ...coderRouter,
   ...problemRouter,
   ...contestRouter,
-  ...homePageRouter,
 ];
 
 const router = createRouter({

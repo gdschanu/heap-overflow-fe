@@ -1,4 +1,4 @@
-import apiService from "../../../helpers/apiService"
+import apiService from '@/shared/helpers/apiService';
 import ProgrammingLanguage from '../../programmingLanguage'
 import Difficulty from '../../difficulty'
 import { ProblemStatus } from "../../problemStatus";

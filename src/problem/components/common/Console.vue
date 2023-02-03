@@ -21,9 +21,9 @@ const props = defineProps({
 $lh: 20px;
 
 .wrapper {
+    @apply bg-slate-200 dark:bg-slate-800;
     overflow: overlay;
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
     padding: 2px;
     .console {
         font-family: "Courier New", monospace;

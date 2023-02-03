@@ -1,38 +1,31 @@
 <template>
-    <div id="main">
-        <div class="content">
-            <router-view />
-        </div>
-        <Alert
-            :isShow="$store.state.alert.isAlert"
-            :text="$store.state.alert.message"
-            :type="$store.state.alert.type"
-            @close="$store.dispatch('closeAlert')"
-        />
-    </div>
+  <div id="main">
+    <!-- <router-view /> -->
+    <component :is="layout">
+      <router-view :layout.sync="layout" />
+    </component>
+    <Alert
+      :isShow="$store.state.alert.isAlert"
+      :text="$store.state.alert.message"
+      :type="$store.state.alert.type"
+      @close="$store.dispatch('closeAlert')"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
 import Alert from "./shared/components/general/Alert.vue";
-import { ref, watch } from "@vue/runtime-core";
-import { useRouter, useRoute } from "vue-router";
-import routerWatcher from "./shared/helpers/routerWatcher";
-import themeSetup from "./shared/helpers/themeSetup";
+import { onMounted } from "vue";
+import themeSetup from "./shared/helpers/theme";
+import autoLogin from "@/shared/helpers/autoLogin";
+import useLayout from "./shared/layout/layout";
 
-// router
-const route = useRoute();
-const router = useRouter();
-
-watch(route, (to, from) => {
-    routerWatcher(to, from);
-});
-
-// theme
+const layout = useLayout();
 themeSetup();
 
-
+onMounted(async () => {
+  await autoLogin();
+});
 </script>
 
-
-<style lang="scss">
-</style>
+<style lang="scss"></style>

@@ -11,10 +11,7 @@
     </section>
 </template>
 
-<script>
-export default {
-    name: "LoadingScreen",
-};
+<script lang="ts" setup>
 </script>
 
 <style scoped>

@@ -81,7 +81,7 @@ function isSelecting(submission: Submission) {
         th,
         tr {
             th {
-                @apply p-2 bg-slate-200;
+                @apply p-2 bg-slate-200 dark:bg-slate-800;
             }
 
             td {
@@ -98,15 +98,17 @@ function isSelecting(submission: Submission) {
         }
 
         tr:nth-child(2n) {
-            @apply bg-slate-100 hover:bg-slate-200;
+            @apply bg-slate-100 hover:bg-slate-200
+            dark:bg-slate-900 dark:hover:bg-slate-800;
         }
 
         tr:nth-child(2n + 1) {
-            @apply bg-slate-50 hover:bg-slate-200;
+            @apply bg-slate-50 hover:bg-slate-200
+            dark:bg-slate-900 dark:hover:bg-slate-800;
         }
 
         tr.selected {
-            @apply bg-slate-200;
+            @apply bg-slate-200 dark:bg-slate-800;
         }
 
         tr.submissions__header {

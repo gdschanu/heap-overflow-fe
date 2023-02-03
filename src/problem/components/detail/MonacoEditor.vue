@@ -25,7 +25,7 @@ export default {
         language: String,
         code: {
             type: String,
-            default: `your code go here`,
+            default: ``,
         },
     },
     data() {
@@ -76,7 +76,7 @@ export default {
     },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .monaco-editor, .monaco-editor .inputarea {
     background-color: transparent;
 }
@@ -92,20 +92,18 @@ export default {
         }
     }
     .monaco-editor.vs-dark {
+        @apply dark:bg-slate-900;
         .monaco-editor-background {
-            // background-color:;
+            background-color: transparent !important;
         }
         .glyph-margin {
-            // background-color:;
+            background-color: transparent !important;
         }
         .line-numbers {
-            color: #595c63;;
+            color: #595c63;
         }
         .current-line {
             border-color: #5c5c5c77;
-        }
-        .token {
-            // color: #abb2bf;
         }
         .token.number {
             color: #e5c07b;
@@ -123,14 +121,18 @@ export default {
             color: #56b6c2;
         }
         .token.delimiter.curly, .token.delimiter.parenthesis, .token.delimiter.square {
-            color: rgb(249, 102, 102);
+            color: #e06c75;
         }
         .token.comment {
             color: #6e727b;
         }
         // js
         .token.array.js {
-            color: rgb(249, 102, 102);
+            color: #e06c75;
+        }
+
+        .token.bracket.js {
+            color: #e06c75;
         }
     }
 }

@@ -1,4 +1,4 @@
-import apiService from "../apiService"
+import apiService from "@/shared/helpers/apiService"
 type RegisterRequest = {
     email: string
     username: string
@@ -11,14 +11,14 @@ type RegisterResponse = {
     data: responseData
 }
 type responseData = {
-    coderId: string | null;
-    token: string | null;
-    username: string | null;
+    coderId: string
+    token: string
+    username: string
 }
 async function registerApi(req: RegisterRequest): Promise<RegisterResponse> {
     try {
         const response = (await apiService('POST', '/coderAuth/signUp', {}, req)).data as RegisterResponse
-        return response;
+        return response
     } catch (error) {
         throw error
     }

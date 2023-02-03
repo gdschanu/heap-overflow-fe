@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import Button from "../common/Button.vue"
+import Button from "../../../shared/components/general/Button.vue"
 
 </script>
 

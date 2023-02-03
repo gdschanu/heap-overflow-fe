@@ -1,4 +1,4 @@
-import apiService from "@/problem/helpers/apiService";
+import apiService from "@/shared/helpers/apiService";
 import DateTime from "@/shared/models/dateTime";
 
 interface Resp {

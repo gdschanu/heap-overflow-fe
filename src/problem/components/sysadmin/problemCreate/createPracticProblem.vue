@@ -132,7 +132,7 @@ import { createProblem } from "../../../model/domainLogic/problem";
 import Problem from "../../../model/problem";
 import Difficulty from "@/problem/model/difficulty";
 import Select from "../../common/Select.vue";
-import Button from "../../common/Button.vue";
+import Button from "../../../../shared/components/general/Button.vue";
 import MarkdownRender from "@/shared/components/general/MarkdownRender.vue";
 import MarkdownEditor from "@/shared/components/general/MarkdownEditor.vue";
 import { ProblemStatus } from "@/problem/model/problemStatus";

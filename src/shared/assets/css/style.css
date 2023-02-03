@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-slate-50 text-black dark:bg-slate-800 dark:text-slate-50;
+}
+
+html {
+    scroll-behavior:smooth;
+}
+
+@layer base {
+    #main {
+        @apply box-border p-0 m-0 text-base font-normal;
+    }
+
+    h1 {
+        @apply text-5xl font-medium;
+    }
+
+    h2 {
+        @apply text-4xl font-medium;
+    }
+
+    h3 {
+        @apply text-3xl font-medium;
+    }
+
+    h4 {
+        @apply text-2xl font-normal;
+    }
+
+    h5 {
+        @apply text-lg font-normal;
+    }
+
+    h6 {
+        @apply text-base font-thin;
+    }
+
+    img {
+        @apply max-w-full h-auto;
+    }
+}
+
+/* global */
+::-webkit-scrollbar {
+    @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply transition rounded-lg bg-slate-300 hover:bg-slate-400 dark:bg-slate-700 hover:dark:bg-slate-600;
+}
+
+/* Element plus override */
+.el-badge__content {
+    @apply border-hidden;
+}
+
+.el-dropdown, .el-select {
+    @apply text-base font-normal;
+}
+
+.el-popper {
+    @apply box-border p-0 m-0 text-base font-normal rounded-lg border
+    border-slate-300 text-slate-900
+    dark:border-slate-700 dark:text-slate-50;
+}
+
+.el-popper.is-light {
+    @apply bg-slate-50 dark:bg-slate-900 
+}
+
+.el-popper__arrow::before {
+    @apply hidden;
+}
+
+.el-progress__text {
+    @apply text-slate-900 dark:text-slate-50;
+}
+
+.el-progress-circle__track {
+    @apply stroke-slate-300 dark:stroke-slate-700;
+}
+
+.el-progress-circle__path {
+    @apply stroke-slate-700 dark:stroke-slate-300;
+}
+
+.el-pagination>* {
+    @apply text-base font-normal text-slate-900 dark:text-slate-50;
+}
+
+.el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+    @apply text-sm p-2 text-slate-900 dark:text-slate-50 bg-slate-200 dark:bg-slate-800 rounded;
+}
+
+.el-pagination.is-background .el-pager li:not(.is-disabled):hover {
+    @apply text-slate-800 dark:text-slate-200;
+}
+
+.el-pagination.is-background .btn-next:disabled, .el-pagination.is-background .btn-prev:disabled {
+    @apply text-slate-500;
+}
+
+.el-pagination.is-background .el-pager li:not(.is-disabled).is-active {
+    @apply text-slate-50 bg-slate-900 dark:text-slate-900 dark:bg-slate-50;
+}
+
+.el-pagination--small button, .el-pagination--small span:not([class*=suffix]) {
+    @apply text-base;
+}
+
+.el-pagination .el-input__wrapper {
+    @apply shadow-none text-base font-normal bg-slate-200 dark:bg-slate-800;
+}
+
+.el-pagination .el-input__inner {
+    @apply text-slate-900 dark:text-slate-50;
+}
+
+.el-tag {
+    @apply text-sm;
+}
+
+html.light .el-skeleton {
+    --el-skeleton-color: #e2e8f0;
+    --el-skeleton-to-color: #cbd5e1;
+}
+
+html.dark .el-skeleton {
+    --el-skeleton-color: #1e293b;
+    --el-skeleton-to-color: #334155;
+}
+
+input.el-input__inner {
+    @apply text-base font-sans px-3 py-2
+    text-slate-900 placeholder:text-slate-900
+    dark:text-slate-50 dark:placeholder:text-slate-50;
+}
+
+.el-input__wrapper {
+    @apply rounded-lg bg-transparent shadow-none hover:!shadow-none border
+    border-slate-300 dark:border-slate-100;
+}
+
+.el-select .el-input__wrapper {
+    @apply dark:border-none dark:bg-slate-900;
+}
+
+.el-input__wrapper:hover {
+    @apply shadow-none;
+}
+
+.el-select:hover:not(.el-select--disabled) .el-input__wrapper {
+    @apply shadow-none;
+}
+
+.el-input__wrapper.is-focus {
+    @apply !ring-1 ring-slate-100 dark:ring-slate-900;
+}
+
+.el-select .el-input__wrapper.is-focus {
+    @apply !shadow-none;
+}
+
+.el-select .el-input.is-focus .el-input__wrapper {
+    @apply !shadow-none active:shadow-none;
+}
+
+.el-select-dropdown__list {
+    @apply !py-2;
+}
+
+.el-select-dropdown__item {
+    @apply text-base px-6 py-2
+    text-slate-900
+    dark:text-slate-100;
+    height: unset;
+}
+
+
+.el-select-dropdown__item.hover, .el-select-dropdown__item:hover {
+    @apply transition
+    bg-slate-100
+    dark:bg-slate-800;
+}
+
+/* common */
+.icon-button {
+    @apply inline-block p-3 transition rounded-full aspect-square cursor-pointer hover:text-slate-800 active:text-slate-700 hover:bg-slate-200 active:bg-slate-300 dark:hover:text-slate-200 dark:active:text-slate-300 dark:hover:bg-slate-800 dark:active:bg-slate-700;
+}

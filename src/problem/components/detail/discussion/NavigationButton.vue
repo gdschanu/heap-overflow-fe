@@ -30,10 +30,10 @@ function handleClick() {
 
 <style lang="scss" scoped>
 .navigation-button {
+    @apply text-slate-900 bg-slate-200
+    dark:text-slate-50 dark:bg-slate-800;
     height: 100%;
     aspect-ratio: 1/1;
-    background-color: #f4f4f5;
-    color: #27272A;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,12 +41,12 @@ function handleClick() {
     border-radius: 5px;
 
     &--active {
-        background-color: #302f4e;
-        color: white;
+        @apply bg-slate-900 text-slate-50
+        dark:bg-slate-100 dark:text-slate-900;
     }
 
     &--disabled {
-        color: #c9c2e0;
+        @apply text-slate-300 dark:text-slate-700;
         cursor: unset;
     }
 

@@ -1,4 +1,3 @@
-import errorHandler from "@/shared/helpers/errorHandler";
 import apiService from "../../../helpers/apiService";
 
 type Response = {
@@ -8,21 +7,15 @@ type Response = {
 };
 
 type progressList = Array<{
-  difficulty: string | null;
-  done: number | null;
-  problems: number | null;
-  percentage: number | null;
+  difficulty: string;
+  done: number;
+  problems: number;
+  percentage: number;
 }>;
 
-async function getProgressAPI(): Promise<Response> {
-  try {
-    const response = (
-      await apiService("GET", "/practiceProblem/problem/progress", {}, {})
-    ).data as Response;
-    return response;
-  } catch (error) {
-    throw error;
-  }
+export default async function getProgress(): Promise<Response> {
+  const response = (
+    await apiService("GET", "/practiceProblem/problem/progress", {}, {})
+  ).data as Response;
+  return response;
 }
-
-export { getProgressAPI };

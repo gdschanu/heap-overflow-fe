@@ -5,15 +5,19 @@ const api = process.env.VUE_APP_API;
 export default async function (
   method: string,
   address: string,
-  params: any,
-  body: any
+  params?: any,
+  body?: any,
+  customHeaders?: any
 ) {
   const accessToken = localStorage.getItem("accessToken");
-  const headers = {
+  let headers = {
     "Content-Type": "Application/json",
-    "access-token": `${accessToken}`,
     "Access-Control-Allow-Origin": "*",
+    ...customHeaders,
   };
+  if (accessToken) {
+    headers["access-token"] = `${accessToken}`;
+  }
   try {
     const response = await axios({
       method,

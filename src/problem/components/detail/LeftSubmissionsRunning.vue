@@ -54,7 +54,7 @@ table {
     th,
     tr {
         th {
-            @apply p-2 bg-slate-200;
+            @apply p-2 bg-slate-200 dark:bg-slate-800;
         }
 
         td {
@@ -63,15 +63,11 @@ table {
     }
 
     tr:nth-child(2n) {
-        @apply bg-slate-100;
+        @apply bg-slate-100 dark:bg-slate-900;
     }
 
     tr:nth-child(2n + 1) {
-        @apply bg-slate-50;
-    }
-
-    tr.selected {
-        @apply bg-slate-200;
+        @apply bg-slate-50 dark:bg-slate-900;
     }
 
     tr.submissions__header {

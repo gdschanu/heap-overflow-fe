@@ -1,7 +1,7 @@
 <template>
     <div class="new-post">
         <InputText placeholder="Enter your title here" class="new-post__title"
-            @dataUpdated="(title: string) => {newPost.setTitle(title)}" />
+        v-model="title" />
         <MarkdownEditor @data-updated="(content: string) => {newPost.setContent(content)}" />
         <Button
             @clicked="handleCreatePost"
@@ -22,16 +22,17 @@ import errorHandler from '@/shared/helpers/errorHandler';
 import DateTime from '@/shared/models/dateTime';
 import { computed } from '@vue/reactivity';
 import { AxiosError } from 'axios';
-import { onMounted, ref, Ref } from 'vue';
+import { onMounted, ref, Ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import InputText from '../../../../shared/components/general/InputText.vue';
-import Button from '../../common/Button.vue';
+import Button from '../../../../shared/components/general/Button.vue';
 
 const store = useStore()
 const emit = defineEmits<(event: 'postCreated') => void>()
 
 const problem = computed(() => store.state.problemStore.problem) as Ref<Problem>
 const isPosting = ref(false)
+const title = ref('')
 
 const newPost = ref(new Post({
     id: '',
@@ -60,6 +61,10 @@ async function handleCreatePost() {
     isPosting.value = false
 }
 
+watch(title, () => {
+    newPost.value.setTitle(title.value)
+})
+
 </script>
 
 <style lang="scss" scoped>
@@ -75,7 +80,7 @@ async function handleCreatePost() {
     &__button {}
 
     &__hr {
-        margin: 20px 0;
+        @apply my-6 border-t border-slate-300 dark:border-slate-700;
     }
 
 }

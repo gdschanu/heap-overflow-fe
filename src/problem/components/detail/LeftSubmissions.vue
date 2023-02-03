@@ -94,7 +94,8 @@ watch(runningSubmissionId, async () => {
     }
 
     .running-submissions {
-        @apply absolute -bottom-1 bg-white border border-slate-900 rounded-xl overflow-hidden;
+        @apply absolute -bottom-1 border rounded-xl overflow-hidden
+        bg-slate-50 border-slate-300 dark:border-none;
         left: -1px;
         right: -1px;
     }

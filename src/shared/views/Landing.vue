@@ -1,13 +1,14 @@
 <template>
-    <div class="landing">landing</div>
+  <div>
+    <p>
+      Landing page. Some essential route: 
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/dashboard">Dashboard</router-link>
+    </p>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-    name: "Landing",
-});
+<script lang="ts" setup>
 </script>
 
 <style lang="scss" scoped>

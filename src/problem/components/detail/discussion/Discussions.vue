@@ -1,5 +1,5 @@
 <template>
-    <div class="discussions" v-if="reload">
+    <div class="p-5" v-if="reload">
         <NewPost @post-created="handleReloadPaging()"/>
         <Paging />
     </div>
@@ -29,7 +29,4 @@ function handleReloadPaging() {
 </script>
 
 <style lang="scss" scoped>
-.discussions {
-    padding: 20px;
-}
 </style>

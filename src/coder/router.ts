@@ -1,42 +1,31 @@
+import { protectAuthRoute } from "@/shared/helpers/routerGuard";
+import { RouteLocationNormalizedLoaded } from "vue-router";
+
 export default [
-    // example:
     {
         path: '/login',
         name: 'Login',
-        component: () => import("./AuthLogin.vue"), //paste the component needed
-        meta: {
-            type: 'auth'
-        }
+        component: () => import("@/coder/view/Login.vue"),
+        beforeEnter(to: RouteLocationNormalizedLoaded, from: RouteLocationNormalizedLoaded) {
+            return protectAuthRoute(to, from)
+		}
     },
     {
         path: '/register',
         name: 'Register',
-        component:  () => import("./AuthRegister.vue"), //paste the component needed
-        meta: {
-            type: 'auth'
-        }
-    },
-    {
-        path: '/userProfile',
-        name: 'Profile',
-        component:  () => import("./userProfile.vue"), //paste the component needed
-        meta: {
-            type: 'protected'
-        }
+        component:  () => import("@/coder/view/Register.vue"),
+        beforeEnter(to: RouteLocationNormalizedLoaded, from: RouteLocationNormalizedLoaded) {
+            return protectAuthRoute(to, from)
+		}
     },
     {
         path: '/admin',
         name: 'AdminLogin',
-        component:  () => import("./AdminLogin.vue"), //paste the component needed
-        meta: {
-            type: 'public'
-        }
-    },{
+        component:  () => import("./view/AdminLogin.vue")
+    },
+    {
         path: '/AdminDashboard',
         name: 'AdminDashboard',
-        component:  () => import("./AdminDashboard.vue"), //paste the component needed
-        meta: {
-            type: 'public'
-        }
+        component:  () => import("./view/AdminDashboard.vue")
     }
 ]
