@@ -12,9 +12,9 @@
 						<img
 							src="@/shared/assets/img/logo_white.png"
 							alt="logo"
-							class="hidden dark:!block dark:!visible w-16 p-2"
+							class="hide-on-dark w-16 p-2"
 						>
-						<h5 class="font-medium hidden xl:!block !visible">Heap Overflow</h5>
+						<h5 class="font-medium hide-on-small">Heap Overflow</h5>
 					</div>
 				</router-link>
 				<router-link
@@ -24,7 +24,7 @@
 					class="relative flex items-center py-2 pl-2 mb-2 dark:text-slate-500 dark:hover:text-slate-400 dark:active:text-slate-300 transition"
 				>
 					<i :class="route.icon" class="mx-3"></i>
-					<span class="mx-3 hidden xl:!block !visible">{{ route.name }}</span>
+					<span class="mx-3 hide-on-small">{{ route.name }}</span>
 				</router-link>
 			</div>
 		</div>
@@ -84,5 +84,13 @@ const routeList = ref([
 .router-link-active::after {
 	@apply absolute bg-slate-900 dark:bg-slate-50 left-0 top-1 bottom-1 w-1 rounded-r;
 	content: "";
+}
+
+.hide-on-small {
+	@apply hidden xl:block;
+}
+
+.hide-on-dark {
+	@apply hidden dark:block;
 }
 </style>

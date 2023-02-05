@@ -78,6 +78,6 @@ function clicked() {
     dark:active:border-slate-200 dark:active:text-slate-200 dark:focus:ring-slate-50;
 }
 .secondary-disabled {
-    @apply text-slate-300 border border-slate-300 cursor-not-allowed;
+    @apply text-slate-300 dark:text-slate-500 border border-slate-300 dark:border-slate-500 cursor-not-allowed;
 }
 </style>

@@ -36,7 +36,7 @@
 <script lang="ts" setup>
 import Select from "../../components/common/Select.vue";
 import { ElSelect, ElOption } from "element-plus";
-import programmingLanguages from "../../../shared/assets/json/programmingLanguage.json";
+import programmingLanguages from "../../../shared/assets/static/programmingLanguage";
 import { useStore } from "vuex";
 import { PropType, ref, computed, ComputedRef } from "vue";
 import Problem from "@/problem/model/problem";

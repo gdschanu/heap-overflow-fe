@@ -1,0 +1,18 @@
+export default [
+  {
+      "name": "Java",
+      "value": "JAVA"
+  },
+  {
+      "name": "Python",
+      "value": "PYTHON"
+  },
+  {
+      "name": "C++",
+      "value": "CPLUSPLUS"
+  },
+  {
+      "name": "Javascript",
+      "value": "JAVASCRIPT"
+  }
+]
