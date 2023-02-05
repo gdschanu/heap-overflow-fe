@@ -1,5 +1,5 @@
 import Difficulty from "@/problem/model/difficulty";
-import getProgressApi from "../api/progressApi";
+import getProgressApi from "../api/progressAPI";
 import Process from "../progress";
 
 async function getProgress(): Promise<Process[]> {
