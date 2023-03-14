@@ -48,31 +48,31 @@ const routeList = ref([
 		name: "Problem",
 		icon: "fa-solid fa-computer",
 	},
-	{
-		path: "/contest",
-		name: "Contest",
-		icon: "fa-brands fa-free-code-camp",
-	},
-	{
-		path: "/discussion",
-		name: "Discussion",
-		icon: "fa-solid fa-comment",
-	},
-	{
-		path: "/ranking",
-		name: "Ranking",
-		icon: "fa-solid fa-ranking-star",
-	},
-	{
-		path: "/help",
-		name: "Help",
-		icon: "fa-solid fa-circle-question",
-	},
-	{
-		path: "/setting",
-		name: "Setting",
-		icon: "fa-solid fa-gear",
-	},
+	// {
+	// 	path: "/contest",
+	// 	name: "Contest",
+	// 	icon: "fa-brands fa-free-code-camp",
+	// },
+	// {
+	// 	path: "/discussion",
+	// 	name: "Discussion",
+	// 	icon: "fa-solid fa-comment",
+	// },
+	// {
+	// 	path: "/ranking",
+	// 	name: "Ranking",
+	// 	icon: "fa-solid fa-ranking-star",
+	// },
+	// {
+	// 	path: "/help",
+	// 	name: "Help",
+	// 	icon: "fa-solid fa-circle-question",
+	// },
+	// {
+	// 	path: "/setting",
+	// 	name: "Setting",
+	// 	icon: "fa-solid fa-gear",
+	// },
 ])
 </script>
 

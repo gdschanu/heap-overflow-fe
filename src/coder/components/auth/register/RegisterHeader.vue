@@ -1,8 +1,15 @@
 <template>
   <div class="flex items-center gap-3">
     <img
-      src="https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-dsc/chapter_banners/logo_4osUi1m.jpg"
-      alt="logo" class="w-14" />
+      src="@/shared/assets/img/logo.png"
+      alt="logo"
+      class="block dark:hidden w-16 p-2"
+    >
+    <img
+      src="@/shared/assets/img/logo_white.png"
+      alt="logo"
+      class="hide-on-dark w-16 p-2"
+    >
     <p class="text-lg">Heap Overflow</p>
     <p class="ml-auto text-right">
     <p class="hidden sm:block">Have an account?</p>
@@ -15,4 +22,7 @@
 </script>
 
 <style scoped>
+.hide-on-dark {
+	@apply hidden dark:block;
+}
 </style>
